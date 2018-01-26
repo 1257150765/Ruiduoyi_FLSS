@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ruiduoyi.activity.ZyzdActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/blue_sl_false">
+
+        <Button
+            android:id="@+id/cancle_btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/cmdclose_sl" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="作业指导"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/blue_sl_false">
+                <TextView
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:background="@drawable/text_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="指导书名称"/>
+            </LinearLayout>
+            <ListView
+                android:background="@drawable/text_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/list_zyzd"
+                android:divider="@color/touming"
+                android:layout_marginBottom="10dp"></ListView>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.github.barteksc.pdfviewer.PDFView
+                android:id="@+id/pdfview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
+
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/blue_sl_false"></LinearLayout>
+</LinearLayout>
