@@ -333,7 +333,7 @@
                 <!--当前工单-->
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="415dp"
+                    android:layout_height="385dp"
                     app:cardBackgroundColor="#dcdcdc"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="5dp">
@@ -385,7 +385,7 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
@@ -411,11 +411,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="MES单号"
+                                        android:text="制造单号"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -437,11 +437,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="工单单号"
+                                        android:text="生产单号"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -456,6 +456,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
@@ -463,7 +464,7 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
@@ -489,11 +490,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="模具编号"
+                                        android:text="金型品番"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -515,11 +516,23 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="30dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="品"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
                                         android:layout_marginRight="7dp"
-                                        android:text="产品编号"
+                                        android:gravity="right"
+                                        android:text="番"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -541,11 +554,33 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="20dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="材"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="20dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:gravity="right"
+                                        android:text="料"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="20dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
                                         android:layout_marginRight="7dp"
-                                        android:text="品名规格"
+                                        android:gravity="right"
+                                        android:text="名"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -559,20 +594,71 @@
                                         android:textSize="@dimen/text_size" />
                                 </LinearLayout>
 
+
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_weight="1"
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="30dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="原"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
                                         android:layout_marginRight="7dp"
-                                        android:text="颜色代码"
+                                        android:gravity="right"
+                                        android:text="料"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+
+                                    <TextView
+                                        android:id="@+id/dq_9"
+                                        android:layout_width="250dp"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="3dp"
+                                        android:background="@drawable/ed_bg"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="颜"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:layout_marginRight="7dp"
+                                        android:gravity="right"
+                                        android:text="色"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -585,8 +671,6 @@
                                         android:gravity="center_vertical"
                                         android:textSize="@dimen/text_size" />
                                 </LinearLayout>
-
-
 
                             </LinearLayout>
 
@@ -605,7 +689,7 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
@@ -631,11 +715,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="MES单号"
+                                        android:text="制造单号"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -657,11 +741,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="工单单号"
+                                        android:text="生产单号"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -676,6 +760,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
@@ -683,7 +768,7 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
@@ -709,11 +794,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="模具编号"
+                                        android:text="金型品番"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -735,11 +820,23 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="30dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="品"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
                                         android:layout_marginRight="7dp"
-                                        android:text="产品编号"
+                                        android:gravity="right"
+                                        android:text="番"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -761,11 +858,33 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="20dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="材"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="20dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:gravity="right"
+                                        android:text="料"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="20dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
                                         android:layout_marginRight="7dp"
-                                        android:text="品名规格"
+                                        android:gravity="right"
+                                        android:text="名"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -782,17 +901,67 @@
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_weight="1"
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="30dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="原"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
                                         android:layout_marginRight="7dp"
-                                        android:text="颜色代码"
+                                        android:gravity="right"
+                                        android:text="料"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+
+                                    <TextView
+                                        android:id="@+id/xygd_9"
+                                        android:layout_width="250dp"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="3dp"
+                                        android:background="@drawable/ed_bg"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:text="颜"
+                                        android:textColor="#000000"
+                                        android:textSize="15dp" />
+                                    <TextView
+                                        android:layout_width="30dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:layout_marginRight="7dp"
+                                        android:gravity="right"
+                                        android:text="色"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -805,21 +974,23 @@
                                         android:gravity="center_vertical"
                                         android:textSize="@dimen/text_size" />
                                 </LinearLayout>
+
                             </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:layout_marginRight="7dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginRight="7dp"
-                                android:text="特殊质量缺陷"
+                                android:text="原料"
                                 android:textColor="#000000"
                                 android:textSize="15dp" />
 
@@ -828,7 +999,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_margin="3dp"
-                                android:background="@color/small"
+                                android:background="@color/white"
                                 android:gravity="center_vertical"
                                 android:textSize="@dimen/text_size" />
                         </LinearLayout>
@@ -865,7 +1036,7 @@
                 <!--模具信息-->
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="124dp"
+                    android:layout_height="139dp"
                     app:cardBackgroundColor="#dcdcdc"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="5dp">
@@ -879,7 +1050,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="【模具信息】"
+                            android:text="【金型信息】"
                             android:textColor="#000000"
                             android:textSize="20dp" />
 
@@ -896,10 +1067,9 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="20dp"
                                     android:layout_height="wrap_content"
-
-                                    android:layout_weight="1"
+                                    android:layout_weight="2"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -907,7 +1077,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="模具编号"
+                                        android:text="金型品番"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -916,13 +1086,14 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="30dp"
                                         android:layout_margin="3dp"
-                                        android:layout_weight="1"
+                                        android:layout_weight="2"
                                         android:background="@drawable/ed_bg"
                                         android:gravity="center_vertical"
                                         android:textSize="@dimen/text_size" />
                                 </LinearLayout>
 
-                                <LinearLayout
+                               <!-- <LinearLayout
+                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
@@ -948,13 +1119,12 @@
                                         android:background="@drawable/ed_bg"
                                         android:gravity="center_vertical"
                                         android:textSize="@dimen/text_size" />
-                                </LinearLayout>
+                                </LinearLayout>-->
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="10dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
-
                                     android:layout_weight="1"
                                     android:orientation="horizontal">
 
@@ -963,7 +1133,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="模具腔数"
+                                        android:text="金型取数"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -998,7 +1168,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="产品腔数"
+                                        android:text="产品取数"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -1024,7 +1194,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="7dp"
-                                        android:text="实际腔数"
+                                        android:text="实际取数"
                                         android:textColor="#000000"
                                         android:textSize="15dp" />
 
@@ -1125,7 +1295,7 @@
                 <!--统计信息-->
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="135dp"
                     app:cardBackgroundColor="#dcdcdc"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="5dp">
@@ -1158,7 +1328,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="计划数量"
+                                    android:text="生产数量"
                                     android:textColor="#000000"
                                     android:textSize="15dp" />
 

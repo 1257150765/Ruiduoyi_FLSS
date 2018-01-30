@@ -255,17 +255,10 @@
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
-                        android:layout_width="110dp"
+                        android:layout_width="230dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
-                        android:text="模具编号"/>
-                    <TextView
-                        android:background="@drawable/text_bg"
-                        android:gravity="center"
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
-                        android:textColor="@android:color/black"
-                        android:text="模具名称"/>
+                        android:text="金型品番"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"

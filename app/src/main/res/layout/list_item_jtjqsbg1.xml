@@ -112,16 +112,16 @@
         <TextView
             android:background="@drawable/text_bg"
             android:gravity="center"
-            android:layout_width="@dimen/b3_lable"
+            android:layout_width="294dp"
             android:layout_height="match_parent"
             android:textColor="@android:color/black"
             android:id="@+id/lab_9"/>
-        <TextView
+        <!--<TextView
             android:background="@drawable/text_bg"
             android:gravity="center"
             android:layout_width="196dp"
             android:layout_height="match_parent"
             android:textColor="@android:color/black"
-            android:id="@+id/lab_10"/>
+            android:id="@+id/lab_10"/>-->
     </LinearLayout>
 </LinearLayout>

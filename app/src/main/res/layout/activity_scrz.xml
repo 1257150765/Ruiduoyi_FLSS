@@ -142,49 +142,42 @@
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
-                        android:text="MES单号"/>
+                        android:text="制造单号"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
-                        android:text="工单单号"/>
+                        android:text="生产单号"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
-                        android:text="生产批号"/>
+                        android:text="交货日期"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
                         android:layout_width="90dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
-                        android:text="产品编号"/>
+                        android:text="品番"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
-                        android:text="品名规格"/>
+                        android:text="材料号"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
-                        android:layout_width="90dp"
+                        android:layout_width="240dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
-                        android:text="模具编号"/>
-                    <TextView
-                        android:background="@drawable/text_bg"
-                        android:gravity="center"
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:textColor="@android:color/black"
-                        android:text="模具名称"/>
+                        android:text="金型品番"/>
                 </LinearLayout>
                 <ListView
                     android:layout_marginLeft="4dp"

@@ -61,11 +61,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView ymd_tx;
     private ImageView wifi_ig,gpio_1,gpio_2,gpio_3,gpio_4,rdy_logo_img;
     private FrameLayout bottom1,bottom2,bottom3;
-    private TextView bottom_text1,bottom_text2,bottom_text3;
+    private TextView bottom_text1,bottom_text2,bottom_text3,companyName;
     private String mac;
     private PopupDialog dialog;
     private BroadcastReceiver gpioSignalReceiver;
     private StatusFragment statusFragment;
+    private android.os.Handler handler;
     private BroadcastReceiver returnToInfoReceiver=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -87,8 +88,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
         initData();
+        initView();
         //开启刷卡串口服务
         Intent intent_service=new Intent(this, SerialPortService.class);
         startService(intent_service);
@@ -100,84 +101,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //CountdownToInfo();
     }
 
-    android.os.Handler handler=new android.os.Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 0x100://更新wifi和时间
-                    List<String>strs=(List<String>)msg.obj;
-                    time_tx.setText(strs.get(0));
-                    ymd_tx.setText(strs.get(1));
-                    int level=msg.arg1;
-                    if(level>=0&&level<50){
-                        wifi_ig.setImageResource(R.drawable.wifi_4);
-                    }else if(level>49&&level<70){
-                        wifi_ig.setImageResource(R.drawable.wifi_3);
-                    }else if(level>69&&level<90){
-                        wifi_ig.setImageResource(R.drawable.wifi_2);
-                    }else if(level>89&&level<100){
-                        wifi_ig.setImageResource(R.drawable.wifi_1);
-                    }else {
-                        wifi_ig.setImageResource(R.drawable.empty);
-                    }
-                    break;
-                case 0x101:
-                    ImageView view=(ImageView)msg.obj;
-                    view.setImageResource(R.drawable.gpio_false);
-                    break;
-                case 0x102:
-                    ImageView view2=(ImageView)msg.obj;
-                    view2.setImageResource(R.drawable.gpio_true);
-                    break;
-                case 0x104:
-                    try {
-                        final JSONArray array= (JSONArray) msg.obj;
-                        if (array.getJSONObject(0).getString("v_WebAppVer").equals(array.getJSONObject(0).getString("oldver"))){
-                            dialog.setMessage("当前已是最新版本");
-                            dialog.getOkbtn().setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-                        }else {
-                            dialog.setMessage("当前版本:"+array.getJSONObject(0).getString("oldver")+"\n最新版本:"+array.getJSONObject(0).getString("v_WebAppVer")+"\n是否立即更新？");
-                            dialog.getOkbtn().setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.getOkbtn().setEnabled(false);
-                                    dialog.setMessage("下载更新包当中...");
-                                    new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                          try {
-                                              NetHelper.DownLoadFileByUrl(array.getJSONObject(0).getString("v_WebAppPath"),
-                                                      Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
-                                              Intent intent = new Intent(Intent.ACTION_VIEW);
-                                              intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
-                                                      "application/vnd.android.package-archive");
-                                              startActivity(intent);
-                                          }catch (JSONException e){
-                                              e.printStackTrace();
-                                          }
-                                        }
-                                    }).start();
-                                }
-                            });
-                        }
-                        dialog.show();
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                    break;
-                case 0x105:
-                    //Toast.makeText(MainActivity.this,"更新失败",Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 
 
     public void  initData(){
@@ -204,6 +127,89 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         receiverfilter=new IntentFilter();
         receiverfilter.addAction("com.Ruiduoyi.CountdownToInfo");
         registerReceiver(countdownReceiver,receiverfilter);
+        getCompanyName();
+        handler=new android.os.Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0x100://更新wifi和时间
+                        List<String>strs=(List<String>)msg.obj;
+                        time_tx.setText(strs.get(0));
+                        ymd_tx.setText(strs.get(1));
+                        int level=msg.arg1;
+                        if(level>=0&&level<50){
+                            wifi_ig.setImageResource(R.drawable.wifi_4);
+                        }else if(level>49&&level<70){
+                            wifi_ig.setImageResource(R.drawable.wifi_3);
+                        }else if(level>69&&level<90){
+                            wifi_ig.setImageResource(R.drawable.wifi_2);
+                        }else if(level>89&&level<100){
+                            wifi_ig.setImageResource(R.drawable.wifi_1);
+                        }else {
+                            wifi_ig.setImageResource(R.drawable.empty);
+                        }
+                        break;
+                    case 0x101:
+                        ImageView view=(ImageView)msg.obj;
+                        view.setImageResource(R.drawable.gpio_false);
+                        break;
+                    case 0x102:
+                        ImageView view2=(ImageView)msg.obj;
+                        view2.setImageResource(R.drawable.gpio_true);
+                        break;
+                    case 0x104:
+                        try {
+                            final JSONArray array= (JSONArray) msg.obj;
+                            if (array.getJSONObject(0).getString("v_WebAppVer").equals(array.getJSONObject(0).getString("oldver"))){
+                                dialog.setMessage("当前已是最新版本");
+                                dialog.getOkbtn().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }else {
+                                dialog.setMessage("当前版本:"+array.getJSONObject(0).getString("oldver")+"\n最新版本:"+array.getJSONObject(0).getString("v_WebAppVer")+"\n是否立即更新？");
+                                dialog.getOkbtn().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.getOkbtn().setEnabled(false);
+                                        dialog.setMessage("下载更新包当中...");
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    NetHelper.DownLoadFileByUrl(array.getJSONObject(0).getString("v_WebAppPath"),
+                                                            Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
+                                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                                    intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
+                                                            "application/vnd.android.package-archive");
+                                                    startActivity(intent);
+                                                }catch (JSONException e){
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }).start();
+                                    }
+                                });
+                            }
+                            dialog.show();
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 0x105:
+                        //Toast.makeText(MainActivity.this,"更新失败",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 0x106:
+                        companyName.setText((String)msg.obj);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
     }
 
 
@@ -232,6 +238,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         bottom_text1=(TextView)findViewById(R.id.bottom_btn_text1);
         bottom_text2=(TextView)findViewById(R.id.bottom_btn_text2);
         bottom_text3=(TextView)findViewById(R.id.bottom_btn_text3);
+        companyName=(TextView)findViewById(R.id.company_name);
         rdy_logo_img=(ImageView)findViewById(R.id.rdy_logo_img);
         initLogoClieckEvent();
         //初始化gpio
@@ -383,7 +390,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+    private void getCompanyName(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONArray array=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_CmpName");
+                    if (array!=null){
+                        if (array.length()>0){
+                            String name=array.getJSONObject(0).getString("cmp_gsmc");
+                            Message msg=handler.obtainMessage();
+                            msg.what=0x106;
+                            msg.obj=name;
+                            handler.sendMessage(msg);
+                        }
+                    }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 
 
 

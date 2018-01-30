@@ -65,63 +65,57 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="MES单号" />
+                    android:text="制造单号" />
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="工单单号" />
+                    android:text="生产单号" />
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="产品批号" />
+                    android:text="交货日期" />
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="产品编号" />
+                    android:text="品番" />
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="品名规格" />
+                    android:text="材料名" />
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="模具编号" />
+                    android:text="金型品番" />
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:text="模具名称" />
 
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="产品腔数" />
+                    android:text="产品取数" />
 
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="实际腔数" />
+                    android:text="实际取数" />
 
                 <TextView
                     android:layout_width="70dp"

@@ -84,7 +84,6 @@ public class Jtjqsbg2Activity extends BaseActivity implements View.OnClickListen
         jtbh_text.setText(jtbh);
 
 
-
         dialog=new PopupDialog(this,400,360);
         dialog.setTitle("提示");
         dialog.getCancle_btn().setVisibility(View.GONE);
@@ -196,9 +195,6 @@ public class Jtjqsbg2Activity extends BaseActivity implements View.OnClickListen
                         jtbhSub_btn.setText("提交");
                         jtbh_text.setText(new_jtbh_text.getText().toString());
                         new_jtbh_text.setText("");
-                        /*dialog.setMessageTextColor(Color.BLACK);
-                        dialog.setMessage("提交成功");
-                        dialog.show();*/
                         break;
                     case 0x108:
                         jtbhSub_btn.setEnabled(true);
@@ -230,7 +226,6 @@ public class Jtjqsbg2Activity extends BaseActivity implements View.OnClickListen
 
         getList2Data(zzdh);
 
-        //getDutouListData(zzdh);
     }
 
 
@@ -240,20 +235,6 @@ public class Jtjqsbg2Activity extends BaseActivity implements View.OnClickListen
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //
-                /*List<List<String>>list= NetHelper.getQuerysqlResult("Exec PAD_Get_MoeJtxsInf 'B','"+zzdh+"'");
-                if (list!=null){
-                    if (list.size()>0){
-                        if (list.get(0).size()>3){
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x101;
-                            msg.obj=list;
-                            handler.sendMessage(msg);
-                        }
-                    }
-                }else {
-                    AppUtils.uploadNetworkError("Exec PAD_Get_MoeJtXs  'B'",jtbh,sharedPreferences.getString("mac",""));
-                }*/
                 JSONArray list= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_MoeJtxsInf 'B','"+zzdh+"'");
                 if (list!=null){
                     if (list.length()>0){
@@ -278,22 +259,6 @@ public class Jtjqsbg2Activity extends BaseActivity implements View.OnClickListen
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /*List<List<String>>list=NetHelper.getQuerysqlResult("Exec PAD_Upd_MoeJtXs  'A','"+zzdh+"','"+new_jtbh+"','',0,0,'','"+wkno+"'");
-                if (list!=null){
-                    if (list.size()>0){
-                        if (list.get(0).size()>0){
-                            if (list.get(0).get(0).equals("OK")){
-                                handler.sendEmptyMessage(0x107);
-                            }else {
-                                Message msg=handler.obtainMessage();
-                                msg.what=0x108;
-                                msg.obj=list.get(0).get(0);
-                                handler.sendMessage(msg);
-                            }
-                        }
-                    }
-                }else {
-                }*/
                 try {
                     JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_MoeJtXs  'A','"+zzdh+"','"+new_jtbh+"','',0,0,'','"+wkno+"'");
                     if (list!=null){
@@ -374,8 +339,8 @@ public class Jtjqsbg2Activity extends BaseActivity implements View.OnClickListen
             @Override
             public void run() {
                 int qs=Integer.parseInt(cpqs);
-                int horizontal=12;
-                int vertical=12;
+                int horizontal=8;
+                int vertical=8;
                 switch (qs){
                     case 64:
                         horizontal=8;
@@ -394,112 +359,11 @@ public class Jtjqsbg2Activity extends BaseActivity implements View.OnClickListen
                         vertical=4;
                         break;
                     default:
-                        qs=144;
-                        horizontal=12;
-                        vertical=12;
+                        qs=64;
+                        horizontal=8;
+                        vertical=8;
                         break;
                 }
-               /* List<List<String>>list_dt=NetHelper.getQuerysqlResult("Exec PAD_Get_MoeJtxsInf 'A','"+zzdh+"'");
-                if (list_dt!=null){
-                    if (list_dt.size()>0){
-                        if (list_dt.get(0).size()>6){
-                            //初始化堵头信息的ListView
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x104;
-                            msg.obj=list_dt;
-                            dtxxFragment.getHandler().sendMessage(msg);
-
-
-                            //初始化堵头位置的RecyclerView;
-                            List<Map<String,String>>data=new ArrayList<Map<String, String>>();
-                            for (int i=0;i<qs;i++){
-                                Map<String,String>map=new HashMap<String, String>();
-                                int w=((i+1)/horizontal)+1;
-                                int h=(i+1)%horizontal;
-                                if (h==0){
-                                    h=horizontal;
-                                    w=w-1;
-                                }
-                                String w_str=w+"";
-                                String h_str=h+"";
-                                if (w<10){
-                                    w_str="0"+w;
-                                }
-                                if (h<10){
-                                    h_str="0"+h;
-                                }
-                                map.put("wz",w_str+"-"+h_str);
-                                map.put("isSelect","0");
-                                data.add(map);
-                            }
-                            for (int i=0;i<list_dt.size();i++){
-                                String wz=list_dt.get(i).get(0);
-                                String[] temp=wz.split("-");
-                                int w=Integer.parseInt(temp[0]);
-                                int h=Integer.parseInt(temp[1]);
-                                int position=(w-1)*horizontal+h-1;
-                                if (position>-1){
-                                    try {
-                                        data.get(position).put("isSelect","1");
-                                    }catch (IndexOutOfBoundsException e){
-                                        Message msg_error=handler.obtainMessage();
-                                        msg_error.obj=wz;
-                                        msg_error.what=0x102;
-                                       handler.sendMessage(msg_error);
-                                    }
-                                }
-
-
-                            }
-
-
-                            Message msg_wz=handler.obtainMessage();
-                            msg_wz.what=0x104;
-                            msg_wz.obj=data;
-                            msg_wz.arg1=horizontal;
-                            msg_wz.arg2=vertical;
-                            dtwzFragment.getHandler().sendMessage(msg_wz);
-                        }
-                    }else {
-                        //初始化堵头信息ListView
-                        Message msg=handler.obtainMessage();
-                        msg.what=0x104;
-                        msg.obj=list_dt;
-                        dtxxFragment.getHandler().sendMessage(msg);
-
-                        //初始化堵头位置listView
-                        List<Map<String,String>>data=new ArrayList<Map<String, String>>();
-                        for (int i=0;i<qs;i++){
-                            Map<String,String>map=new HashMap<String, String>();
-                            int w=((i+1)/horizontal)+1;
-                            int h=(i+1)%horizontal;
-                            if (h==0){
-                                h=horizontal;
-                                w=w-1;
-                            }
-                            String w_str=w+"";
-                            String h_str=h+"";
-                            if (w<10){
-                                w_str="0"+w;
-                            }
-                            if (h<10){
-                                h_str="0"+h;
-                            }
-                            map.put("wz",w_str+"-"+h_str);
-                            map.put("isSelect","0");
-                            data.add(map);
-                        }
-                        Message msg_wz=handler.obtainMessage();
-                        msg_wz.what=0x104;
-                        msg_wz.obj=data;
-                        msg_wz.arg1=horizontal;
-                        msg_wz.arg2=vertical;
-                        dtwzFragment.getHandler().sendMessage(msg_wz);
-                    }
-                }else {
-                    AppUtils.uploadNetworkError("Exec PAD_Get_MoeJtxsInf 'A'",jtbh,sharedPreferences.getString("mac",""));
-                }*/
-
                 try {
                     JSONArray list_dt=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_MoeJtxsInf 'A','"+zzdh+"'");
                     if (list_dt!=null){

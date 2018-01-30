@@ -64,8 +64,8 @@ public class InfoFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private BarChart mBarChart;
     private String jtbh;
-    private TextView dq_1,dq_2,dq_3,dq_4,dq_5,dq_6,dq_7,dq_8,
-                xy_1,xy_2,xy_3,xy_4,xy_5,xy_6,xy_7,xy_8,
+    private TextView dq_1,dq_2,dq_3,dq_4,dq_5,dq_6,dq_7,dq_8,dq_9,
+                xy_1,xy_2,xy_3,xy_4,xy_5,xy_6,xy_7,xy_8,xy_9,
                 mo_1,mo_2,mo_3,mo_4,mo_5,mo_6,mo_7,mo_8,tong_1,tong_2,tong_3,tong_4,tong_5,tong_6,jtbh_text,status,msg_text,
                 caozuo_text,jisu_text,cao_name_text,ji_name_text,labRym,tsqx_text;
     private SharedPreferences sharedPreferences;
@@ -131,6 +131,7 @@ public class InfoFragment extends Fragment {
         dq_6=(TextView)view.findViewById(R.id.dq_6);
         dq_7=(TextView)view.findViewById(R.id.dq_7);
         dq_8=(TextView)view.findViewById(R.id.dq_8);
+        dq_9=(TextView)view.findViewById(R.id.dq_9);
         xy_1=(TextView)view.findViewById(R.id.xygd_1);
         xy_2=(TextView)view.findViewById(R.id.xygd_2);
         xy_3=(TextView)view.findViewById(R.id.xygd_3);
@@ -139,9 +140,10 @@ public class InfoFragment extends Fragment {
         xy_6=(TextView)view.findViewById(R.id.xygd_6);
         xy_7=(TextView)view.findViewById(R.id.xygd_7);
         xy_8=(TextView)view.findViewById(R.id.xygd_8);
+        xy_9=(TextView)view.findViewById(R.id.xygd_9);
 
         mo_1=(TextView)view.findViewById(R.id.mo_1);
-        mo_2=(TextView)view.findViewById(R.id.mo_2);
+        //mo_2=(TextView)view.findViewById(R.id.mo_2);
         mo_3=(TextView)view.findViewById(R.id.mo_3);
         mo_4=(TextView)view.findViewById(R.id.mo_4);
         mo_5=(TextView)view.findViewById(R.id.mo_5);
@@ -212,14 +214,14 @@ public class InfoFragment extends Fragment {
                             editor.putString("cpbh",list.getJSONObject(0).getString("kbm_wldm"));
                             editor.putString("pmgg",list.getJSONObject(0).getString("kbm_pmgg"));
                             editor.putString("ysdm",list.getJSONObject(0).getString("kbm_ysdm"));
-                            editor.putString("mjmc",list.getJSONObject(0).getString("kbm_mjmc"));
+                            //editor.putString("mjmc",list.getJSONObject(0).getString("kbm_mjmc"));
                             editor.putString("jhsl",list.getJSONObject(0).getString("kbm_scsl"));
                             editor.putString("lpsl",list.getJSONObject(0).getString("kbm_lpsl"));
                             editor.putString("blsl",list.getJSONObject(0).getString("kbm_blsl"));
                             editor.putString("mjqs",list.getJSONObject(0).getString("kbm_mjxs"));
                             editor.putString("sjqs",list.getJSONObject(0).getString("kbm_xs"));
                             editor.putString("jzzl",list.getJSONObject(0).getString("kbm_jzzl"));
-                            editor.putString("tszlqx",list.getJSONObject(0).getString("kbm_tsqxinf"));
+                             //editor.putString("tszlqx",list.getJSONObject(0).getString("kbm_tsqxinf"));
                             //editor.putString("jzzl","2");
                             editor.commit();
                             dq_3.setText(list.getJSONObject(0).getString("kbm_sodh"));
@@ -228,6 +230,7 @@ public class InfoFragment extends Fragment {
                             dq_6.setText(list.getJSONObject(0).getString("kbm_wldm"));
                             dq_7.setText(list.getJSONObject(0).getString("kbm_pmgg"));
                             dq_8.setText(list.getJSONObject(0).getString("kbm_ysdm"));
+                            dq_9.setText(list.getJSONObject(0).getString("kbm_czdm"));
                             xy_1.setText(list.getJSONObject(0).getString("kbm_xxrq"));
                             xy_2.setText(list.getJSONObject(0).getString("kbm_nextzzdh"));
                             xy_3.setText(list.getJSONObject(0).getString("kbm_nextsodh"));
@@ -236,16 +239,16 @@ public class InfoFragment extends Fragment {
                             xy_6.setText(list.getJSONObject(0).getString("kbm_nextwldm"));
                             xy_7.setText(list.getJSONObject(0).getString("kbm_nextpmgg"));
                             xy_8.setText(list.getJSONObject(0).getString("kbm_nextysdm"));
-
-                            tsqx_text.setText(list.getJSONObject(0).getString("kbm_tsqxinf"));
-                            if (list.getJSONObject(0).getString("kbm_tsqxinf").equals("")){
+                            xy_9.setText(list.getJSONObject(0).getString("kbm_nextczdm"));
+                            //tsqx_text.setText(list.getJSONObject(0).getString("kbm_tsqxinf"));
+                            /*if (list.getJSONObject(0).getString("kbm_tsqxinf").equals("")){
                                 tsqx_text.setBackgroundColor(Color.WHITE);
                             }else {
                                 tsqx_text.setBackgroundColor(getResources().getColor(R.color.small));
-                            }
+                            }*/
 
                             mo_1.setText(list.getJSONObject(0).getString("kbm_mjbh"));
-                            mo_2.setText(list.getJSONObject(0).getString("kbm_mjmc"));
+                            //mo_2.setText(list.getJSONObject(0).getString("kbm_mjmc"));
                             mo_3.setText(list.getJSONObject(0).getString("kbm_cpxs"));
                             mo_4.setText(list.getJSONObject(0).getString("kbm_cxsj"));
                             mo_5.setText(list.getJSONObject(0).getString("kbm_sjcxsj"));
@@ -417,6 +420,7 @@ public class InfoFragment extends Fragment {
             }
         }
     };
+
     private void initBarChart(BarChart mBarChart){
         //mBarChart.setOnChartValueSelectedListener(this);
         //mBarChart.getDescription().setEnabled(false);

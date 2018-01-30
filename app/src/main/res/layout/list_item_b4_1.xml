@@ -40,17 +40,10 @@
         <TextView
             android:background="@drawable/text_bg"
             android:gravity="center"
-            android:layout_width="@dimen/b4_lable"
+            android:layout_width="210dp"
             android:layout_height="match_parent"
             android:textColor="@android:color/black"
             android:id="@+id/lab_5"/>
-        <TextView
-            android:background="@drawable/text_bg"
-            android:gravity="center"
-            android:layout_width="@dimen/b4_lable"
-            android:layout_height="match_parent"
-            android:textColor="@android:color/black"
-            android:id="@+id/lab_6"/>
         <TextView
             android:background="@drawable/text_bg"
             android:gravity="center"

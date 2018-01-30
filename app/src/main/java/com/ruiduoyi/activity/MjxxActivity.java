@@ -37,7 +37,7 @@ public class MjxxActivity extends BaseActivity implements View.OnClickListener{
     private Button ok_btn,cancle_btn;
     private ListView listView;
     private SimpleAdapter adapter;
-    private TextView mjbh_text,mjmc_text,mjcc_text,mjdw_text,mjqs_text,cxzq_text,mjah_text,cfwz_text,tmcz_text,zrry_text,ptsb_text;
+    private TextView mjbh_text,mjcc_text,mjdw_text,mjqs_text,cxzq_text,mjah_text,cfwz_text,tmcz_text,zrry_text,ptsb_text;
     private String mjbh,zzdh,jtbh;
     private LineChart mDoubleLineChar;
     private Animation anim;
@@ -57,7 +57,7 @@ public class MjxxActivity extends BaseActivity implements View.OnClickListener{
                     try {
                         JSONArray list1= (JSONArray) msg.obj;
                         mjbh_text.setText(list1.getJSONObject(0).getString("v_mjbh"));
-                        mjmc_text.setText(list1.getJSONObject(0).getString("v_mjmc"));
+                        //mjmc_text.setText(list1.getJSONObject(0).getString("v_mjmc"));
                         mjcc_text.setText(list1.getJSONObject(0).getString("v_mjgg"));
                         mjah_text.setText(list1.getJSONObject(0).getString("v_mjah"));
                         mjdw_text.setText(list1.getJSONObject(0).getString("v_dw"));
@@ -114,7 +114,7 @@ public class MjxxActivity extends BaseActivity implements View.OnClickListener{
 
     private void initView(){
         mjbh_text=(TextView)findViewById(R.id.mjbh);
-        mjmc_text=(TextView)findViewById(R.id.mjmc);
+        //mjmc_text=(TextView)findViewById(R.id.mjmc);
         mjcc_text=(TextView)findViewById(R.id.mjgg);
         mjdw_text=(TextView)findViewById(R.id.dw);
         mjqs_text=(TextView)findViewById(R.id.xs);

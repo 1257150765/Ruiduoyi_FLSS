@@ -40,7 +40,7 @@ import java.util.Map;
 public class PzglActivity extends BaseActivity implements View.OnClickListener{
     private Button btn_1,btn_2,btn_3,btn_4,cancle_btn;
     private TextView fcry_text,fcsj_text,pdry_text,pdsj_text,ys_text,zzdh_text,
-        gddh_text,scph_text,mjbh_text,mjmc_text,mjqs_text,cxzq_text,
+        gddh_text,scph_text,mjbh_text,mjqs_text,cxzq_text,
         cpbh_text,pmgg_text,bzjz_text,sjjz_text,bzsk_text,sjsk_text,
         pdjg_text,blyy_text,bzxx_text;
     private BarChart barChart;
@@ -74,7 +74,7 @@ public class PzglActivity extends BaseActivity implements View.OnClickListener{
                         gddh_text.setText(list.getJSONObject(0).getString("v_sodh"));
                         scph_text.setText(list.getJSONObject(0).getString("v_ph"));
                         mjbh_text.setText(list.getJSONObject(0).getString("v_mjbh"));
-                        mjmc_text.setText(list.getJSONObject(0).getString("v_mjmc"));
+                        //mjmc_text.setText(list.getJSONObject(0).getString("v_mjmc"));
                         mjqs_text.setText(list.getJSONObject(0).getString("v_bzxs"));
                         cxzq_text.setText(list.getJSONObject(0).getString("v_bzcxsj"));
                         cpbh_text.setText(list.getJSONObject(0).getString("v_wldm"));
@@ -141,7 +141,7 @@ public class PzglActivity extends BaseActivity implements View.OnClickListener{
         gddh_text=(TextView)findViewById(R.id.sodh);
         scph_text=(TextView)findViewById(R.id.ph);
         mjbh_text=(TextView)findViewById(R.id.mjbh);
-        mjmc_text=(TextView)findViewById(R.id.mjmc);
+        //mjmc_text=(TextView)findViewById(R.id.mjmc);
         mjqs_text=(TextView)findViewById(R.id.bzxs);
         cxzq_text=(TextView)findViewById(R.id.bzcxsj);
         cpbh_text=(TextView)findViewById(R.id.wldm);
@@ -383,7 +383,7 @@ public class PzglActivity extends BaseActivity implements View.OnClickListener{
             map.put("lab_3",lists.getJSONObject(i).getString("v_sodh"));
             map.put("lab_4",lists.getJSONObject(i).getString("v_ph"));
             map.put("lab_5",lists.getJSONObject(i).getString("v_mjbh"));
-            map.put("lab_6",lists.getJSONObject(i).getString("v_mjmc"));
+            //map.put("lab_6",lists.getJSONObject(i).getString("v_mjmc"));
             map.put("lab_7",lists.getJSONObject(i).getString("v_wldm"));
             map.put("lab_8",lists.getJSONObject(i).getString("v_pmgg"));
             map.put("lab_9",lists.getJSONObject(i).getString("v_jlrq"));
@@ -393,8 +393,8 @@ public class PzglActivity extends BaseActivity implements View.OnClickListener{
             data.add(map);
         }
         SimpleAdapter adapter=new SimpleAdapter(this,data,R.layout.list_item_b4_1,
-                new String[]{"lab_1","lab_2","lab_3","lab_4","lab_5","lab_6","lab_7","lab_8","lab_9","lab_10","lab_11","lab_12"},
-                new int[]{R.id.lab_1,R.id.lab_2,R.id.lab_3,R.id.lab_4,R.id.lab_5,R.id.lab_6,R.id.lab_7,
+                new String[]{"lab_1","lab_2","lab_3","lab_4","lab_5","lab_7","lab_8","lab_9","lab_10","lab_11","lab_12"},
+                new int[]{R.id.lab_1,R.id.lab_2,R.id.lab_3,R.id.lab_4,R.id.lab_5,R.id.lab_7,
                         R.id.lab_8,R.id.lab_9,R.id.lab_10,R.id.lab_11,R.id.lab_12});
         xuncha_lisView.setAdapter(adapter);
     }

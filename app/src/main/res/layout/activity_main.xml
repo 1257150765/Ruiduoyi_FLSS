@@ -104,12 +104,11 @@
                     android:background="@drawable/pmes"></View>
 
                 <TextView
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="河北金环包装有限公司"
                     android:textColor="@color/lable"
+                    android:id="@+id/company_name"
                     android:textSize="25dp" />
 
                 <FrameLayout
@@ -118,14 +117,13 @@
                     android:layout_weight="1"></FrameLayout>
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/rdy_logo_img"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/rdy" />
+                    />
             </LinearLayout>
         </FrameLayout>
 

@@ -140,20 +140,6 @@ public class JtjqsbgActivity extends BaseActivity implements View.OnClickListene
                         intent.putExtra("cpqs",map.get("cpqs"));
                         intent.putExtra("pmgg",map.get("pmgg"));
                         startActivityForResult(intent,1);
-                        /*mjbh_text.setText(map.get("mjbh"));
-                        mjmc_text.setText(map.get("mjmc"));
-                        mjqs_text.setText(map.get("mjqs"));
-                        cpbh_text.setText(map.get("wldm"));
-                        pmgg_text.setText(map.get("pmgg"));
-                        sjqs_text.setText(map.get("cpqs"));
-                        zzdh=map.get("zzdh");
-                        getDutouListData(zzdh);
-                        jtbh_text.setText(jtbh);
-                        if (mjqs_text.getText().toString().equals(sjqs_text.getText().toString())){
-                            sjqs_text.setBackgroundColor(Color.WHITE);
-                        }else {
-                            sjqs_text.setBackgroundColor(Color.RED);
-                        }*/
                         break;
                     default:
                         break;
@@ -180,7 +166,7 @@ public class JtjqsbgActivity extends BaseActivity implements View.OnClickListene
                 map.put("sodh",item.getString("v_sodh"));
                 map.put("ph",item.getString("v_ph"));
                 map.put("mjbh",item.getString("v_mjbh"));
-                map.put("mjmc",item.getString("v_mjmc"));
+                //map.put("mjmc",item.getString("v_mjmc"));
                 map.put("wldm",item.getString("v_wldm"));
                 map.put("pmgg",item.getString("v_pmgg"));
                 map.put("wgrq",item.getString("v_wgrq"));
@@ -205,19 +191,6 @@ public class JtjqsbgActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void run() {
                 //工单信息表
-               /* List<List<String>>list= NetHelper.getQuerysqlResult("Exec PAD_Get_MoeDet 'B','"+jtbh+"'");
-                if (list!=null){
-                    if (list.size()>0){
-                        if (list.get(0).size()>15){
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x100;
-                            msg.obj=list;
-                            handler.sendMessage(msg);
-                        }
-                    }
-                }else {
-                    AppUtils.uploadNetworkError("Exec PAD_Get_MoeDet",jtbh,sharedPreferences.getString("mac",""));
-                }*/
                 JSONArray list= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_MoeDet 'B','"+jtbh+"'");
                 if (list!=null){
                     if (list.length()>0){

@@ -38,7 +38,7 @@
             <LinearLayout
                 android:background="@color/blue_sl_false"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="1638dp"
+                android:layout_width="1442dp"
                 android:layout_height="35dp"
                 android:orientation="horizontal">
                 <TextView
@@ -75,35 +75,35 @@
                     android:layout_width="108dp"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
-                    android:text="MES单号"/>
+                    android:text="制造单号"/>
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
                     android:layout_width="108dp"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
-                    android:text="工单单号"/>
+                    android:text="生产单号"/>
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
                     android:layout_width="118dp"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
-                    android:text="生产批号"/>
+                    android:text="交货日期"/>
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
                     android:layout_width="@dimen/b3_lable"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
-                    android:text="产品编号"/>
+                    android:text="品番"/>
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
                     android:layout_width="196dp"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
-                    android:text="品名规格"/>
+                    android:text="材料号"/>
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
@@ -117,7 +117,7 @@
                     android:layout_width="@dimen/b3_lable"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
-                    android:text="计划数量"/>
+                    android:text="生产数量"/>
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
@@ -131,18 +131,11 @@
                     android:layout_width="@dimen/b3_lable"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
-                    android:text="模具编号"/>
-                <TextView
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:layout_width="196dp"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:text="模具名称"/>
+                    android:text="金型品番"/>
             </LinearLayout>
             <ListView
                 android:layout_gravity="center_horizontal"
-                android:layout_width="1638dp"
+                android:layout_width="1442dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/list_b3"

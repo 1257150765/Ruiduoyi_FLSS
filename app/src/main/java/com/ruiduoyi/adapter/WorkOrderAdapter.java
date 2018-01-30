@@ -56,7 +56,7 @@ public class WorkOrderAdapter extends ArrayAdapter{
         TextView lab_7=(TextView)view.findViewById(R.id.lab_7);
         TextView lab_8=(TextView)view.findViewById(R.id.lab_8);
         TextView lab_9=(TextView)view.findViewById(R.id.lab_9);
-        TextView lab_10=(TextView)view.findViewById(R.id.lab_10);
+        //TextView lab_10=(TextView)view.findViewById(R.id.lab_10);
         TextView lab_11=(TextView)view.findViewById(R.id.lab_11);
         TextView lab_12=(TextView)view.findViewById(R.id.lab_12);
         TextView lab_13=(TextView)view.findViewById(R.id.lab_13);
@@ -124,7 +124,7 @@ public class WorkOrderAdapter extends ArrayAdapter{
         lab_7.setText(map.get("sodh"));
         lab_8.setText(map.get("ph"));
         lab_9.setText(map.get("mjbh"));
-        lab_10.setText(map.get("mjmc"));
+        //lab_10.setText(map.get("mjmc"));
         lab_11.setText(map.get("wldm"));
         lab_12.setText(map.get("pmgg"));
         lab_13.setText(map.get("wgrq"));

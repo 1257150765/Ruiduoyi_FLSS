@@ -108,7 +108,7 @@
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
             android:layout_height="wrap_content"
-            android:text="MES单号"/>
+            android:text="制造单号"/>
         <TextView
             android:id="@+id/zzdh"
             android:gravity="center_vertical"
@@ -120,7 +120,7 @@
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
             android:layout_height="wrap_content"
-            android:text="工单单号"/>
+            android:text="生产单号"/>
         <TextView
             android:id="@+id/sodh"
             android:gravity="center_vertical"
@@ -132,7 +132,7 @@
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
             android:layout_height="wrap_content"
-            android:text="生产批号"/>
+            android:text="交货批号"/>
         <TextView
             android:gravity="center_vertical"
             android:id="@+id/ph"
@@ -144,14 +144,27 @@
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
             android:layout_height="wrap_content"
-            android:text="模具编号"/>
+            android:text="金型品番"/>
         <TextView
             android:gravity="center_vertical"
             android:id="@+id/mjbh"
             android:background="@drawable/text_bg"
             android:layout_width="@dimen/pzgl_text_width2"
             android:layout_height="35dp" />
+
         <TextView
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:layout_width="@dimen/pzgl_text_width"
+            android:layout_height="wrap_content"
+            android:text="金型取数"/>
+        <TextView
+            android:id="@+id/bzxs"
+            android:gravity="center_vertical"
+            android:background="@drawable/text_bg"
+            android:layout_width="@dimen/pzgl_text_width2"
+            android:layout_height="35dp" />
+       <!-- <TextView
             android:layout_marginLeft="10dp"
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
@@ -162,7 +175,7 @@
             android:id="@+id/mjmc"
             android:background="@drawable/text_bg"
             android:layout_width="@dimen/pzgl_text_width2"
-            android:layout_height="35dp" />
+            android:layout_height="35dp" />-->
 
     </LinearLayout>
     <LinearLayout
@@ -173,18 +186,6 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:textSize="15dp"
-            android:layout_width="@dimen/pzgl_text_width"
-            android:layout_height="wrap_content"
-            android:text="模具腔数"/>
-        <TextView
-            android:id="@+id/bzxs"
-            android:gravity="center_vertical"
-            android:background="@drawable/text_bg"
-            android:layout_width="@dimen/pzgl_text_width2"
-            android:layout_height="35dp" />
         <TextView
             android:layout_marginLeft="10dp"
             android:textSize="15dp"
@@ -204,7 +205,7 @@
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
             android:layout_height="wrap_content"
-            android:text="产品编号"/>
+            android:text="品番"/>
         <TextView
             android:gravity="center_vertical"
             android:id="@+id/wldm"
@@ -216,7 +217,7 @@
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
             android:layout_height="wrap_content"
-            android:text="品名规格"/>
+            android:text="材料名"/>
         <TextView
             android:gravity="center_vertical"
             android:id="@+id/pmgg"
@@ -235,15 +236,6 @@
             android:background="@drawable/text_bg"
             android:layout_width="@dimen/pzgl_text_width2"
             android:layout_height="35dp" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
         <TextView
             android:layout_marginLeft="10dp"
             android:textSize="15dp"
@@ -256,6 +248,15 @@
             android:background="@drawable/text_bg"
             android:layout_width="@dimen/pzgl_text_width2"
             android:layout_height="35dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
         <TextView
             android:layout_marginLeft="10dp"
             android:textSize="15dp"
@@ -304,15 +305,6 @@
             android:background="@drawable/text_bg"
             android:layout_width="@dimen/pzgl_text_width2"
             android:layout_height="35dp" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
         <TextView
             android:layout_marginLeft="10dp"
             android:textSize="15dp"
@@ -325,6 +317,15 @@
             android:background="@drawable/text_bg"
             android:layout_width="@dimen/pzgl_text_width2"
             android:layout_height="35dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
         <TextView
             android:visibility="invisible"
             android:layout_marginLeft="10dp"
@@ -453,14 +454,14 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="MES单号"
+                    android:text="制造单号"
                     android:textColor="@android:color/black" />
                 <TextView
                     android:layout_width="@dimen/b4_lable"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="工单单号"
+                    android:text="生产单号"
                     android:textColor="@android:color/black" />
                 <TextView
                     android:visibility="gone"
@@ -468,7 +469,15 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="生产批号"
+                    android:text="交货日期"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="210dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_bg"
+                    android:gravity="center"
+                    android:text="金型品番"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -476,14 +485,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="模具编号"
-                    android:textColor="@android:color/black" />
-                <TextView
-                    android:layout_width="@dimen/b4_lable"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:text="模具名称"
+                    android:text="品番"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -491,15 +493,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="物料代码"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:layout_width="@dimen/b4_lable"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:text="品名规格"
+                    android:text="材料名"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -576,7 +570,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="物料代码"
+                    android:text="品番"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -584,7 +578,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="品名规格"
+                    android:text="材料名"
                     android:textColor="@android:color/black" />
 
                 <TextView

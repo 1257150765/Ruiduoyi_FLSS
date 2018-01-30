@@ -44,7 +44,7 @@ public class YichangfenxiAdapter extends ArrayAdapter{
         Button btn=(Button)view.findViewById(R.id.btn_1);
         TextView lab_1=(TextView)view.findViewById(R.id.lab_1);
         TextView lab_2=(TextView)view.findViewById(R.id.lab_2);
-        TextView lab_3=(TextView)view.findViewById(R.id.lab_3);
+        //TextView lab_3=(TextView)view.findViewById(R.id.lab_3);
         TextView lab_4=(TextView)view.findViewById(R.id.lab_4);
         TextView lab_5=(TextView)view.findViewById(R.id.lab_5);
         TextView lab_6=(TextView)view.findViewById(R.id.lab_6);
@@ -55,7 +55,7 @@ public class YichangfenxiAdapter extends ArrayAdapter{
         TextView lab_11=(TextView)view.findViewById(R.id.lab_11);
         lab_1.setText(map.get("lab_1"));
         lab_2.setText(map.get("lab_2"));
-        lab_3.setText(map.get("lab_3"));
+        //lab_3.setText(map.get("lab_3"));
         lab_4.setText(map.get("lab_4"));
         lab_5.setText(map.get("lab_5"));
         lab_6.setText(map.get("lab_6"));
@@ -81,7 +81,7 @@ public class YichangfenxiAdapter extends ArrayAdapter{
                 list_text.get(8).setText(map.get("lab_9"));
                 list_text.get(9).setText(map.get("lab_10"));
                 list_text.get(10).setText(map.get("lab_11"));
-                list_text.get(11).setText(map.get("lab_3"));
+                //list_text.get(11).setText(map.get("lab_3"));
                 Message msg=handler.obtainMessage();
                 msg.what=0x107;
                 //msg.obj=map.get("lab_12");

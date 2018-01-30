@@ -95,7 +95,7 @@ public class GdglActivity extends BaseActivity implements View.OnClickListener{
                map.put("sodh",item.getString("v_sodh"));
                map.put("ph",item.getString("v_ph"));
                map.put("mjbh",item.getString("v_mjbh"));
-               map.put("mjmc",item.getString("v_mjmc"));
+               //map.put("mjmc",item.getString("v_mjmc"));
                map.put("wldm",item.getString("v_wldm"));
                map.put("pmgg",item.getString("v_pmgg"));
                map.put("wgrq",item.getString("v_wgrq"));

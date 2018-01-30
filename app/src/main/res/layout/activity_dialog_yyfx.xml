@@ -56,7 +56,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
@@ -82,11 +82,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
-                android:text="MES单号"
+                android:text="制造单号"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
@@ -108,11 +108,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
-                android:text="工单单号"
+                android:text="生产单号"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
@@ -134,11 +134,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
-                android:text="生产批号"
+                android:text="交货日期"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
@@ -168,11 +168,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
-                android:text="模具编号"
+                android:text="金型品番"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
@@ -186,31 +186,6 @@
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="7dp"
-                android:text="模具名称"
-                android:textColor="#000000"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/dq_6"
-                android:layout_width="@dimen/blyyfx_text_width"
-                android:layout_height="36dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/text_bg"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -220,11 +195,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
-                android:text="产品编号"
+                android:text="品番"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
@@ -247,7 +222,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
@@ -257,6 +232,32 @@
 
             <TextView
                 android:id="@+id/dq_8"
+                android:layout_width="@dimen/blyyfx_text_width"
+                android:layout_height="36dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/text_bg"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="7dp"
+                android:text="生产数量"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/dq_9"
                 android:layout_width="@dimen/blyyfx_text_width"
                 android:layout_height="36dp"
                 android:layout_margin="3dp"
@@ -284,33 +285,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="7dp"
-                android:text="计划数量"
-                android:textColor="#000000"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/dq_9"
-                android:layout_width="@dimen/blyyfx_text_width"
-                android:layout_height="36dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/text_bg"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
@@ -336,7 +311,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
@@ -363,7 +338,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="7dp"
@@ -373,6 +348,32 @@
 
             <TextView
                 android:id="@+id/dq_12"
+                android:layout_width="@dimen/blyyfx_text_width"
+                android:layout_height="36dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/text_bg"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="7dp"
+                android:text="模具名称"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/dq_6"
                 android:layout_width="@dimen/blyyfx_text_width"
                 android:layout_height="36dp"
                 android:layout_margin="3dp"

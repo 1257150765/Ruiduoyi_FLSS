@@ -41,7 +41,7 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
     private ListView listView,listView_register;
     private String jtbh;
     private TextView sjsx_text,zzdh_text,gddh_text,scph_text,mjbh_text,cpbh_text,
-            pmgg_text,mjmc_text,jhsl_text,lpsl_text,blpsl_text,bldm_text,blms_text,jzzl_text;
+            pmgg_text,jhsl_text,lpsl_text,blpsl_text,bldm_text,blms_text,jzzl_text;
     private Button btn_dian,btn_1,btn_2,btn_3,btn_4,btn_5,btn_6,btn_7,btn_8,btn_9,btn_0,btn_clear,btn_submit,btn_del;
     private TextView sub_text;
     private Animation anim;
@@ -80,25 +80,6 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                     }
                     break;
                 case 0x101:
-                    /*List<List<String>>list1= (List<List<String>>) msg.obj;
-                    data1=new ArrayList<>();
-                    for (int i=0;i<list1.size();i++){
-                        Map<String,String>map=new HashMap<>();
-                        map.put("lab_1",list1.get(i).get(0));
-                        map.put("lab_2",list1.get(i).get(1));
-                        map.put("lab_3","0");
-                        data1.add(map);
-                    }
-                    adapter2= new SigleSelectAdapter(BlfxActivity.this, data1) {
-                        @Override
-                        public void onRadioSelectListener(int position,Map<String, String> map) {
-                            select_position=position;
-                            bldm_text.setText(map.get("lab_1"));
-                            blms_text.setText(map.get("lab_2"));
-                        }
-
-                    };
-                    listView.setAdapter(adapter2);*/
                     try {
                         JSONArray list1= (JSONArray) msg.obj;
                         data1=new ArrayList<>();
@@ -124,28 +105,7 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                     }
                     break;
                 case 0x102:
-                    /*blpsl_text.setText(Integer.parseInt(blpsl_text.getText().toString())+
-                            Integer.parseInt(sub_text.getText().toString())+"");
-                    sub_text.setText("0");
-                    List<List<String>>list2= (List<List<String>>) msg.obj;
-                    List<Map<String,String>>data=new ArrayList<>();
-                    for (int i=0;i<list2.size();i++){
-                        Map<String,String>map=new HashMap<>();
-                        List<String>item=list2.get(i);
-                        map.put("lab_1",item.get(0));
-                        map.put("lab_2",item.get(1));
-                        map.put("lab_3",item.get(2));
-                        map.put("lab_4",item.get(3));
-                        data.add(map);
-                    }
-                    SimpleAdapter adapter=new SimpleAdapter(BlfxActivity.this,data,R.layout.list_item_b8_2,
-                            new String[]{"lab_1","lab_2","lab_3","lab_4"},new int[]{R.id.lab_1,R.id.lab_2,
-                            R.id.lab_3,R.id.lab_4});
-                    listView_register.setAdapter(adapter);
-                    listView_register.startAnimation(anim);*/
                     try {
-                        /*blpsl_text.setText(Integer.parseInt(blpsl_text.getText().toString())+
-                                Integer.parseInt(sub_text.getText().toString())+"");*/
                         sub_text.setText("0");
                         JSONArray list2= (JSONArray) msg.obj;
                         List<Map<String,String>>data=new ArrayList<>();
@@ -166,6 +126,9 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                         e.printStackTrace();
                     }
                     break;
+                case 0x103:
+                    btn_submit.setEnabled(true);
+                    btn_submit.setText("提交");
                 default:
                     break;
             }
@@ -207,7 +170,7 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
         gddh_text=(TextView)findViewById(R.id.dq_3);
         scph_text=(TextView)findViewById(R.id.dq_4);
         mjbh_text=(TextView)findViewById(R.id.dq_5);
-        mjmc_text=(TextView)findViewById(R.id.dq_6);
+        //mjmc_text=(TextView)findViewById(R.id.dq_6);
         cpbh_text=(TextView)findViewById(R.id.dq_7);
         pmgg_text=(TextView)findViewById(R.id.dq_8);
         jhsl_text=(TextView)findViewById(R.id.dq_9);
@@ -223,7 +186,7 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
         mjbh_text.setText(mjbh_str);
         cpbh_text.setText(cpbh_str);
         pmgg_text.setText(pmgg_str);
-        mjmc_text.setText(mjmc_str);
+        //mjmc_text.setText(mjmc_str);
         jhsl_text.setText(jhsl_str);
         lpsl_text.setText(lpsl_str);
         blpsl_text.setText(blpsl_str);
@@ -344,8 +307,6 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                }
             }
         });
-        /*ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,data);
-        spinner.setAdapter(adapter);*/
     }
 
 
@@ -452,6 +413,8 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.btn_submit:
                 if (isReady()){
+                    btn_submit.setEnabled(false);
+                    btn_submit.setText("提交中");
                     upLoadData(wkno);
                 }
                 break;
@@ -532,6 +495,8 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                     upLoadOneData(wkno);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }finally {
+                    handler.sendEmptyMessage(0x103);
                 }
             }
         }).start();
@@ -599,7 +564,7 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                 }
             }
         }else {
-            upLoadOneData(wkno);
+            //upLoadOneData(wkno);
         }
     }
 

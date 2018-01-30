@@ -45,10 +45,11 @@
     <string name="gpio_update_time">10000</string>
     <string name="base_info_update_time">60000</string>
     <!--<string name="service_ip">http://hbjh.ruiduoyi.com</string>-->
-    <!--<string name="service_ip">http://192.168.1.38</string>-->
+    <!--<string name="service_ip">http://192.168.1.39</string>-->
     <!--<string name="service_ip">http://193.168.0.117</string>-->
     <!--<string name="service_ip">http://172.27.35.58</string>-->
     <string name="service_ip">http://192.168.99.2</string>
+    <!--<string name="service_ip">http://flss.ruiduoyi.com</string>-->
     <!--http://192.168.99.2:8080/Service.asmx
     Exec Pln_Auto_ReCalsj 'A02'
     Exec Jobs_Cal_Fhl_Cnl_list

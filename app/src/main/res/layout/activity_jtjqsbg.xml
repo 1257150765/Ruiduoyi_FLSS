@@ -74,40 +74,23 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="MES单号"
+                    android:text="制造单号"
                     android:textColor="@android:color/black" />
 
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="108dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:text="工单单号"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="118dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:text="生产批号"
-                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:layout_width="@dimen/b3_lable"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="产品编号"
+                    android:text="品番"
                     android:textColor="@android:color/black" />
                 <TextView
                     android:layout_width="196dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="品名规格"
+                    android:text="材料名"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -115,14 +98,14 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="产品腔数"
+                    android:text="产品取数"
                     android:textColor="@android:color/black" />
                 <TextView
                     android:layout_width="98dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="实际腔数"
+                    android:text="实际取数"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -138,7 +121,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="计划数量"
+                    android:text="生产数量"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -150,27 +133,11 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:layout_width="@dimen/b3_lable"
+                    android:layout_width="294dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:text="模具编号"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:layout_width="196dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:text="模具名称"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:layout_width="98dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
-                    android:text="模具腔数"
+                    android:text="金型品番"
                     android:textColor="@android:color/black" />
             </LinearLayout>
 

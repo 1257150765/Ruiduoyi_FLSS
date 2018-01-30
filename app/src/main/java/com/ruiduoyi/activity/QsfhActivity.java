@@ -116,24 +116,6 @@ public class QsfhActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-               /* List<List<String>>list= NetHelper.getQuerysqlResult("Exec PAD_Get_MoexsFhInf 'A','"+jtbh+"','"+zzdh+"','"+mjbh+"'");
-                if (list!=null){
-                    if (list.size()>0){
-                        if (list.get(0).size()>13){
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x100;
-                            msg.obj=list;
-                            handler.sendMessage(msg);
-                        }
-                    }else {
-                        Message msg=handler.obtainMessage();
-                        msg.what=0x100;
-                        msg.obj=list;
-                        handler.sendMessage(msg);
-                    }
-                }else {
-                    AppUtils.uploadNetworkError("Exec PAD_Get_MoexsFhInf 'A'",jtbh,sharedPreferences.getString("mac",""));
-                }*/
                 JSONArray list= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_MoexsFhInf 'A','"+jtbh+"','"+zzdh+"','"+mjbh+"'");
                 if (list!=null){
                     Message msg=handler.obtainMessage();
@@ -160,7 +142,7 @@ public class QsfhActivity extends BaseActivity {
             map.put("lab_5",lists.getJSONObject(i).getString("dxm_wldm"));
             map.put("lab_6",lists.getJSONObject(i).getString("itm_pmgg"));
             map.put("lab_7",lists.getJSONObject(i).getString("dxm_mjbh"));
-            map.put("lab_8",lists.getJSONObject(i).getString("mjm_mjmc"));
+            //map.put("lab_8",lists.getJSONObject(i).getString("mjm_mjmc"));
             map.put("lab_9",lists.getJSONObject(i).getString("itd_xs"));
             map.put("lab_10",lists.getJSONObject(i).getString("dxm_bgxs"));
             map.put("lab_11",lists.getJSONObject(i).getString("dxm_dtsl"));
@@ -186,7 +168,7 @@ public class QsfhActivity extends BaseActivity {
                 TextView lab_5=(TextView)view.findViewById(R.id.lab_5);
                 TextView lab_6=(TextView)view.findViewById(R.id.lab_6);
                 TextView lab_7=(TextView)view.findViewById(R.id.lab_7);
-                TextView lab_8=(TextView)view.findViewById(R.id.lab_8);
+                //TextView lab_8=(TextView)view.findViewById(R.id.lab_8);
                 TextView lab_9=(TextView)view.findViewById(R.id.lab_9);
                 TextView lab_10=(TextView)view.findViewById(R.id.lab_10);
                 TextView lab_11=(TextView)view.findViewById(R.id.lab_11);
@@ -199,7 +181,7 @@ public class QsfhActivity extends BaseActivity {
                 lab_5.setText(data.get(position).get("lab_5"));
                 lab_6.setText(data.get(position).get("lab_6"));
                 lab_7.setText(data.get(position).get("lab_7"));
-                lab_8.setText(data.get(position).get("lab_8"));
+                //lab_8.setText(data.get(position).get("lab_8"));
                 lab_9.setText(data.get(position).get("lab_9"));
                 lab_10.setText(data.get(position).get("lab_10"));
                 lab_11.setText(data.get(position).get("lab_11"));

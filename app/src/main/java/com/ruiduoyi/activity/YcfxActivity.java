@@ -32,7 +32,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
     private Button cancle_btn,sub_btn;
     private ListView listView,blmsList;
     private Button spinner_1;
-    private TextView text_1,text_2,text_3,text_4,text_5,text_6,text_7,text_8,text_9,text_10,text_11,text_key;
+    private TextView text_1,text_2,text_3,text_4,text_5,text_6,text_7,text_8,text_9,text_10,text_11;
     private String jtbh,lbdm;
     private YyfxAdapter adapter;
     private String wkno="";
@@ -62,7 +62,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
         text_9=(TextView)findViewById(R.id.text_9);
         text_10=(TextView)findViewById(R.id.text_10);
         text_11=(TextView)findViewById(R.id.text_11);
-        text_key=(TextView)findViewById(R.id.text_key);
+        //text_key=(TextView)findViewById(R.id.text_key);
         spinner_1=(Button) findViewById(R.id.spinner_1);
         blmsList=(ListView)findViewById(R.id.list_bl);
         //spinner_2=(Button) findViewById(R.id.spinner_2);
@@ -94,7 +94,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
         wkno=intent_from.getStringExtra("wkno");
         sharedPreferences=getSharedPreferences("info",MODE_PRIVATE);
         jtbh=sharedPreferences.getString("jtbh","");
-        thread_1.start();
+        getYcListInfo();
     }
 
     private void initListView(JSONArray list){
@@ -104,7 +104,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
                 Map<String,String>map=new HashMap<>();
                 map.put("lab_1",list.getJSONObject(i).getString("v_rq"));
                 map.put("lab_2",list.getJSONObject(i).getString("v_mjbh"));
-                map.put("lab_3",list.getJSONObject(i).getString("v_mjmc"));
+                //map.put("lab_3",list.getJSONObject(i).getString("v_mjmc"));
                 map.put("lab_4",list.getJSONObject(i).getString("v_wlmd"));
                 map.put("lab_5",list.getJSONObject(i).getString("v_pmgg"));
                 map.put("lab_6",list.getJSONObject(i).getString("v_kssj"));
@@ -129,7 +129,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
             list_text.add(text_9);
             list_text.add(text_10);
             list_text.add(text_11);
-            list_text.add(text_key);
+            //list_text.add(text_key);
             YichangfenxiAdapter adapter=new YichangfenxiAdapter(YcfxActivity.this,R.layout.list_item_b7,data,list_text,handler);
             listView.setAdapter(adapter);
         } catch (JSONException e) {
@@ -204,6 +204,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
                         }
                     });
                     dialog.show();
+                    getYcListInfo();
                     break;
                 case 0x111:
                     dialog.setMessageTextColor(Color.RED);
@@ -240,22 +241,6 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /*List<List<String>>list=NetHelper.getQuerysqlResult("Exec PAD_Get_ZlmYywh 'B','"+jtbh+"','"+zldm+"'");
-                if (list!=null){
-                    if (list.size()>0){
-                        if (list.get(0).size()>1){
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x108;
-                            msg.obj=list;
-                            handler.sendMessage(msg);
-                        }
-                    }else {
-                        Message msg=handler.obtainMessage();
-                        msg.what=0x108;
-                        msg.obj=list;
-                        handler.sendMessage(msg);
-                    }
-                }*/
                 JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_ZlmYywh 'B','"+jtbh+"','"+zldm+"'");
                 if (list!=null){
                     Message msg=handler.obtainMessage();
@@ -272,32 +257,20 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
 
 
     //请求表格数据
-    Thread thread_1=new Thread(new Runnable() {
-        @Override
-        public void run() {
-            /*List<List<String>>list= NetHelper.getQuerysqlResult("Exec PAD_Get_YcmInf '"+jtbh+"'");
-            Message msg=handler.obtainMessage();
-            if(list!=null){
-                if(list.size()>0){
-                    if (list.get(0).size()>13){
-                        msg.what=0x100;
-                        msg.obj=list;
-                    }
-                }else {
+    public void getYcListInfo(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                JSONArray list= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_YcmInf '"+jtbh+"'");
+                Message msg=handler.obtainMessage();
+                if(list!=null){
                     msg.what=0x100;
                     msg.obj=list;
                 }
+                handler.sendMessage(msg);
             }
-            handler.sendMessage(msg);*/
-            JSONArray list= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_YcmInf '"+jtbh+"'");
-            Message msg=handler.obtainMessage();
-            if(list!=null){
-                msg.what=0x100;
-                msg.obj=list;
-            }
-            handler.sendMessage(msg);
-        }
-    });
+        }).start();
+    }
 
 
     private boolean isReady(){
@@ -347,21 +320,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
                             for (int i=0;i<select_data.size();i++){
                                 Map<String,String>uplaod_data=select_data.get(i);
                                 select_str=select_str+uplaod_data.get("lab_1")+";";
-                                //upLoadOneData(uplaod_data,wkno);
                             }
-                            /*List<List<String>>list=NetHelper.getQuerysqlResult("Exec PAD_Upd_YclInfo " +
-                                    "'"+jtbh+"','"+text_2.getText().toString()+"','"+lbdm+"'," + "'"+select_str+"',"+keyid+",'"+wkno+"'");
-                            if (list!=null){
-                                if (list.size()>0){
-                                    if (list.get(0).size()>0){
-                                        if (list.get(0).get(0).equals("OK")){
-                                            handler.sendEmptyMessage(0x110);
-                                        }
-                                    }
-                                }
-                            }else {
-                                handler.sendEmptyMessage(0x111);
-                            }*/
                             try {
                                 JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
                                         "'"+jtbh+"','"+text_2.getText().toString()+"','"+lbdm+"'," + "'"+select_str+"',"+keyid+",'"+wkno+"'");
@@ -395,23 +354,6 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /*List<List<String>>list1=NetHelper.getQuerysqlResult("Exec PAD_Get_ZlmYywh 'C','"+jtbh+"','"+
-                        list.get(position).get(0)+"'");
-                if (list1!=null){
-                    if (list1.size()>0){
-                        if (list1.get(0).size()>1){
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x109;
-                            msg.obj=list1;
-                            handler.sendMessage(msg);
-                        }
-                    }else {
-                        Message msg=handler.obtainMessage();
-                        msg.what=0x109;
-                        msg.obj=list1;
-                        handler.sendMessage(msg);
-                    }
-                }*/
                try {
                    JSONArray list1=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_ZlmYywh 'C','"+jtbh+"','"+
                            list.getJSONObject(position).getString("v_lbdm")+"'");

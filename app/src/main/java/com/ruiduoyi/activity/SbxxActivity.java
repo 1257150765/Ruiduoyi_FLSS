@@ -98,14 +98,16 @@ public class SbxxActivity extends BaseDialogActivity implements View.OnClickList
            for (int i=0;i<list.length();i++){
                Map<String,String>map=new HashMap<>();
                map.put("mjbh",list.getJSONObject(i).getString("v_mjbh"));
-               map.put("mjmc",list.getJSONObject(i).getString("v_mjmc"));
+               //map.put("mjmc",list.getJSONObject(i).getString("v_mjmc"));
                map.put("hmcs",list.getJSONObject(i).getString("v_hmcs"));
                map.put("rate",list.getJSONObject(i).getString("v_rate"));
                map.put("newsj",list.getJSONObject(i).getString("v_newsj"));
                data.add(map);
            }
-           adapter=new SimpleAdapter(this,data,R.layout.list_item_b1,new String[]{"mjbh","mjmc","hmcs","rate","newsj"},
-                   new int[]{R.id.lab_1,R.id.lab_2,R.id.lab_3,R.id.lab_4,R.id.lab_5});
+           /*adapter=new SimpleAdapter(this,data,R.layout.list_item_b1,new String[]{"mjbh","mjmc","hmcs","rate","newsj"},
+                   new int[]{R.id.lab_1,R.id.lab_2,R.id.lab_3,R.id.lab_4,R.id.lab_5});*/
+           adapter=new SimpleAdapter(this,data,R.layout.list_item_b1,new String[]{"mjbh","hmcs","rate","newsj"},
+                   new int[]{R.id.lab_1,R.id.lab_3,R.id.lab_4,R.id.lab_5});
            listView.setAdapter(adapter);
        } catch (JSONException e) {
            e.printStackTrace();
