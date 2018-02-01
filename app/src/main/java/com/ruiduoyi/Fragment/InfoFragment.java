@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -63,6 +64,7 @@ public class InfoFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private BarChart mBarChart;
+    private int UPDATE_TYPE_AUTO=0,UPDATE_TYPE_RECEIVER=1;
     private String jtbh;
     private TextView dq_1,dq_2,dq_3,dq_4,dq_5,dq_6,dq_7,dq_8,dq_9,
                 xy_1,xy_2,xy_3,xy_4,xy_5,xy_6,xy_7,xy_8,xy_9,
@@ -82,7 +84,7 @@ public class InfoFragment extends Fragment {
     private BroadcastReceiver receiver=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            getNetDate();
+            getNetDate(UPDATE_TYPE_RECEIVER);
         }
     };
 
@@ -179,14 +181,14 @@ public class InfoFragment extends Fragment {
         cardView=(CardView)view.findViewById(R.id.cardView);
         tip_layout=(ScrollView)view.findViewById(R.id.tip_bg);
         filePhath=getContext().getCacheDir().getPath();
-        getNetDate();
+        getNetDate(UPDATE_TYPE_RECEIVER);
         updateDataOntime();
         initBarChart(mBarChart);
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getNetDate();
+                getNetDate(UPDATE_TYPE_RECEIVER);
             }
         });
     }
@@ -221,8 +223,6 @@ public class InfoFragment extends Fragment {
                             editor.putString("mjqs",list.getJSONObject(0).getString("kbm_mjxs"));
                             editor.putString("sjqs",list.getJSONObject(0).getString("kbm_xs"));
                             editor.putString("jzzl",list.getJSONObject(0).getString("kbm_jzzl"));
-                             //editor.putString("tszlqx",list.getJSONObject(0).getString("kbm_tsqxinf"));
-                            //editor.putString("jzzl","2");
                             editor.commit();
                             dq_3.setText(list.getJSONObject(0).getString("kbm_sodh"));
                             dq_4.setText(list.getJSONObject(0).getString("kbm_ph"));
@@ -240,12 +240,6 @@ public class InfoFragment extends Fragment {
                             xy_7.setText(list.getJSONObject(0).getString("kbm_nextpmgg"));
                             xy_8.setText(list.getJSONObject(0).getString("kbm_nextysdm"));
                             xy_9.setText(list.getJSONObject(0).getString("kbm_nextczdm"));
-                            //tsqx_text.setText(list.getJSONObject(0).getString("kbm_tsqxinf"));
-                            /*if (list.getJSONObject(0).getString("kbm_tsqxinf").equals("")){
-                                tsqx_text.setBackgroundColor(Color.WHITE);
-                            }else {
-                                tsqx_text.setBackgroundColor(getResources().getColor(R.color.small));
-                            }*/
 
                             mo_1.setText(list.getJSONObject(0).getString("kbm_mjbh"));
                             //mo_2.setText(list.getJSONObject(0).getString("kbm_mjmc"));
@@ -305,26 +299,6 @@ public class InfoFragment extends Fragment {
                     try {
                         boolean isSame=false;
                         JSONArray array= (JSONArray) msg.obj;
-                       /* JSONObject object=new JSONObject();
-                        object.put("v_scrq","9-6");
-                        object.put("v_moeid","1");
-                        object.put("v_hval","8");
-                        array.put(object);
-                        JSONObject object2=new JSONObject();
-                        object2.put("v_scrq","9-6");
-                        object2.put("v_moeid","2");
-                        object2.put("v_hval","12");
-                        array.put(object2);
-                        JSONObject object3=new JSONObject();
-                        object3.put("v_scrq","9-7");
-                        object3.put("v_moeid","1");
-                        object3.put("v_hval","12");
-                        array.put(object3);
-                        JSONObject object4=new JSONObject();
-                        object4.put("v_scrq","9-7");
-                        object4.put("v_moeid","2");
-                        object4.put("v_hval","8");
-                        array.put(object4);*/
 
                         List<List<String>>list_jhfh=new ArrayList<>();
                         for (int i=0;i<array.length();i++){
@@ -394,7 +368,7 @@ public class InfoFragment extends Fragment {
                 case 0x105:
                     JSONArray list_phonto= (JSONArray) msg.obj;
                     try {
-                        initPhoto(list_phonto);
+                        initPhotoWithoutCache(list_phonto);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -522,7 +496,7 @@ public class InfoFragment extends Fragment {
     }
 
 
-    //初始化
+    //初始化条形图数据
     private void setData(final List<String>xVals, final List<String>yVals, List<List<String>>list_jhfh) {
         //补全工单信息
         for (int i=0;i<yVals.size();i++){
@@ -617,13 +591,6 @@ public class InfoFragment extends Fragment {
 
         BarDataSet set1;
 
-        /*if (mBarChart.getData() != null &&
-                mBarChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) mBarChart.getData().getDataSetByIndex(0);
-            set1.setValues(yVals1);
-            mBarChart.getData().notifyDataChanged();
-            mBarChart.notifyDataSetChanged();
-        } else {*/
 
         set1 = new BarDataSet(yVals1, "");
         int[]color=new int[]{R.color.color_1,R.color.color_2,R.color.color_3,R.color.color_4,
@@ -637,61 +604,6 @@ public class InfoFragment extends Fragment {
             }
         }
         set1.setColors(colors);
-        /*switch (yVals.size()){
-            case 0:
-                set1.setColor(getResources().getColor(R.color.tongming));
-                break;
-            case 1:
-                set1.setColors(getResources().getColor(color[0]));
-                break;
-            case 2:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]));
-                break;
-            case 3:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),getResources().getColor(color[2]));
-                break;
-            case 4:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),
-                        getResources().getColor(color[2]),getResources().getColor(color[3]));
-                break;
-            case 5:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),
-                        getResources().getColor(color[2]),getResources().getColor(color[3]),getResources().getColor(color[4]));
-                break;
-            case 6:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),
-                        getResources().getColor(color[2]),getResources().getColor(color[3]),getResources().getColor(color[4]),
-                        getResources().getColor(color[5]));
-                break;
-            case 7:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),
-                        getResources().getColor(color[2]),getResources().getColor(color[3]),getResources().getColor(color[4]),
-                        getResources().getColor(color[5]),getResources().getColor(color[6]));
-                break;
-            case 8:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),
-                        getResources().getColor(color[2]),getResources().getColor(color[3]),getResources().getColor(color[4]),
-                        getResources().getColor(color[5]),getResources().getColor(color[6]),getResources().getColor(color[7]));
-                break;
-            case 9:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),
-                        getResources().getColor(color[2]),getResources().getColor(color[3]),getResources().getColor(color[4]),
-                        getResources().getColor(color[5]),getResources().getColor(color[6]),getResources().getColor(color[7]),
-                        getResources().getColor(color[8]));
-                break;
-            case 10:
-                set1.setColors(getResources().getColor(color[0]),getResources().getColor(color[1]),
-                        getResources().getColor(color[2]),getResources().getColor(color[3]),getResources().getColor(color[4]),
-                        getResources().getColor(color[5]),getResources().getColor(color[6]),getResources().getColor(color[7]),
-                        getResources().getColor(color[8]),getResources().getColor(color[9]));
-                break;
-            default:
-                break;
-
-        }*/
-            /*set1.setColors(getResources().getColor(R.color.blue_sl_false),
-                    getResources().getColor(R.color.colorPrimary),
-                    getResources().getColor(R.color.bottom_sl));*/
         String[] yStr=new String[yVals.size()];
         for (int n=0;n<yVals.size();n++){
             yStr[n]=yVals.get(n);
@@ -835,20 +747,79 @@ public class InfoFragment extends Fragment {
         }
     }
 
+    //初始化照片
+    private void initPhotoWithoutCache(JSONArray list) throws JSONException {
+        Log.e("initPhotoWithoutCache",list.toString());
+        if(list.length()>0){
+            //下载图片
+            for (int i=0;i<list.length();i++){
+                final JSONObject object=list.getJSONObject(i);
+                if(object.getString("wkm_lb").equals("A")){
+                    if (!object.getString("wkm_wkno").equals("")){
+                        File file=new File(filePhath+"/Photos/"+object.getString("wkm_wkno")+".JPG");
+                        caozuo_text.setText(object.getString("wkm_zwmc"));
+                        cao_name_text.setText(object.getString("wkm_name"));
+                        String[] str=object.getString("wkm_rymname").split("&lt;br&gt;");
+                        String rym="";
+                        for (int j=0;j<str.length;j++){
+                            rym=rym+str[j]+"\n";
+                        }
+                        labRym.setText(rym);
+                        Glide.with(getContext())
+                                .load(object.getString("wkm_PicFile"))
+                                .centerCrop()
+                                .placeholder(R.drawable.a_img)
+                                .error(R.drawable.a_img)
+                                .diskCacheStrategy( DiskCacheStrategy.NONE )//禁用磁盘缓存
+                                .skipMemoryCache(true)///跳过内存缓存
+                                .into(img_pho1);
+
+
+                    }else {
+                        handler.sendEmptyMessage(0x108);
+                    }
+                }else if(object.getString("wkm_lb").equals("B")){
+                    if (!object.getString("wkm_wkno").equals("")){
+                        File file=new File(filePhath+"/Photos/"+object.getString("wkm_wkno")+".JPG");
+                        jisu_text.setText(object.getString("wkm_zwmc"));
+                        ji_name_text.setText(object.getString("wkm_name"));
+
+                        Glide.with(getContext())
+                                .load(object.getString("wkm_PicFile"))
+                                .centerCrop()
+                                .placeholder(R.drawable.b_img)
+                                .error(R.drawable.b_img)
+                                .diskCacheStrategy( DiskCacheStrategy.NONE )//禁用磁盘缓存
+                                .skipMemoryCache(true)///跳过内存缓存
+                                .into(img_pho2);
+                    }else {
+                        handler.sendEmptyMessage(0x109);
+                    }
+                }
+            }
+        }else {
+            jisu_text.setText("【技术员】");
+            ji_name_text.setText("技术员");
+            caozuo_text.setText("【操作员】");
+            cao_name_text.setText("操作员");
+            labRym.setText("");
+        }
+    }
+
     //定时刷新
     private void updateDataOntime(){
         updateTimer=new Timer();
         TimerTask timerTask=new TimerTask() {
             @Override
             public void run() {
-                getNetDate();
+                getNetDate(UPDATE_TYPE_AUTO);
                 //Log.e("updateDataOntime","updateDataOntime go");
             }
         };
         updateTimer.schedule(timerTask,Integer.parseInt(getString(R.string.base_info_update_time)),Integer.parseInt(getString(R.string.base_info_update_time)));
     }
 
-    private void getNetDate(){
+    private void getNetDate(final int type){
         //工单信息
 
         if (sharedPreferences.getString("isBaseInfoFinish","OK").equals("OK")){
@@ -858,26 +829,6 @@ public class InfoFragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    /*List<List<String>>list= NetHelper.getQuerysqlResult("Exec PAD_Get_OrderInfo  '"+jtbh+"'");
-                    if(list!=null){
-                        handler.sendEmptyMessage(0x111);
-                        if(list.size()>0){
-                            if (list.get(0).size()>31){
-                                Message msg=handler.obtainMessage();
-                                msg.what=0x100;
-                                msg.obj=list;
-                                handler.sendMessage(msg);
-                            }
-                        }
-                    }else {
-                        AppUtils.uploadNetworkError("Exec PAD_Get_OrderInfo NetWorkError",jtbh,mac);
-                        handler.sendEmptyMessage(0x110);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString("isBaseInfoFinish","OK");
-                        editor.commit();
-                        getNetDate();
-                        return;
-                    }*/
                     JSONArray list= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_OrderInfo  '"+jtbh+"'");
                     if(list!=null){
                         handler.sendEmptyMessage(0x111);
@@ -893,35 +844,11 @@ public class InfoFragment extends Fragment {
                         SharedPreferences.Editor editor=sharedPreferences.edit();
                         editor.putString("isBaseInfoFinish","OK");
                         editor.commit();
-                        getNetDate();
+                        getNetDate(UPDATE_TYPE_AUTO);
                         return;
                     }
 
 
-
-
-
-                    /*List<List<String>>list2= NetHelper.getQuerysqlResult("Exec PAD_Get_JtmZtInfo '"+jtbh+"'");
-                    if(list2!=null){
-                        handler.sendEmptyMessage(0x111);
-                        if (list2.size()>0){
-                            if (list2.get(0).size()>16){
-                                Message msg=handler.obtainMessage();
-                                msg.what=0x104;
-                                msg.obj=list2;
-                                handler.sendMessage(msg);
-                            }
-                        }
-                    }else {
-                        AppUtils.uploadNetworkError("Exec PAD_Get_JtmZtInfo NetWordError",jtbh,mac);
-                        //handler.sendEmptyMessage(0x101);
-                        handler.sendEmptyMessage(0x110);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString("isBaseInfoFinish","OK");
-                        editor.commit();
-                        getNetDate();
-                        return;
-                    }*/
                     JSONArray list2= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_JtmZtInfo '"+jtbh+"'");
                     if(list2!=null){
                         handler.sendEmptyMessage(0x111);
@@ -933,36 +860,15 @@ public class InfoFragment extends Fragment {
                         }
                     }else {
                         AppUtils.uploadNetworkError("Exec PAD_Get_JtmZtInfo NetWordError",jtbh,mac);
-                        //handler.sendEmptyMessage(0x101);
                         handler.sendEmptyMessage(0x110);
                         SharedPreferences.Editor editor=sharedPreferences.edit();
                         editor.putString("isBaseInfoFinish","OK");
                         editor.commit();
-                        getNetDate();
+                        getNetDate(UPDATE_TYPE_AUTO);
                         return;
                     }
 
 
-                    /*List<List<String>>list3= NetHelper.getQuerysqlResult("Exec PAD_Get_FhChartInfo '"+jtbh+"'");
-                    if(list3!=null){
-                        handler.sendEmptyMessage(0x111);
-                        if (list3.size()>0){
-                            if (list3.get(0).size()>2){
-                                Message msg=handler.obtainMessage();
-                                msg.what=0x103;
-                                msg.obj=list3;
-                                handler.sendMessage(msg);
-                            }
-                        }
-                    }else {
-                        AppUtils.uploadNetworkError("Exec PAD_Get_FhChartInfo NetWordError",jtbh,mac);
-                        handler.sendEmptyMessage(0x110);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString("isBaseInfoFinish","OK");
-                        editor.commit();
-                        getNetDate();
-                        return;
-                    }*/
                     JSONArray list3= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_FhChartInfo '"+jtbh+"'");
                     if(list3!=null){
                         if (list3.length()>0){
@@ -978,48 +884,31 @@ public class InfoFragment extends Fragment {
                         SharedPreferences.Editor editor=sharedPreferences.edit();
                         editor.putString("isBaseInfoFinish","OK");
                         editor.commit();
-                        getNetDate();
+                        getNetDate(UPDATE_TYPE_AUTO);
                         return;
                     }
 
 
-                    /*List<List<String>>list4= NetHelper.getQuerysqlResult("Exec PAD_Get_PhotoInfo '"+jtbh+"'");
-                    if(list4!=null){
-                        handler.sendEmptyMessage(0x111);
-                        if (list4.size()>0){
-                            if (list4.get(0).size()>6){
+
+                    if (type==UPDATE_TYPE_RECEIVER){
+                        JSONArray list4= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_PhotoInfo '"+jtbh+"'");
+                        if(list4!=null){
+                            handler.sendEmptyMessage(0x111);
+                            if (list4.length()>0){
                                 Message msg=handler.obtainMessage();
                                 msg.what=0x105;
                                 msg.obj=list4;
                                 handler.sendMessage(msg);
                             }
+                        }else {
+                            AppUtils.uploadNetworkError("Exec PAD_Get_PhotoInfo NetWordError",jtbh,mac);
+                            handler.sendEmptyMessage(0x110);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putString("isBaseInfoFinish","OK");
+                            editor.commit();
+                            getNetDate(UPDATE_TYPE_RECEIVER);
+                            return;
                         }
-                    }else {
-                        AppUtils.uploadNetworkError("Exec PAD_Get_PhotoInfo NetWordError",jtbh,mac);
-                        handler.sendEmptyMessage(0x110);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString("isBaseInfoFinish","OK");
-                        editor.commit();
-                        getNetDate();
-                        return;
-                    }*/
-                    JSONArray list4= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_PhotoInfo '"+jtbh+"'");
-                    if(list4!=null){
-                        handler.sendEmptyMessage(0x111);
-                        if (list4.length()>0){
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x105;
-                            msg.obj=list4;
-                            handler.sendMessage(msg);
-                        }
-                    }else {
-                        AppUtils.uploadNetworkError("Exec PAD_Get_PhotoInfo NetWordError",jtbh,mac);
-                        handler.sendEmptyMessage(0x110);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString("isBaseInfoFinish","OK");
-                        editor.commit();
-                        getNetDate();
-                        return;
                     }
 
                     SharedPreferences.Editor editor=sharedPreferences.edit();

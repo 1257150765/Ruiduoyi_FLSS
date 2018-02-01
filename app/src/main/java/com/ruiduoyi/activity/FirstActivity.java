@@ -87,8 +87,8 @@ public class FirstActivity extends BaseActivity{
             file.delete();
         }
         sharedPreferences=getSharedPreferences("info",MODE_PRIVATE);
-        NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
-        //NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
+        //NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
+        NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
         getNetData(0);
         new Thread(new Runnable() {
             @Override

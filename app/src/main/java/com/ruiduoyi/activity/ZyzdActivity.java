@@ -8,13 +8,16 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -55,6 +58,8 @@ public class ZyzdActivity extends BaseActivity {
     private ProgressBar progressBar;
     private Button cancle_btn;
     private PopupDialog dialog;
+    private ImageView openBtn;
+    private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +91,35 @@ public class ZyzdActivity extends BaseActivity {
             }
         });
         dialog.getOkbtn().setText("确定");
+        openBtn=(ImageView)findViewById(R.id.open_btn);
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawer);
+        openBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.START);
+            }
+        });
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                openBtn.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                openBtn.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
 
     private void initData(){
@@ -105,6 +139,7 @@ public class ZyzdActivity extends BaseActivity {
                         File file=new File((String) msg.obj);
                         pdfView.recycle();
                         pdfView.fromFile(file).defaultPage(0).load();
+                        drawerLayout.closeDrawer(Gravity.START);
                         break;
                     case 0x102:
                         progressBar.setVisibility(View.VISIBLE);
@@ -131,19 +166,6 @@ public class ZyzdActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /*List<List<String>>list1= NetHelper.getQuerysqlResult("Exec PAD_Get_ZyzdInf  'A','"+zzdh+"',''");
-                if (list1!=null){
-                    if (list1.size()>0){
-                        if (list1.get(0).size()>1){
-                            Message msg=handler.obtainMessage();
-                            msg.what=0x100;
-                            msg.obj=list1;
-                            handler.sendMessage(msg);
-                        }
-                    }
-                }else {
-                    AppUtils.uploadNetworkError("Exec PAD_Get_ZyzdInf  'A'",jtbh,sharedPreferences.getString("msc",""));
-                }*/
                 JSONArray list1= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_ZyzdInf  'A','"+zzdh+"',''");
                 if (list1!=null){
                     if (list1.length()>0){
@@ -198,13 +220,7 @@ public class ZyzdActivity extends BaseActivity {
                         AppUtils.sendCountdownReceiver(ZyzdActivity.this);
                         bg.setBackgroundColor(getResources().getColor(R.color.small));
                         data.get(position).put("isSelect","1");
-
-                        try {
-                            onItemClickEven(data,position);
-                        } catch (IOException e) {
-                            handler.sendEmptyMessage(0x104);
-                            e.printStackTrace();
-                        }
+                        onItemClickEven(data,position);
 
 
                         for (int i=0;i<data.size();i++){
@@ -223,13 +239,13 @@ public class ZyzdActivity extends BaseActivity {
 
 
 
-    private void onItemClickEven(final List<Map<String,String>>data, final int position) throws IOException {
+    private void onItemClickEven(final List<Map<String,String>>data, final int position){
         File dir=new File(path);
         if (!dir.exists()){
             dir.mkdir();
         }
         final String filePath=path+data.get(position).get("lab_1")+".pdf";
-        File file=new File(filePath);
+        final File file=new File(filePath);
         if (file.exists()){
             Message msg=handler.obtainMessage();
             msg.what=0x101;
@@ -239,43 +255,6 @@ public class ZyzdActivity extends BaseActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    /*List<List<String>>list=NetHelper.getQuerysqlResult("Exec PAD_Get_ZyzdInf  'B','"+zzdh+"','"
-                            +data.get(position).get("lab_1")+"'");
-                    if (list!=null){
-                        if (list.size()>0){
-                            if (list.get(0).size()>0){
-                                String url_str=list.get(0).get(0);
-                                try {
-                                    handler.sendEmptyMessage(0x102);
-                                    URL url=new URL(url_str);
-                                    HttpURLConnection urlConnection= (HttpURLConnection) url.openConnection();
-                                    urlConnection.setDoInput(true);
-                                    urlConnection.setUseCaches(false);
-                                    urlConnection.setRequestMethod("GET");
-                                    urlConnection.setConnectTimeout(5000);
-                                    urlConnection.connect();
-                                    InputStream in=urlConnection.getInputStream();
-                                    OutputStream out=new FileOutputStream(filePath,false);
-                                    byte[] buff=new byte[1024];
-                                    int size;
-                                    while ((size = in.read(buff)) != -1) {
-                                        out.write(buff, 0, size);
-                                    }
-                                    Message msg=handler.obtainMessage();
-                                    msg.what=0x101;
-                                    msg.obj=filePath;
-                                    handler.sendMessage(msg);
-                                    handler.sendEmptyMessage(0x103);
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
-                                    handler.sendEmptyMessage(0x104);
-                                } catch (IOException e) {
-                                    handler.sendEmptyMessage(0x104);
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }*/
                     JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_ZyzdInf  'B','"+zzdh+"','"
                             +data.get(position).get("lab_1")+"'");
                     if (list!=null){
@@ -304,11 +283,14 @@ public class ZyzdActivity extends BaseActivity {
                                 handler.sendEmptyMessage(0x103);
                             } catch (MalformedURLException e) {
                                 e.printStackTrace();
+                                file.delete();
                                 handler.sendEmptyMessage(0x104);
                             } catch (IOException e) {
+                                file.delete();
                                 handler.sendEmptyMessage(0x104);
                                 e.printStackTrace();
                             } catch (JSONException e) {
+                                file.delete();
                                 e.printStackTrace();
                             }
                         }
