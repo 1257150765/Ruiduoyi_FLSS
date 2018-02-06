@@ -415,5 +415,11 @@
             android:layout_height="195dp"
             android:id="@+id/bRecycler"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
+    <ProgressBar
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:id="@+id/wait_progress"
+        android:visibility="gone"/>
 
 </FrameLayout>

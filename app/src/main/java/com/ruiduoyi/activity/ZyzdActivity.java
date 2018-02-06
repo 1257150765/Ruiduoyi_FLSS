@@ -161,7 +161,6 @@ public class ZyzdActivity extends BaseActivity {
         getNetData();
     }
 
-
     private void getNetData(){
         new Thread(new Runnable() {
             @Override
@@ -180,8 +179,6 @@ public class ZyzdActivity extends BaseActivity {
             }
         }).start();
     }
-
-
 
     private void initListView(JSONArray lists){
         final List<Map<String,String>>data=new ArrayList<>();
@@ -236,8 +233,6 @@ public class ZyzdActivity extends BaseActivity {
         };
         listView.setAdapter(adapter);
     }
-
-
 
     private void onItemClickEven(final List<Map<String,String>>data, final int position){
         File dir=new File(path);

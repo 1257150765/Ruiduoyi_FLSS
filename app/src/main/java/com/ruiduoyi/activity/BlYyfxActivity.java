@@ -185,8 +185,8 @@ public class BlYyfxActivity extends BaseActivity implements View.OnClickListener
                 if (yyfxFragment.isReady()&&blfxFragment.isReady()){
                     Intent intent=new Intent(BlYyfxActivity.this,DialogGActivity.class);
                     if (zldming.equals("50")|zldming.equals("51")|zldming.equals("52")|zldming.equals("53")|zldming.equals("54")|
-                            zldming.equals("55")|zldming.equals("56")|zldming.equals("57")|zldming.equals("58")|
-                            zldming.equals("59")|zldming.equals("60")|zldming.equals("61")|zldming.equals("62")|
+                            zldming.equals("55")|zldming.equals("56")|zldming.equals("57")|zldming.equals("58") |
+                            zldming.equals("60")|zldming.equals("61")|zldming.equals("62")|
                             zldming.equals("63")|zldming.equals("64")|zldming.equals("65")|zldming.equals("66")|
                             zldming.equals("67")|zldming.equals("68")|zldming.equals("69")|zldming.equals("70")){
                         intent.putExtra("zldm",getResources().getString(R.string.js));

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ruiduoyi.R;
@@ -56,9 +57,9 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
     private FrameLayout Yc_unread_bg,Dj_unread_bg;
     private TextView Yc_unread_text,Dj_unread_text;
     private RecyclerView gRecycler,bRecycler;
-    private ZLRecyclerViewAdapter gAdapter,bAdapter;
     private List<Map<String,String>>gdata,bdata;
     private boolean isFirst=true;
+    private ProgressBar progressBar;
     public StatusFragment() {
 
     }
@@ -101,6 +102,7 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                     }
                     break;
                 case 0x101:
+                    progressBar.setVisibility(View.GONE);
                     break;
                 case 0x102:
                     gdata=new ArrayList<>();
@@ -114,6 +116,7 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
 
 
     private void exitEven(){
+        progressBar.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -189,6 +192,8 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }finally {
+                    handler.sendEmptyMessage(0x101);
                 }
             }
         }).start();
@@ -213,11 +218,7 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         cardView_qsfh=(CardView)view.findViewById(R.id.qsfh);
         gRecycler=(RecyclerView) view.findViewById(R.id.zl_list);
         bRecycler=(RecyclerView) view.findViewById(R.id.bRecycler);
-        /*mjwx_text=(TextView)view.findViewById(R.id.mjwx_text);
-        pzyc_text=(TextView)view.findViewById(R.id.pzyc_text);
-        tiaoji_text=(TextView)view.findViewById(R.id.tiaoji_text);*/
-        //unread_bg=(FrameLayout)view.findViewById(R.id.unread_bg);
-        //unread_text=(TextView)view.findViewById(R.id.unread_text);
+        progressBar=(ProgressBar)view.findViewById(R.id.wait_progress);
 
         cardView_js.setOnClickListener(this);
         cardView_gdgl.setOnClickListener(this);
@@ -296,19 +297,24 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                 holder.zl_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        progressBar.setVisibility(View.VISIBLE);
                         AppUtils.sendCountdownReceiver(getContext());
                         holder.zl_btn.startAnimation(anim);
                         if (map.get("type").equals("OPR")){
                             if (isReady(map.get("zldm"))){
                                 startActivityByNetResult(map.get("zldm"),map.get("zlmc"),map.get("type"));
+                            }else {
+                                progressBar.setVisibility(View.GONE);
                             }
                         }else if (map.get("type").equals("DOC")){
+                            progressBar.setVisibility(View.GONE);
                             Intent intent=new Intent(getContext(),DialogGActivity.class);
                             intent.putExtra("title",map.get("zlmc"));
                             intent.putExtra("zldm",map.get("zldm"));
                             intent.putExtra("type","DOC");
                             startActivity(intent);
                         }else if (map.get("type").equals("NO")){
+                            progressBar.setVisibility(View.GONE);
                             String zldm_no=map.get("zldm");
                             Intent no_intent;
                             if (zldm_no.equals(getResources().getString(R.string.sbxx))){
@@ -388,8 +394,8 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                                             String waring = list2.getJSONObject(0).getString("kbl_waring");
                                             if (waring.equals("1")){//如果超时了则必须要弹出蓝框
                                                 Intent intent_blyyfx=new Intent(getContext(),BlYyfxActivity.class);
-                                                intent_blyyfx.putExtra("title",zldm);
-                                                intent_blyyfx.putExtra("zldm",title);
+                                                intent_blyyfx.putExtra("zldm",zldm);
+                                                intent_blyyfx.putExtra("title",title);
                                                 startActivity(intent_blyyfx);
                                             }else {//如果没有超时则直接启动结束
                                                 Intent intent_js = new Intent(getContext(), DialogGActivity.class);
@@ -413,6 +419,8 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }finally {
+                    handler.sendEmptyMessage(0x101);
                 }
             }
         }).start();
@@ -518,9 +526,6 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                 }
             }
         }
-        /*tiaoji_text.setTextColor(Color);
-        pzyc_text.setTextColor(Color);
-        mjwx_text.setTextColor(Color);*/
     }
 
     @Override
@@ -621,132 +626,6 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                 intent_qsfh.putExtra("zldm",getResources().getString(R.string.qsfh));
                 startActivity(intent_qsfh);
                 break;
-
-
-
-/*
-            case  R.id.zmsw:
-                if (isReady(getContext().getString(R.string.zmsw))){
-                    cardView_zmsw.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.zmsw),"装模升温","OPR");
-                }
-                break;
-            case  R.id.cxpt:
-                if (isReady(getContext().getString(R.string.cxpt))){
-                    cardView_cxpt.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.cxpt),"冲洗炮筒","OPR");
-                }
-                break;
-            case  R.id.kjsl:
-                if (isReady(getContext().getString(R.string.kjsl))){
-                    cardView_kjsl.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.kjsl),"开机试料","OPR");
-                }
-                break;
-            case  R.id.ds:
-                if (isReady(getContext().getString(R.string.ds))){
-                    cardView_ds.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.ds),"定色","OPR");
-                }
-                break;
-            case  R.id.sjqc:
-                if (isReady(getContext().getString(R.string.sjqc))){
-                    cardView_sjqc.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.sjqc),"三级清场","OPR");
-                }
-                break;
-            case  R.id.sjjc:
-                if (isReady(getContext().getString(R.string.sjjc))){
-                    cardView_sjjc.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.sjjc),"首件检查","OPR");
-                }
-                break;
-            case  R.id.pzyc:
-                if (isReady(getContext().getString(R.string.pzyc))){
-                    cardView_pzyc.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.pzyc),"品质异常","OPR");
-                }
-                break;
-            case  R.id.tiaoji:
-                if (isReady(getContext().getString(R.string.tiaoji))){
-                    cardView_tiaoji.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.tiaoji),"调机","OPR");
-                }
-                break;
-            case  R.id.ts:
-                if (isReady(getContext().getString(R.string.ts))){
-                    cardView_ts.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.ts),"调色","OPR");
-                }
-                break;
-            case  R.id.tingji:
-                if (isReady(getContext().getString(R.string.tingji))){
-                    cardView_tingji.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.tingji),"停机","OPR");
-                }
-                break;
-            case  R.id.dl:
-                if (isReady(getContext().getString(R.string.dl))){
-                    cardView_dl.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.dl),"待料","OPR");
-                }
-                break;
-            case R.id.by:
-                if (isReady(getContext().getString(R.string.by))){
-                    cardView_by.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.by),"保养","OPR");
-                }
-                break;
-            case  R.id.sm:
-                if (isReady(getContext().getString(R.string.sm))){
-                    cardView_xmsm.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.sm),"新模试模","OPR");
-                }
-                break;
-            case  R.id.sl:
-                if (isReady(getContext().getString(R.string.sl))){
-                    cardView_ylsl.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.sl),"原料试料","OPR");
-                }
-                break;
-            case  R.id.mjwx:
-                if (isReady(getContext().getString(R.string.mjwx))){
-                    cardView_mjwx.startAnimation(anim);
-                    //getActivity().finish();
-                    startActivityByNetResult(getContext().getString(R.string.mjwx),"模具维修","OPR");
-                }
-                break;
-            case R.id.jtwx:
-                if (isReady(getContext().getString(R.string.jtwx))){
-                    cardView_jtwx.startAnimation(anim);
-                    startActivityByNetResult(getContext().getString(R.string.jtwx),"机台维修","OPR");
-                }
-                break;
-            case R.id.zyg:
-               if (isReady(getContext().getString(R.string.zyg))){
-                   cardView_zyg.startAnimation(anim);
-                   startActivityByNetResult(getContext().getString(R.string.zyg),"粘样盖","OPR");
-               }
-                break;
-            case R.id.cm:
-               if (isReady(getContext().getString(R.string.cm))){
-                   cardView_cm.startAnimation(anim);
-                   startActivityByNetResult(getContext().getString(R.string.cm),"拆模","OPR");
-               }
-                break;
-            case R.id.rysg:
-                cardView_rysg.startAnimation(anim);
-                startActivityByNetResult(getContext().getString(R.string.rysg),"人员上岗","OPR");
-                break;
-            case R.id.pgxj:
-                cardView_pgxj.startAnimation(anim);
-                Intent intent_g20=new Intent(getContext(),DialogGActivity.class);
-                intent_g20.putExtra("zldm",getResources().getString(R.string.pgxj));
-                intent_g20.putExtra("title","品管巡机");
-                intent_g20.putExtra("type","DOC");
-                startActivity(intent_g20);
-                //startActivityByNetResult(getContext().getString(R.string.pgxj),"品管巡机","OPR");
-                break;*/
             case R.id.js:
                 cardView_js.startAnimation(anim);
                 exitEven();

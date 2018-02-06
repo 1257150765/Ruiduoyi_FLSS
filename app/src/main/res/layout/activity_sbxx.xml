@@ -2,13 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="800dp"
+    android:layout_width="match_parent"
     android:background="@android:color/white"
-    android:layout_height="500dp"
+    android:layout_height="match_parent"
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
         android:orientation="vertical">
@@ -36,19 +36,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TableLayout
-                android:layout_width="220dp"
+                android:layout_width="match_parent"
                 android:layout_marginBottom="20dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                >
 
-                <TableRow android:layout_weight="1">
+                <TableRow android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_margin="5dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="机台编号"
@@ -65,12 +69,10 @@
                         android:background="@drawable/text_bg"
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
-                </TableRow>
-
-                <TableRow android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="机台名称"
@@ -87,12 +89,10 @@
                         android:background="@drawable/text_bg"
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
-                </TableRow>
-
-                <TableRow android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="所属组别"
@@ -109,12 +109,10 @@
                         android:background="@drawable/text_bg"
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
-                </TableRow>
-
-                <TableRow android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="机台吨位"
@@ -133,10 +131,15 @@
                         android:textSize="17dp" />
                 </TableRow>
 
-                <TableRow android:layout_weight="1">
+
+                <TableRow android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="设备地址"
@@ -153,11 +156,10 @@
                         android:background="@drawable/text_bg"
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
-                </TableRow>
-                <TableRow android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="最小宽度"
@@ -174,11 +176,10 @@
                         android:background="@drawable/text_bg"
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
-                </TableRow>
-                <TableRow android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="最大宽度"
@@ -195,11 +196,10 @@
                         android:background="@drawable/text_bg"
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
-                </TableRow>
-                <TableRow android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="最小厚度"
@@ -217,10 +217,14 @@
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
                 </TableRow>
-                <TableRow android:layout_weight="1">
+                <TableRow android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="最大厚度"
@@ -229,6 +233,69 @@
 
                     <TextView
                         android:id="@+id/maxhd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/text_bg"
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="最大厚度"
+                        android:visibility="invisible"
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/text_bg"
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="最大厚度"
+                        android:visibility="invisible"
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/text_bg"
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="最大厚度"
+                        android:visibility="invisible"
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:visibility="invisible"
                         android:layout_width="wrap_content"
                         android:layout_height="26dp"
                         android:layout_gravity="center_vertical"
@@ -248,43 +315,43 @@
                 android:orientation="vertical">
                 <LinearLayout
                     android:background="@color/blue_sl_false"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="550dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="700dp"
                     android:layout_height="35dp"
                     android:orientation="horizontal">
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
-                        android:layout_width="230dp"
+                        android:layout_width="300dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
                         android:text="金型品番"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
-                        android:layout_width="70dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
                         android:text="合模次数"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
-                        android:layout_width="70dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
                         android:text="良品率%"/>
                     <TextView
                         android:background="@drawable/text_bg"
                         android:gravity="center"
-                        android:layout_width="180dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/black"
                         android:text="最近生产时间"/>
                 </LinearLayout>
                 <ListView
                     android:background="@drawable/text_bg"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="550dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="700dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:divider="@color/touming"

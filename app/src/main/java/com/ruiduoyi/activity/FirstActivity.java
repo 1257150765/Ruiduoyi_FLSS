@@ -86,9 +86,13 @@ public class FirstActivity extends BaseActivity{
         if(is){
             file.delete();
         }
+        File appDir=new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes");
+        if(!appDir.exists()){
+            appDir.mkdir();
+        }
         sharedPreferences=getSharedPreferences("info",MODE_PRIVATE);
-        //NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
-        NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
+        NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
+        //NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
         getNetData(0);
         new Thread(new Runnable() {
             @Override

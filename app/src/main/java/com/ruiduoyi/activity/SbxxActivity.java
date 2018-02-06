@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SbxxActivity extends BaseDialogActivity implements View.OnClickListener{
+public class SbxxActivity extends BaseActivity implements View.OnClickListener{
     private Button ok_btn,cancle_btn;
     private ListView listView;
     private SimpleAdapter adapter;
