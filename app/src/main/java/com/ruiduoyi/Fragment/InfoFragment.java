@@ -6,16 +6,22 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +48,9 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.ruiduoyi.R;
+import com.ruiduoyi.activity.FirstActivity;
 import com.ruiduoyi.activity.MainActivity;
+import com.ruiduoyi.activity.PreViewDialogActivity;
 import com.ruiduoyi.activity.ScrzActivity;
 import com.ruiduoyi.model.NetHelper;
 import com.ruiduoyi.utils.AppUtils;
@@ -59,16 +67,17 @@ import java.util.TimerTask;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class InfoFragment extends Fragment {
+public class InfoFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private BarChart mBarChart;
     private int UPDATE_TYPE_AUTO=0,UPDATE_TYPE_RECEIVER=1;
     private String jtbh;
-    private TextView dq_1,dq_2,dq_3,dq_4,dq_5,dq_6,dq_7,dq_8,dq_9,
-                xy_1,xy_2,xy_3,xy_4,xy_5,xy_6,xy_7,xy_8,xy_9,
-                mo_1,mo_2,mo_3,mo_4,mo_5,mo_6,mo_7,mo_8,tong_1,tong_2,tong_3,tong_4,tong_5,tong_6,jtbh_text,status,msg_text,
+    private int setTimeNum=0;
+    private TextView dq_sjsx,dq_zzdh,dq_cfwz,dq_jxpf,dq_pf,dq_clm,dq_ys,dq_yl,
+                xy_yjsx,xy_zzdh,xy_cfwz,xy_jxpf,xy_pf,xy_clm,xy_ys,xy_yl,
+                mo_jxpf,mo_jyzq,mo_cpqs,mo_cxzq,mo_sjzq,mo_jxqs,mo_sjqs,tong_1,tong_2,tong_3,tong_4,tong_5,tong_6,jtbh_text,status,msg_text,preViewText,
                 caozuo_text,jisu_text,cao_name_text,ji_name_text,labRym,tsqx_text;
     private SharedPreferences sharedPreferences;
     private ImageView img_1,img_2,img_3,img_4,img_5,img_6,img_7,img_8,img_0,img_pho1,img_pho2;
@@ -78,7 +87,8 @@ public class InfoFragment extends Fragment {
     private Timer updateTimer;
     private String mac;
     private MainActivity activity;
-
+    private PopupWindow preViewPopupWindow;
+    private LinearLayout jxpfLayout,pfLayout,clmLayout,nextJxpfLayout,nextPfLayout,nextClmLayout,tipLayout;
 
 
     private BroadcastReceiver receiver=new BroadcastReceiver() {
@@ -125,33 +135,30 @@ public class InfoFragment extends Fragment {
 
     public void initView(View view){
         mBarChart=(BarChart)view.findViewById(R.id.barChart);
-        dq_1=(TextView)view.findViewById(R.id.dq_1);
-        dq_2=(TextView)view.findViewById(R.id.dq_2);
-        dq_3=(TextView)view.findViewById(R.id.dq_3);
-        dq_4=(TextView)view.findViewById(R.id.dq_4);
-        dq_5=(TextView)view.findViewById(R.id.dq_5);
-        dq_6=(TextView)view.findViewById(R.id.dq_6);
-        dq_7=(TextView)view.findViewById(R.id.dq_7);
-        dq_8=(TextView)view.findViewById(R.id.dq_8);
-        dq_9=(TextView)view.findViewById(R.id.dq_9);
-        xy_1=(TextView)view.findViewById(R.id.xygd_1);
-        xy_2=(TextView)view.findViewById(R.id.xygd_2);
-        xy_3=(TextView)view.findViewById(R.id.xygd_3);
-        xy_4=(TextView)view.findViewById(R.id.xygd_4);
-        xy_5=(TextView)view.findViewById(R.id.xygd_5);
-        xy_6=(TextView)view.findViewById(R.id.xygd_6);
-        xy_7=(TextView)view.findViewById(R.id.xygd_7);
-        xy_8=(TextView)view.findViewById(R.id.xygd_8);
-        xy_9=(TextView)view.findViewById(R.id.xygd_9);
+        dq_sjsx=(TextView)view.findViewById(R.id.dq_sjsx);
+        dq_zzdh=(TextView)view.findViewById(R.id.dq_zzdh);
+        dq_cfwz=(TextView)view.findViewById(R.id.dq_cfwz);
+        dq_jxpf=(TextView)view.findViewById(R.id.dq_jxpf);
+        dq_pf=(TextView)view.findViewById(R.id.dq_pf);
+        dq_clm=(TextView)view.findViewById(R.id.dq_clm);
+        dq_yl=(TextView)view.findViewById(R.id.dq_yl);
+        dq_ys=(TextView)view.findViewById(R.id.dq_ys);
+        xy_yjsx=(TextView)view.findViewById(R.id.xy_yjsx);
+        xy_zzdh=(TextView)view.findViewById(R.id.xy_zzdh);
+        xy_cfwz=(TextView)view.findViewById(R.id.xy_cfwz);
+        xy_jxpf=(TextView)view.findViewById(R.id.xy_jxpf);
+        xy_pf=(TextView)view.findViewById(R.id.xy_pf);
+        xy_clm=(TextView)view.findViewById(R.id.xy_clm);
+        xy_yl=(TextView)view.findViewById(R.id.xy_yl);
+        xy_ys=(TextView)view.findViewById(R.id.xy_ys);
 
-        mo_1=(TextView)view.findViewById(R.id.mo_1);
-        //mo_2=(TextView)view.findViewById(R.id.mo_2);
-        mo_3=(TextView)view.findViewById(R.id.mo_3);
-        mo_4=(TextView)view.findViewById(R.id.mo_4);
-        mo_5=(TextView)view.findViewById(R.id.mo_5);
-        mo_6=(TextView)view.findViewById(R.id.mo_6);
-        mo_7=(TextView)view.findViewById(R.id.mo_7);
-        mo_8=(TextView)view.findViewById(R.id.mo_8);
+        mo_jxpf=(TextView)view.findViewById(R.id.mo_jxpf);
+        mo_jyzq=(TextView)view.findViewById(R.id.mo_jyzq);
+        mo_cpqs=(TextView)view.findViewById(R.id.mo_cpqs);
+        mo_cxzq=(TextView)view.findViewById(R.id.mo_cxzq);
+        mo_sjzq=(TextView)view.findViewById(R.id.mo_sjzq);
+        mo_jxqs=(TextView)view.findViewById(R.id.mo_jxqs);
+        mo_sjqs=(TextView)view.findViewById(R.id.mo_sjqs);
         tong_1=(TextView)view.findViewById(R.id.tong_1);
         tong_2=(TextView)view.findViewById(R.id.tong_2);
         tong_3=(TextView)view.findViewById(R.id.tong_3);
@@ -180,10 +187,12 @@ public class InfoFragment extends Fragment {
         img_pho2=(ImageView)view.findViewById(R.id.photo_2);
         cardView=(CardView)view.findViewById(R.id.cardView);
         tip_layout=(ScrollView)view.findViewById(R.id.tip_bg);
+        tipLayout=(LinearLayout)view.findViewById(R.id.tip_layout);
         filePhath=getContext().getCacheDir().getPath();
         getNetDate(UPDATE_TYPE_RECEIVER);
         updateDataOntime();
         initBarChart(mBarChart);
+
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,6 +200,40 @@ public class InfoFragment extends Fragment {
                 getNetDate(UPDATE_TYPE_RECEIVER);
             }
         });
+
+
+        jxpfLayout=(LinearLayout)view.findViewById(R.id.jxpf_layout);
+        pfLayout=(LinearLayout)view.findViewById(R.id.pf_layout);
+        clmLayout=(LinearLayout)view.findViewById(R.id.clm_layout);
+        nextJxpfLayout=(LinearLayout)view.findViewById(R.id.next_jxpf_layout);
+        nextPfLayout=(LinearLayout)view.findViewById(R.id.next_pf_layout);
+        nextClmLayout=(LinearLayout)view.findViewById(R.id.next_clm_layout);
+
+
+        jxpfLayout.setOnClickListener(this);
+        pfLayout.setOnClickListener(this);
+        clmLayout.setOnClickListener(this);
+        nextJxpfLayout.setOnClickListener(this);
+        nextPfLayout.setOnClickListener(this);
+        nextClmLayout.setOnClickListener(this);
+        img_0.setOnClickListener(this);
+        img_1.setOnClickListener(this);
+        img_2.setOnClickListener(this);
+        img_3.setOnClickListener(this);
+        img_4.setOnClickListener(this);
+        img_5.setOnClickListener(this);
+        img_6.setOnClickListener(this);
+        img_7.setOnClickListener(this);
+        msg_text.setOnClickListener(this);
+
+
+
+        View preView=LayoutInflater.from(getContext()).inflate(R.layout.preview,null);
+        int width_dp=((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250,getContext().getResources().getDisplayMetrics()));
+        int height_dp=((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getContext().getResources().getDisplayMetrics()));
+        preViewPopupWindow=new PopupWindow(preView,ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
+        preViewText=(TextView)preView.findViewById(R.id.pre_text);
+        preViewPopupWindow.setAnimationStyle(R.style.popwin_anim_style);
     }
 
 
@@ -204,8 +247,8 @@ public class InfoFragment extends Fragment {
                     try {
                         JSONArray list= (JSONArray) msg.obj;
                         if(list.length()>0){
-                            dq_1.setText(list.getJSONObject(0).getString("kbm_sxrq"));
-                            dq_2.setText(list.getJSONObject(0).getString("kbm_zzdh"));
+                            dq_sjsx.setText(list.getJSONObject(0).getString("kbm_sxrq"));
+                            dq_zzdh.setText(list.getJSONObject(0).getString("kbm_zzdh"));
 
                             SharedPreferences.Editor editor=sharedPreferences.edit();
                             editor.putString("sjsx",list.getJSONObject(0).getString("kbm_sxrq"));
@@ -224,35 +267,32 @@ public class InfoFragment extends Fragment {
                             editor.putString("sjqs",list.getJSONObject(0).getString("kbm_xs"));
                             editor.putString("jzzl",list.getJSONObject(0).getString("kbm_jzzl"));
                             editor.commit();
-                            dq_3.setText(list.getJSONObject(0).getString("kbm_sodh"));
-                            dq_4.setText(list.getJSONObject(0).getString("kbm_ph"));
-                            dq_5.setText(list.getJSONObject(0).getString("kbm_mjbh"));
-                            dq_6.setText(list.getJSONObject(0).getString("kbm_wldm"));
-                            dq_7.setText(list.getJSONObject(0).getString("kbm_pmgg"));
-                            dq_8.setText(list.getJSONObject(0).getString("kbm_ysdm"));
-                            dq_9.setText(list.getJSONObject(0).getString("kbm_czdm"));
-                            xy_1.setText(list.getJSONObject(0).getString("kbm_xxrq"));
-                            xy_2.setText(list.getJSONObject(0).getString("kbm_nextzzdh"));
-                            xy_3.setText(list.getJSONObject(0).getString("kbm_nextsodh"));
-                            xy_4.setText(list.getJSONObject(0).getString("kbm_nextph"));
-                            xy_5.setText(list.getJSONObject(0).getString("kbm_nextmjbh"));
-                            xy_6.setText(list.getJSONObject(0).getString("kbm_nextwldm"));
-                            xy_7.setText(list.getJSONObject(0).getString("kbm_nextpmgg"));
-                            xy_8.setText(list.getJSONObject(0).getString("kbm_nextysdm"));
-                            xy_9.setText(list.getJSONObject(0).getString("kbm_nextczdm"));
+                            dq_cfwz.setText(list.getJSONObject(0).getString("kbm_cwdm"));
+                            dq_jxpf.setText(list.getJSONObject(0).getString("kbm_mjbh"));
+                            dq_pf.setText(list.getJSONObject(0).getString("kbm_wldm"));
+                            dq_clm.setText(list.getJSONObject(0).getString("kbm_pmgg"));
+                            dq_ys.setText(list.getJSONObject(0).getString("kbm_ysdm"));
+                            dq_yl.setText(list.getJSONObject(0).getString("kbm_czdm"));
+                            xy_yjsx.setText(list.getJSONObject(0).getString("kbm_xxrq"));
+                            xy_zzdh.setText(list.getJSONObject(0).getString("kbm_nextzzdh"));
+                            xy_cfwz.setText(list.getJSONObject(0).getString("kbm_nextcwdm"));
+                            xy_jxpf.setText(list.getJSONObject(0).getString("kbm_nextmjbh"));
+                            xy_pf.setText(list.getJSONObject(0).getString("kbm_nextwldm"));
+                            xy_clm.setText(list.getJSONObject(0).getString("kbm_nextpmgg"));
+                            xy_ys.setText(list.getJSONObject(0).getString("kbm_nextysdm"));
+                            xy_yl.setText(list.getJSONObject(0).getString("kbm_nextczdm"));
 
-                            mo_1.setText(list.getJSONObject(0).getString("kbm_mjbh"));
-                            //mo_2.setText(list.getJSONObject(0).getString("kbm_mjmc"));
-                            mo_3.setText(list.getJSONObject(0).getString("kbm_cpxs"));
-                            mo_4.setText(list.getJSONObject(0).getString("kbm_cxsj"));
-                            mo_5.setText(list.getJSONObject(0).getString("kbm_sjcxsj"));
-                            mo_6.setText(list.getJSONObject(0).getString("kbm_mjsb"));
-                            mo_7.setText(list.getJSONObject(0).getString("kbm_mjxs"));
-                            mo_8.setText(list.getJSONObject(0).getString("kbm_xs"));
+                            mo_jxpf.setText(list.getJSONObject(0).getString("kbm_mjbh"));
+                            mo_cpqs.setText(list.getJSONObject(0).getString("kbm_cpxs"));
+                            mo_cxzq.setText(list.getJSONObject(0).getString("kbm_cxsj"));
+                            mo_sjzq.setText(list.getJSONObject(0).getString("kbm_sjcxsj"));
+                            mo_jxqs.setText(list.getJSONObject(0).getString("kbm_mjxs"));
+                            mo_sjqs.setText(list.getJSONObject(0).getString("kbm_xs"));
+                            mo_jyzq.setText(list.getJSONObject(0).getString("kbm_gdzq"));
                             if (list.getJSONObject(0).getString("kbm_xs").equals(list.getJSONObject(0).getString("kbm_cpxs"))){
-                                mo_8.setBackgroundColor(Color.WHITE);
+                                mo_sjqs.setBackgroundColor(Color.WHITE);
                             }else {
-                                mo_8.setBackgroundColor(getResources().getColor(R.color.small));
+                                mo_sjqs.setBackgroundColor(getResources().getColor(R.color.small));
                             }
 
                             tong_1.setText(list.getJSONObject(0).getString("kbm_scsl"));
@@ -267,21 +307,21 @@ public class InfoFragment extends Fragment {
 
                             if (!(list.getJSONObject(0).getString("kbm_mjbh").trim().equals("")|list.getJSONObject(0).getString("kbm_nextmjbh").equals(""))){
                                 if(!list.getJSONObject(0).getString("kbm_mjbh").equals(list.getJSONObject(0).getString("kbm_nextmjbh").trim())){
-                                    xy_5.setBackgroundColor(Color.RED);
+                                    xy_jxpf.setBackgroundColor(Color.RED);
                                 }else {
-                                    xy_5.setBackgroundColor(Color.WHITE);
+                                    xy_jxpf.setBackgroundColor(Color.WHITE);
                                 }
                             }else {
-                                xy_5.setBackgroundColor(Color.WHITE);
+                                xy_jxpf.setBackgroundColor(Color.WHITE);
                             }
                             if (!(list.getJSONObject(0).getString("kbm_wldm").trim().equals("")|list.getJSONObject(0).getString("kbm_nextwldm").trim().equals(""))){
                                 if(!list.getJSONObject(0).getString("kbm_wldm").trim().equals(list.getJSONObject(0).getString("kbm_nextwldm").trim() )){
-                                    xy_6.setBackgroundColor(Color.RED);
+                                    xy_pf.setBackgroundColor(Color.RED);
                                 }else {
-                                    xy_6.setBackgroundColor(Color.WHITE);
+                                    xy_pf.setBackgroundColor(Color.WHITE);
                                 }
                             }else {
-                                xy_6.setBackgroundColor(Color.WHITE);
+                                xy_pf.setBackgroundColor(Color.WHITE);
                             }
 
 
@@ -390,6 +430,24 @@ public class InfoFragment extends Fragment {
                     break;
                 case 0x111:
                     tip_layout.setBackgroundColor(Color.WHITE);
+                    break;
+                case 0x112://设置系统时间
+                    try {
+                        JSONArray array= (JSONArray) msg.obj;
+                        if(array.length()>0){
+                            String time=array.getJSONObject(0).getString("Column1");
+                            String ymd_hm=time.substring(0,4)+time.substring(5,7)+time.substring(8,10)
+                                    +"."+time.substring(11,13)+time.substring(14,16)+time.substring(17,19);
+                            AppUtils.setSystemTime(getContext(),ymd_hm);
+                        }else {
+                            //Toast.makeText(MainActivity.this,"获取服务器时间失败",Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 0x113://控制提示框隐藏
+                    preViewPopupWindow.dismiss();
                     break;
             }
         }
@@ -911,6 +969,22 @@ public class InfoFragment extends Fragment {
                         }
                     }
 
+                    //刷新系统时间
+                    if (!sharedPreferences.getBoolean("isSetTime",false)){
+                        JSONArray timeArray= NetHelper.getQuerysqlResultJsonArray("select GETDATE()");
+                        Message msg=handler.obtainMessage();
+                        if(timeArray!=null){
+                            msg.obj=timeArray;
+                            msg.what=0x112;
+                            handler.sendMessage(msg);
+                        }else {
+                            AppUtils.uploadNetworkError("select GETDATE() NetWordError",
+                                    jtbh,sharedPreferences.getString("mac",""));
+                        }
+                    }
+
+
+
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putString("isBaseInfoFinish","OK");
                     editor.commit();
@@ -919,8 +993,6 @@ public class InfoFragment extends Fragment {
         }
 
     }
-
-
 
     private int getColorByKey(String color){
          /*
@@ -960,7 +1032,6 @@ public class InfoFragment extends Fragment {
     }
 
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -968,4 +1039,77 @@ public class InfoFragment extends Fragment {
         updateTimer.cancel();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.jxpf_layout:
+                showPreView(dq_jxpf,dq_jxpf.getText().toString());
+                break;
+            case R.id.pf_layout:
+                showPreView(dq_pf,dq_pf.getText().toString());
+                break;
+            case R.id.clm_layout:
+                showPreView(dq_clm,dq_clm.getText().toString());
+                break;
+            case R.id.next_jxpf_layout:
+                showPreView(xy_jxpf,xy_jxpf.getText().toString());
+                break;
+            case R.id.next_pf_layout:
+                showPreView(xy_pf,xy_pf.getText().toString());
+                break;
+            case R.id.next_clm_layout:
+                showPreView(xy_clm,xy_clm.getText().toString());
+                break;
+            case R.id.img_0:
+                showPreView(img_0,"未做首件");
+                break;
+            case R.id.img_1:
+                showPreView(img_1,"异常停机");
+                break;
+            case R.id.img_2:
+                showPreView(img_2,"超产5PCSYI以上");
+                break;
+            case R.id.img_3:
+                showPreView(img_3,"指令超出标准时间");
+                break;
+            case R.id.img_4:
+                showPreView(img_4,"原因分析");
+                break;
+            case R.id.img_5:
+                showPreView(img_5,"不良率超标");
+                break;
+            case R.id.img_6:
+                showPreView(img_6,"成型时间大于实际成型周期");
+                break;
+            case R.id.img_7:
+                showPreView(img_7,"换单提醒");
+                break;
+            case R.id.msg_text:
+                showPreView(tipLayout,msg_text.getText().toString());
+                break;
+        }
+    }
+
+    public void showPreView(View view,String msg){
+        if (preViewPopupWindow.isShowing()){
+            preViewPopupWindow.dismiss();
+            preViewText.setText("");
+        }else {
+            preViewText.setText(msg);
+            preViewPopupWindow.setOutsideTouchable(true);
+            preViewPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+            preViewPopupWindow.showAsDropDown(view,0,0);
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.currentThread().sleep(3000);
+                    handler.sendEmptyMessage(0x113);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 }

@@ -16,4 +16,9 @@
         <item name="android:textSize">35dp</item>
     </style>
 
+    <style name="popwin_anim_style">
+        <item name="android:windowEnterAnimation">@anim/previewanim</item>
+        <item name="android:windowExitAnimation">@anim/previewoutanim</item>
+    </style>
+
 </resources>

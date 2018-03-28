@@ -389,7 +389,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         timer_time.schedule(timerTask,0,5000);
     }
 
-
     private void getCompanyName(){
         new Thread(new Runnable() {
             @Override
@@ -412,7 +411,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         }).start();
     }
-
 
 
     public void initGpio(){
@@ -483,21 +481,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         IntentFilter receiverfilter=new IntentFilter();
         receiverfilter.addAction("com.ruiduoyi.GpioSinal");
         registerReceiver(gpioSignalReceiver,receiverfilter);
-       /* gpio_1=(ImageView)findViewById(R.id.gpio1);
-        gpio_2=(ImageView)findViewById(R.id.gpio2);
-        gpio_3=(ImageView)findViewById(R.id.gpio3);
-        gpio_4=(ImageView)findViewById(R.id.gpio4);
-        event_gpio = new GpioEvent() {
-            @Override
-            public void onGpioSignal(int index,boolean level) {
-                long time=System.currentTimeMillis();
-                Date date=new Date(time);
-                SimpleDateFormat format2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-                String ymd_hms=format2.format(date);
-
-            }
-        };
-        event_gpio.MyObserverStart();*/
     }
 
     public StatusFragment getStatusFragment() {

@@ -91,8 +91,11 @@ public class FirstActivity extends BaseActivity{
             appDir.mkdir();
         }
         sharedPreferences=getSharedPreferences("info",MODE_PRIVATE);
-        NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
-        //NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
+        //NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
+        NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putBoolean("isSetTime",false);
+        editor.commit();
         getNetData(0);
         new Thread(new Runnable() {
             @Override
@@ -304,6 +307,9 @@ public class FirstActivity extends BaseActivity{
                             String ymd_hm=time.substring(0,4)+time.substring(5,7)+time.substring(8,10)
                                     +"."+time.substring(11,13)+time.substring(14,16)+time.substring(17,19);
                             AppUtils.setSystemTime(FirstActivity.this,ymd_hm);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putBoolean("isSetTime",true);
+                            editor.commit();
                         }else {
                             //Toast.makeText(MainActivity.this,"获取服务器时间失败",Toast.LENGTH_SHORT).show();
                         }

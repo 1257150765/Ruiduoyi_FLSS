@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ruiduoyi"
+    android:persistent="true"
     android:versionCode="3"
-    android:versionName="3.0.0.3"
-    android:persistent="true">
+    android:versionName="3.0.0.3">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -24,8 +24,7 @@
         tools:replace="Android:icon, android:theme,android:name">
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="landscape"
-            />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.BaseActivity"
             android:label="@string/title_activity_base"
@@ -63,7 +62,7 @@
         <activity
             android:name=".activity.BlfxActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <service
             android:name=".service.SerialPortService"
@@ -111,8 +110,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.BlYyfxActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.BlYyfxActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".activity.JtjqsbgActivity" />
         <activity android:name=".activity.Jtjqsbg2Activity" />
         <activity android:name=".activity.PgxjActivity" />
@@ -121,12 +121,14 @@
         <activity android:name=".activity.SbdjActivity" />
         <activity android:name=".activity.GycsActivity" />
         <activity android:name=".activity.SlcsActivity" />
-        <activity android:name=".activity.QsfhActivity"></activity>
+        <activity android:name=".activity.QsfhActivity" />
         <activity
             android:name=".activity.ReSetServerIpActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".activity.PreViewDialogActivity"
+            android:theme="@android:style/Theme.Dialog"></activity>
     </application>
 
 </manifest>
