@@ -87,7 +87,6 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
     private Timer updateTimer;
     private String mac;
     private MainActivity activity;
-    private PopupWindow preViewPopupWindow;
     private LinearLayout jxpfLayout,pfLayout,clmLayout,nextJxpfLayout,nextPfLayout,nextClmLayout,tipLayout;
 
 
@@ -228,12 +227,6 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
 
 
-        View preView=LayoutInflater.from(getContext()).inflate(R.layout.preview,null);
-        int width_dp=((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250,getContext().getResources().getDisplayMetrics()));
-        int height_dp=((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getContext().getResources().getDisplayMetrics()));
-        preViewPopupWindow=new PopupWindow(preView,ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
-        preViewText=(TextView)preView.findViewById(R.id.pre_text);
-        preViewPopupWindow.setAnimationStyle(R.style.popwin_anim_style);
     }
 
 
@@ -447,6 +440,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                     }
                     break;
                 case 0x113://控制提示框隐藏
+                    PopupWindow preViewPopupWindow= (PopupWindow) msg.obj;
                     preViewPopupWindow.dismiss();
                     break;
             }
@@ -1091,21 +1085,23 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
     }
 
     public void showPreView(View view,String msg){
-        if (preViewPopupWindow.isShowing()){
-            preViewPopupWindow.dismiss();
-            preViewText.setText("");
-        }else {
-            preViewText.setText(msg);
-            preViewPopupWindow.setOutsideTouchable(true);
-            preViewPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-            preViewPopupWindow.showAsDropDown(view,0,0);
-        }
+        View preView=LayoutInflater.from(getContext()).inflate(R.layout.preview,null);
+        final PopupWindow preViewPopupWindow=new PopupWindow(preView,ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
+        TextView preViewText=(TextView)preView.findViewById(R.id.pre_text);
+        preViewPopupWindow.setAnimationStyle(R.style.popwin_anim_style);
+        preViewText.setText(msg);
+        preViewPopupWindow.setOutsideTouchable(true);
+        preViewPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        preViewPopupWindow.showAsDropDown(view,0,0);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.currentThread().sleep(3000);
-                    handler.sendEmptyMessage(0x113);
+                    Thread.currentThread().sleep(5000);
+                    Message msg=handler.obtainMessage();
+                    msg.obj=preViewPopupWindow;
+                    msg.what=0x113;
+                    handler.sendMessage(msg);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -38,7 +38,7 @@
             <LinearLayout
                 android:background="@color/blue_sl_false"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="1442dp"
+                android:layout_width="1638dp"
                 android:layout_height="35dp"
                 android:orientation="horizontal">
                 <TextView
@@ -93,7 +93,7 @@
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
-                    android:layout_width="@dimen/b3_lable"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
                     android:text="品番"/>
@@ -132,10 +132,17 @@
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
                     android:text="金型品番"/>
+                <TextView
+                    android:background="@drawable/text_bg"
+                    android:gravity="center"
+                    android:layout_width="@dimen/b3_lable"
+                    android:layout_height="match_parent"
+                    android:textColor="@android:color/black"
+                    android:text="存放位置"/>
             </LinearLayout>
             <ListView
                 android:layout_gravity="center_horizontal"
-                android:layout_width="1442dp"
+                android:layout_width="1638dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/list_b3"

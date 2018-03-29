@@ -50,18 +50,18 @@ public class WorkOrderAdapter extends ArrayAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         final Map<String,String>map=data.get(position);
         View view= LayoutInflater.from(getContext()).inflate(resource,null);
-        final TextView lab_4=(TextView)view.findViewById(R.id.lab_4);
+        final TextView lab_1=(TextView)view.findViewById(R.id.lab_1);
+        TextView lab_2=(TextView)view.findViewById(R.id.lab_2);
+        TextView lab_3=(TextView)view.findViewById(R.id.lab_3);
+        TextView lab_4=(TextView)view.findViewById(R.id.lab_4);
         TextView lab_5=(TextView)view.findViewById(R.id.lab_5);
         TextView lab_6=(TextView)view.findViewById(R.id.lab_6);
         TextView lab_7=(TextView)view.findViewById(R.id.lab_7);
         TextView lab_8=(TextView)view.findViewById(R.id.lab_8);
         TextView lab_9=(TextView)view.findViewById(R.id.lab_9);
-        //TextView lab_10=(TextView)view.findViewById(R.id.lab_10);
+        TextView lab_10=(TextView)view.findViewById(R.id.lab_10);
         TextView lab_11=(TextView)view.findViewById(R.id.lab_11);
         TextView lab_12=(TextView)view.findViewById(R.id.lab_12);
-        TextView lab_13=(TextView)view.findViewById(R.id.lab_13);
-        TextView lab_14=(TextView)view.findViewById(R.id.lab_14);
-        TextView lab_15=(TextView)view.findViewById(R.id.lab_15);
         LinearLayout backgroup=(LinearLayout)view.findViewById(R.id.bg);
         final Button on_btn=(Button)view.findViewById(R.id.on_btn);
         final Button off_btn=(Button)view.findViewById(R.id.off_btn);
@@ -118,18 +118,18 @@ public class WorkOrderAdapter extends ArrayAdapter{
                 }).start();
             }
         });
-        lab_4.setText(map.get("scrq"));
-        lab_5.setText(map.get("scxh"));
-        lab_6.setText(map.get("zzdh"));
-        lab_7.setText(map.get("sodh"));
-        lab_8.setText(map.get("ph"));
-        lab_9.setText(map.get("mjbh"));
-        //lab_10.setText(map.get("mjmc"));
-        lab_11.setText(map.get("wldm"));
-        lab_12.setText(map.get("pmgg"));
-        lab_13.setText(map.get("wgrq"));
-        lab_14.setText(map.get("scsl"));
-        lab_15.setText(map.get("lpsl"));
+        lab_1.setText(map.get("scrq"));
+        lab_2.setText(map.get("scxh"));
+        lab_3.setText(map.get("zzdh"));
+        lab_4.setText(map.get("sodh"));
+        lab_5.setText(map.get("wgrq"));
+        lab_6.setText(map.get("wldm"));
+        lab_7.setText(map.get("pmgg"));
+        lab_8.setText(map.get("wgrq"));
+        lab_9.setText(map.get("scsl"));
+        lab_10.setText(map.get("lpsl"));
+        lab_11.setText(map.get("mjbh"));
+        lab_12.setText(map.get("cfwz"));
         switch (map.get("ztbz")){
             case "1":
                 backgroup.setBackgroundColor(getContext().getResources().getColor(R.color.gdgl_1));

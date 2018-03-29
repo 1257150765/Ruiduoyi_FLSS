@@ -120,16 +120,28 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="60dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:text="品"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
                 android:layout_marginRight="7dp"
-                android:text="交货日期"
+                android:text="番"
+                android:gravity="right"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/dq_4"
+                android:id="@+id/dq_7"
                 android:layout_width="@dimen/blyyfx_text_width"
                 android:layout_height="36dp"
                 android:layout_margin="3dp"
@@ -170,43 +182,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                android:text="品"
-                android:textColor="#000000"
-                android:textSize="15dp" />
-            <TextView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginRight="7dp"
-                android:text="番"
-                android:gravity="right"
-                android:textColor="#000000"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/dq_7"
-                android:layout_width="@dimen/blyyfx_text_width"
-                android:layout_height="36dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/text_bg"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -262,6 +238,32 @@
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
 
+        <LinearLayout
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="7dp"
+                android:text="交货日期"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/dq_4"
+                android:layout_width="@dimen/blyyfx_text_width"
+                android:layout_height="36dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/text_bg"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
 
     </LinearLayout>
     <LinearLayout

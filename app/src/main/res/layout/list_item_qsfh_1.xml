@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/bg"
-        android:layout_width="1590dp"
+        android:layout_width="1440dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
@@ -47,65 +47,51 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="生产批号"/>
+            android:text="产品编号"/>
         <TextView
             android:id="@+id/lab_5"
             android:background="@drawable/text_bg"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="产品编号"/>
-        <TextView
-            android:id="@+id/lab_6"
-            android:background="@drawable/text_bg"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
             android:text="品名规格"/>
         <TextView
-            android:id="@+id/lab_7"
+            android:id="@+id/lab_6"
             android:background="@drawable/text_bg"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="模具编号"/>
-       <!-- <TextView
-            android:id="@+id/lab_8"
-            android:background="@drawable/text_bg"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="模具名称"/>-->
         <TextView
-            android:id="@+id/lab_9"
+            android:id="@+id/lab_7"
             android:background="@drawable/text_bg"
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="产品腔数"/>
         <TextView
-            android:id="@+id/lab_10"
+            android:id="@+id/lab_8"
             android:background="@drawable/text_bg"
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="实际腔数"/>
         <TextView
-            android:id="@+id/lab_11"
+            android:id="@+id/lab_9"
             android:background="@drawable/text_bg"
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="堵头数量"/>
         <TextView
-            android:id="@+id/lab_12"
+            android:id="@+id/lab_10"
             android:background="@drawable/text_bg"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="更改人员"/>
         <TextView
-            android:id="@+id/lab_13"
+            android:id="@+id/lab_11"
             android:background="@drawable/text_bg"
             android:layout_width="150dp"
             android:layout_height="match_parent"

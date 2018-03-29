@@ -245,9 +245,10 @@ public class DtwzFragment extends Fragment implements View.OnClickListener{
                             }
                         }
                     }
-                    if (okNum==allNum){
+                    /*if (okNum==allNum){
                         handler.sendEmptyMessage(0x102);
-                    }
+                    }*/
+                    handler.sendEmptyMessage(0x102);
 
                 }catch (JSONException e){
                     e.printStackTrace();

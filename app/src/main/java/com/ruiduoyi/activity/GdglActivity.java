@@ -93,7 +93,7 @@ public class GdglActivity extends BaseActivity implements View.OnClickListener{
                map.put("scxh",item.getString("v_scxh"));
                map.put("zzdh",item.getString("v_zzdh"));
                map.put("sodh",item.getString("v_sodh"));
-               map.put("ph",item.getString("v_ph"));
+               map.put("wgrq",item.getString("v_wgrq"));
                map.put("mjbh",item.getString("v_mjbh"));
                //map.put("mjmc",item.getString("v_mjmc"));
                map.put("wldm",item.getString("v_wldm"));
@@ -102,6 +102,7 @@ public class GdglActivity extends BaseActivity implements View.OnClickListener{
                map.put("scsl",item.getString("v_scsl"));
                map.put("lpsl",item.getString("v_lpsl"));
                map.put("ztbz",item.getString("v_ztbz"));
+               map.put("cfwz",item.getString("v_cwdm"));
                data.add(map);
            }
            WorkOrderAdapter adapter=new WorkOrderAdapter(GdglActivity.this,R.layout.list_item_b3,data,wkno,handler);

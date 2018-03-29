@@ -32,7 +32,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
     private Button cancle_btn,sub_btn;
     private ListView listView,blmsList;
     private Button spinner_1;
-    private TextView text_1,text_2,text_3,text_4,text_5,text_6,text_7,text_8,text_9,text_10,text_11;
+    private TextView fsrqText,jxpfText,pfText,clhText,kssjText,jssjText,ksryText,jsryText,bzText,ysText,text_2;
     private String jtbh,lbdm;
     private YyfxAdapter adapter;
     private String wkno="";
@@ -51,21 +51,19 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
     private void initView(){
         cancle_btn=(Button)findViewById(R.id.cancle_btn);
         sub_btn=(Button)findViewById(R.id.sub_btn);
-        text_1=(TextView)findViewById(R.id.text_1);
         text_2=(TextView)findViewById(R.id.text_2);
-        text_3=(TextView)findViewById(R.id.text_3);
-        text_4=(TextView)findViewById(R.id.text_4);
-        text_5=(TextView)findViewById(R.id.text_5);
-        text_6=(TextView)findViewById(R.id.text_6);
-        text_7=(TextView)findViewById(R.id.text_7);
-        text_8=(TextView)findViewById(R.id.text_8);
-        text_9=(TextView)findViewById(R.id.text_9);
-        text_10=(TextView)findViewById(R.id.text_10);
-        text_11=(TextView)findViewById(R.id.text_11);
-        //text_key=(TextView)findViewById(R.id.text_key);
+        fsrqText=(TextView)findViewById(R.id.fsrq);
+        jxpfText=(TextView)findViewById(R.id.jxpf);
+        pfText=(TextView)findViewById(R.id.pf);
+        clhText=(TextView)findViewById(R.id.clh);
+        kssjText=(TextView)findViewById(R.id.kssj);
+        jssjText=(TextView)findViewById(R.id.jssj);
+        ysText=(TextView)findViewById(R.id.ys);
+        bzText=(TextView)findViewById(R.id.bz);
+        ksryText=(TextView)findViewById(R.id.ksry);
+        jsryText=(TextView)findViewById(R.id.jsry);
         spinner_1=(Button) findViewById(R.id.spinner_1);
         blmsList=(ListView)findViewById(R.id.list_bl);
-        //spinner_2=(Button) findViewById(R.id.spinner_2);
         spinner_1.setOnClickListener(this);
         listView=(ListView)findViewById(R.id.list_b7);
         cancle_btn.setOnClickListener(this);
@@ -118,18 +116,17 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
                 data.add(map);
             }
             List<TextView>list_text=new ArrayList<>();
-            list_text.add(text_1);
+            list_text.add(fsrqText);
             list_text.add(text_2);
-            list_text.add(text_3);
-            list_text.add(text_4);
-            list_text.add(text_5);
-            list_text.add(text_6);
-            list_text.add(text_7);
-            list_text.add(text_8);
-            list_text.add(text_9);
-            list_text.add(text_10);
-            list_text.add(text_11);
-            //list_text.add(text_key);
+            list_text.add(jxpfText);
+            list_text.add(pfText);
+            list_text.add(clhText);
+            list_text.add(kssjText);
+            list_text.add(jssjText);
+            list_text.add(ysText);
+            list_text.add(bzText);
+            list_text.add(ksryText);
+            list_text.add(jsryText);
             YichangfenxiAdapter adapter=new YichangfenxiAdapter(YcfxActivity.this,R.layout.list_item_b7,data,list_text,handler);
             listView.setAdapter(adapter);
         } catch (JSONException e) {
@@ -274,7 +271,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
 
 
     private boolean isReady(){
-        if (text_1.getText().toString().equals("")){
+        if (fsrqText.getText().toString().equals("")){
             dialog_tip.setMessageTextColor(Color.RED);
             dialog_tip.setMessage("请先选取异常信息");
             dialog_tip.show();

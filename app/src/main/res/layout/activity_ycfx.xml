@@ -159,7 +159,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_1"
+                    android:id="@+id/fsrq"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -167,18 +167,16 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:visibility="gone"
                     android:layout_width="60dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
-                    android:text="指令名称"
+                    android:text="金型品番"
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:visibility="gone"
-                    android:id="@+id/text_2"
+                    android:id="@+id/jxpf"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -202,7 +200,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_4"
+                    android:id="@+id/pf"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -219,7 +217,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_5"
+                    android:id="@+id/clh"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -243,7 +241,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_6"
+                    android:id="@+id/kssj"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -260,7 +258,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_7"
+                    android:id="@+id/jssj"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -284,7 +282,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_10"
+                    android:id="@+id/ksry"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -300,7 +298,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_11"
+                    android:id="@+id/jsry"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -324,7 +322,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_9"
+                    android:id="@+id/bz"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -343,7 +341,7 @@
                     android:textSize="13dp" />
 
                 <TextView
-                    android:id="@+id/text_8"
+                    android:id="@+id/ys"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"
@@ -358,6 +356,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp">
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="60dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
@@ -367,7 +366,8 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/text_3"
+                    android:visibility="gone"
+                    android:id="@+id/text_2"
                     android:layout_width="@dimen/ycfx_width"
                     android:layout_height="@dimen/ycfx_height"
                     android:background="@drawable/text_bg"

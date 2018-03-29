@@ -1,1 +1,1 @@
-include ':app', 'SerialPortLibrary', 'gpiolibrary'
+include ':app'

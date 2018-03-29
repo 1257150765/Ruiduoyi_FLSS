@@ -91,8 +91,8 @@ public class FirstActivity extends BaseActivity{
             appDir.mkdir();
         }
         sharedPreferences=getSharedPreferences("info",MODE_PRIVATE);
-        //NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
-        NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
+        NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
+        //NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putBoolean("isSetTime",false);
         editor.commit();

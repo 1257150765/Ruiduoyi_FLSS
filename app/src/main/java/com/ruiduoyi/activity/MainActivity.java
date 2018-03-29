@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.glongtech.gpio.GpioEvent;
 import com.ruiduoyi.Fragment.InfoFragment;
@@ -44,6 +46,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private FrameLayout bottom1,bottom2,bottom3;
     private TextView bottom_text1,bottom_text2,bottom_text3,companyName;
     private String mac;
-    private PopupDialog dialog;
+    private PopupDialog dialog,updata_tip;
     private BroadcastReceiver gpioSignalReceiver;
     private StatusFragment statusFragment;
     private android.os.Handler handler;
@@ -83,7 +86,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,8 +102,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         startService(intent_service);
         //CountdownToInfo();
     }
-
-
 
     public void  initData(){
         sharedPreferences=getSharedPreferences("info",MODE_PRIVATE);
@@ -204,6 +204,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     case 0x106:
                         companyName.setText((String)msg.obj);
                         break;
+                    case 0x110:
+                        updata_tip.setMessage((String) msg.obj);
+                        updata_tip.show();
+                        updata_tip.getCancle_btn().setVisibility(View.VISIBLE);
+                        break;
+                    case 0x111:
+                        //updata_tip.setMessage("下载更新包当中...");
+                        Toast.makeText(MainActivity.this,"下载更新包中...",Toast.LENGTH_LONG).show();
+                        updata_tip.dismiss();
+                        updata_tip.getCancle_btn().setVisibility(View.GONE);
+
+                        break;
+                    case 0x112:
+                        updata_tip.dismiss();
                     default:
                         break;
                 }
@@ -211,7 +225,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         };
 
     }
-
 
     public void initView(){
 
@@ -307,6 +320,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 dialog.dismiss();
             }
         });
+
+
+        updata_tip=new PopupDialog(this,450,350);
+        updata_tip.setMessageTextColor(Color.BLACK);
+        updata_tip.getCancle_btn().setText("取消");
+        updata_tip.getOkbtn().setVisibility(View.GONE);
+        updata_tip.getCancle_btn().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putBoolean("cancle_update",true);
+                editor.commit();
+                updata_tip.dismiss();
+            }
+        });
     }
 
     public void initLogoClieckEvent(){
@@ -384,6 +412,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 msg.obj=strs;
                 msg.arg1=level;
                 handler.sendMessage(msg);
+                AutoUpdateApp();
             }
         };
         timer_time.schedule(timerTask,0,5000);
@@ -504,6 +533,80 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
         AppUtils.removAllActivity();
         System.exit(0);
+    }
+
+    private void AutoUpdateApp(){
+        int auto_updata_num=sharedPreferences.getInt("auto_updata_num",0);
+        Log.e("auto_updata_num",auto_updata_num+"");
+        String delay_time=getResources().getString(R.string.update_app_delay_time);
+        if (auto_updata_num<Integer.parseInt(delay_time)){
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putInt("auto_updata_num",auto_updata_num+1);
+            editor.commit();
+        }else {
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putInt("auto_updata_num",0);
+            editor.commit();
+            updateAppVersion();
+        }
+
+    }
+
+    private void updateAppVersion(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_WebAddr");
+                    if (list!=null){
+                        if (list.length()>0){
+                            String oldVersionName= AppUtils.getAppVersionName(MainActivity.this);
+                            String newVersionName=list.getJSONObject(0).getString("v_WebAppVer");
+                            if (!oldVersionName.equals(newVersionName)){
+                                int i=60;
+                                while (!sharedPreferences.getBoolean("cancle_update",false)){
+                                    i=i-1;
+                                    if (i>0){
+                                        try {
+                                            Message msg=handler.obtainMessage();
+                                            msg.what=0x110;
+                                            msg.obj="将在"+i+"秒后自动更新";
+                                            handler.sendMessage(msg);
+                                            Thread.currentThread().sleep(1000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        handler.sendEmptyMessage(0x111);
+                                        try {
+                                            NetHelper.downLoadFileByUrl("http://192.168.142.1:90/App/RdyPDA.txt",
+                                                    Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
+                                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                                            intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
+                                                    "application/vnd.android.package-archive");
+                                            startActivity(intent);
+                                            handler.sendEmptyMessage(0x112);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
+                                    }
+                                }
+
+                            }
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putBoolean("cancle_update",false);
+                            editor.commit();
+
+                        }
+                    }else {
+                        NetHelper.uploadNetworkError("Exec PAD_Get_WebAddr NetWordError",jtbh,mac);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 
