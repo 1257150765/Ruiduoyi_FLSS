@@ -40,7 +40,7 @@ import java.util.Map;
 public class PzglActivity extends BaseActivity implements View.OnClickListener{
     private Button btn_1,btn_2,btn_3,btn_4,cancle_btn;
     private TextView fcry_text,fcsj_text,pdry_text,pdsj_text,ys_text,zzdh_text,
-        gddh_text,scph_text,mjbh_text,mjqs_text,cxzq_text,
+        gddh_text,mjbh_text,mjqs_text,cxzq_text,
         cpbh_text,pmgg_text,bzjz_text,sjjz_text,bzsk_text,sjsk_text,
         pdjg_text,blyy_text,bzxx_text;
     private BarChart barChart;
@@ -72,7 +72,7 @@ public class PzglActivity extends BaseActivity implements View.OnClickListener{
                         ys_text.setText(list.getJSONObject(0).getString("v_min"));
                         zzdh_text.setText(list.getJSONObject(0).getString("v_zzdh"));
                         gddh_text.setText(list.getJSONObject(0).getString("v_sodh"));
-                        scph_text.setText(list.getJSONObject(0).getString("v_ph"));
+                        //scph_text.setText(list.getJSONObject(0).getString("v_ph"));
                         mjbh_text.setText(list.getJSONObject(0).getString("v_mjbh"));
                         //mjmc_text.setText(list.getJSONObject(0).getString("v_mjmc"));
                         mjqs_text.setText(list.getJSONObject(0).getString("v_bzxs"));
@@ -139,7 +139,6 @@ public class PzglActivity extends BaseActivity implements View.OnClickListener{
         ys_text=(TextView)findViewById(R.id.min);
         zzdh_text=(TextView)findViewById(R.id.zzdh);
         gddh_text=(TextView)findViewById(R.id.sodh);
-        scph_text=(TextView)findViewById(R.id.ph);
         mjbh_text=(TextView)findViewById(R.id.mjbh);
         //mjmc_text=(TextView)findViewById(R.id.mjmc);
         mjqs_text=(TextView)findViewById(R.id.bzxs);

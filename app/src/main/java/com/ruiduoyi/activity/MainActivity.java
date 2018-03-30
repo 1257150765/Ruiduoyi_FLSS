@@ -579,7 +579,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                     }else {
                                         handler.sendEmptyMessage(0x111);
                                         try {
-                                            NetHelper.downLoadFileByUrl("http://192.168.142.1:90/App/RdyPDA.txt",
+                                            NetHelper.downLoadFileByUrl(list.getJSONObject(0).getString("v_WebAppPath"),
                                                     Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
                                             Intent intent = new Intent(Intent.ACTION_VIEW);
                                             intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),

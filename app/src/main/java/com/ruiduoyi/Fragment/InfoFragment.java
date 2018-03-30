@@ -1061,7 +1061,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                 showPreView(img_1,"异常停机");
                 break;
             case R.id.img_2:
-                showPreView(img_2,"超产5PCSYI以上");
+                showPreView(img_2,"超产5PCS以上");
                 break;
             case R.id.img_3:
                 showPreView(img_3,"指令超出标准时间");

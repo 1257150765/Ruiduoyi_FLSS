@@ -52,19 +52,6 @@ public class YyfxAdapter extends ArrayAdapter{
         final LinearLayout bg=(LinearLayout)view.findViewById(R.id.backgrounp);
         lab_1.setText(data.get(position).get("lab_1"));
         lab_2.setText(data.get(position).get("lab_2"));
-       /* checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    bg.setBackgroundColor(getContext().getResources().getColor(R.color.small));
-                    addSelectData(data.get(position));
-                }else {
-                    bg.setBackgroundColor(Color.WHITE);
-                    removeSelectData(data.get(position));
-                }
-                Log.w("YyfxAdapter",selectData.toString());
-            }
-        });*/
         boolean ischeck=isExist(data.get(position));
         checkBox.setChecked(ischeck);
         if (ischeck){

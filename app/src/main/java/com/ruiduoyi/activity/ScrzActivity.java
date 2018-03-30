@@ -76,10 +76,10 @@ public class ScrzActivity extends BaseActivity implements View.OnClickListener{
                 map.put("lab_13",lists.getJSONObject(i).getString("v_jsname"));//v_jsname
                 map.put("lab_14",lists.getJSONObject(i).getString("v_zzdh"));//v_zzdh
                 map.put("lab_15",lists.getJSONObject(i).getString("v_sodh"));//v_sodh
-                map.put("lab_16",lists.getJSONObject(i).getString("v_ph"));//v_ph
-                map.put("lab_17",lists.getJSONObject(i).getString("v_wldm"));//v_wldm
-                map.put("lab_18",lists.getJSONObject(i).getString("v_pmgg"));//v_pmgg
-                map.put("lab_19",lists.getJSONObject(i).getString("v_mjbh"));//v_mjbh
+                //map.put("lab_16",lists.getJSONObject(i).getString("v_ph"));//v_ph
+                map.put("lab_16",lists.getJSONObject(i).getString("v_wldm"));//v_wldm
+                map.put("lab_17",lists.getJSONObject(i).getString("v_pmgg"));//v_pmgg
+                map.put("lab_18",lists.getJSONObject(i).getString("v_mjbh"));//v_mjbh
                 //map.put("lab_20",lists.getJSONObject(i).getString("v_mjmc"));//v_mjmc
                 data.add(map);
             }
@@ -90,9 +90,9 @@ public class ScrzActivity extends BaseActivity implements View.OnClickListener{
                     R.id.lable_10,R.id.lable_11,R.id.lable_12,R.id.lable_13,R.id.lable_14,R.id.lable_15,R.id.lable_16,R.id.lable_17,R.id.lable_18,R.id.lable_19,R.id.lable_20});*/
             adapter=new SimpleAdapter(this,data,R.layout.list_item_b6,new String[]{"lab_1","lab_2",
                     "lab_3","lab_4","lab_5","lab_6","lab_7","lab_8","lab_9","lab_10","lab_11","lab_12",
-                    "lab_13","lab_14","lab_15","lab_16","lab_17","lab_18","lab_19",},new int[]{R.id.lable_1,R.id.lable_2,R.id.lable_3,
+                    "lab_13","lab_14","lab_15","lab_16","lab_17","lab_18"},new int[]{R.id.lable_1,R.id.lable_2,R.id.lable_3,
                     R.id.lable_4,R.id.lable_5,R.id.lable_6,R.id.lable_7,R.id.lable_8,R.id.lable_9,
-                    R.id.lable_10,R.id.lable_11,R.id.lable_12,R.id.lable_13,R.id.lable_14,R.id.lable_15,R.id.lable_16,R.id.lable_17,R.id.lable_18,R.id.lable_19});
+                    R.id.lable_10,R.id.lable_11,R.id.lable_12,R.id.lable_13,R.id.lable_14,R.id.lable_15,R.id.lable_16,R.id.lable_17,R.id.lable_18});
             listView.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();

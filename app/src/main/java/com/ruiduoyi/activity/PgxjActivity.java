@@ -360,6 +360,16 @@ public class PgxjActivity extends BaseActivity implements View.OnClickListener{
 
 
     private boolean isReady(){
+        if (data_cong==null){
+            dialog.setMessage("从工单信息表未初始化");
+            dialog.show();
+            return false;
+        }
+        if (adapter_yy==null){
+            dialog.setMessage("原因信息表未初始化");
+            dialog.show();
+            return false;
+        }
         if (!(radio_ng.isChecked()|radio_ok.isChecked())){
             dialog.setMessage("请先选择判定结果");
             dialog.show();
@@ -395,6 +405,20 @@ public class PgxjActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void run() {
                 try {
+                    if (data_cong==null){
+                        Message msg=handler.obtainMessage();
+                        msg.what=0x102;
+                        msg.obj="从工单信息表未初始化";
+                        handler.sendMessage(msg);
+                        return;
+                    }
+                    if (adapter_yy==null){
+                        Message msg=handler.obtainMessage();
+                        msg.what=0x102;
+                        msg.obj="原因信息表未初始化";
+                        handler.sendMessage(msg);
+                        return;
+                    }
                     if (radio_ok.isChecked()){//Ok情况下
                         for (int i=0;i<data_cong.size();i++){
                             Map<String,String>map=data_cong.get(i);

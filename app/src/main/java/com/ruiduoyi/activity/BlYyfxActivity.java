@@ -23,9 +23,9 @@ import com.ruiduoyi.adapter.ViewPagerAdapter;
 import com.ruiduoyi.utils.AppUtils;
 
 public class BlYyfxActivity extends BaseActivity implements View.OnClickListener {
-    private TextView sjsx_text,zzdh_text,gddh_text,scph_text,mjbh_text,cpbh_text,pmgg_text,mjmc_text,
+    private TextView sjsx_text,zzdh_text,gddh_text,mjbh_text,cpbh_text,pmgg_text,mjmc_text,
                 blfx_text,yyfx_text,title_text,jhsl_text,lpsl_text,blpsl_text,jzzl_text;
-    private String sjsx_str,zzdh_str,gddh_str,scph_str,mjbh_str,cpbh_str,pmgg_str,jhsl_str,lpsl_str,
+    private String sjsx_str,zzdh_str,gddh_str,mjbh_str,cpbh_str,pmgg_str,jhsl_str,lpsl_str,
             blpsl_str;
     private Button cancle_btn,save_btn;
     private FrameLayout blfx_btn,yyfx_btn;
@@ -49,7 +49,6 @@ public class BlYyfxActivity extends BaseActivity implements View.OnClickListener
         sjsx_text=(TextView)findViewById(R.id.dq_1);
         zzdh_text=(TextView)findViewById(R.id.dq_2);
         gddh_text=(TextView)findViewById(R.id.dq_3);
-        scph_text=(TextView)findViewById(R.id.dq_4);
         mjbh_text=(TextView)findViewById(R.id.dq_5);
         mjmc_text=(TextView)findViewById(R.id.dq_6);
         cpbh_text=(TextView)findViewById(R.id.dq_7);
@@ -74,7 +73,6 @@ public class BlYyfxActivity extends BaseActivity implements View.OnClickListener
         sjsx_text.setText(sjsx_str);
         zzdh_text.setText(zzdh_str);
         gddh_text.setText(gddh_str);
-        scph_text.setText(scph_str);
         mjbh_text.setText(mjbh_str);
         cpbh_text.setText(cpbh_str);
         pmgg_text.setText(pmgg_str);
@@ -135,7 +133,6 @@ public class BlYyfxActivity extends BaseActivity implements View.OnClickListener
         sjsx_str=sharedPreferences.getString("sjsx","");
         zzdh_str=sharedPreferences.getString("zzdh","");
         gddh_str=sharedPreferences.getString("gddh","");
-        scph_str=sharedPreferences.getString("scph","");
         mjbh_str=sharedPreferences.getString("mjbh","");
         cpbh_str=sharedPreferences.getString("cpbh","");
         pmgg_str=sharedPreferences.getString("pmgg","");

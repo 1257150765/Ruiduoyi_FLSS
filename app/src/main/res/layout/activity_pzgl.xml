@@ -132,24 +132,12 @@
             android:textSize="15dp"
             android:layout_width="@dimen/pzgl_text_width"
             android:layout_height="wrap_content"
-            android:text="交货批号"/>
-        <TextView
-            android:gravity="center_vertical"
-            android:id="@+id/ph"
-            android:background="@drawable/text_bg"
-            android:layout_width="@dimen/pzgl_text_width2"
-            android:layout_height="35dp" />
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:textSize="15dp"
-            android:layout_width="@dimen/pzgl_text_width"
-            android:layout_height="wrap_content"
             android:text="金型品番"/>
         <TextView
             android:gravity="center_vertical"
             android:id="@+id/mjbh"
             android:background="@drawable/text_bg"
-            android:layout_width="@dimen/pzgl_text_width2"
+            android:layout_width="409dp"
             android:layout_height="35dp" />
 
         <TextView
