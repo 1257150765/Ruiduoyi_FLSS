@@ -1,5 +1,6 @@
 package com.ruiduoyi.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
@@ -561,6 +562,10 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
                         }
                     }
                     return ;
+                }else {
+                    dialog.setMessage(list.getJSONObject(0).getString("Column1"));
+                    dialog.setMessageTextColor(Color.RED);
+                    dialog.show();
                 }
             }
         }else {

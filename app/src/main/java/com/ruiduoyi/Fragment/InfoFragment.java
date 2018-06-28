@@ -75,8 +75,8 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
     private int UPDATE_TYPE_AUTO=0,UPDATE_TYPE_RECEIVER=1;
     private String jtbh;
     private int setTimeNum=0;
-    private TextView dq_sjsx,dq_zzdh,dq_cfwz,dq_jxpf,dq_pf,dq_clm,dq_ys,dq_yl,
-                xy_yjsx,xy_zzdh,xy_cfwz,xy_jxpf,xy_pf,xy_clm,xy_ys,xy_yl,
+    private TextView dq_sjsx,dq_zzdh,dq_cfwz,dq_jxpf,dq_pf,dq_clm,dq_ys,dq_yl,dq_tjbwz,
+                xy_yjsx,xy_zzdh,xy_cfwz,xy_jxpf,xy_pf,xy_clm,xy_ys,xy_yl,xy_tjbwz,
                 mo_jxpf,mo_jyzq,mo_cpqs,mo_cxzq,mo_sjzq,mo_jxqs,mo_sjqs,tong_1,tong_2,tong_3,tong_4,tong_5,tong_6,jtbh_text,status,msg_text,preViewText,
                 caozuo_text,jisu_text,cao_name_text,ji_name_text,labRym,tsqx_text;
     private SharedPreferences sharedPreferences;
@@ -139,6 +139,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         dq_cfwz=(TextView)view.findViewById(R.id.dq_cfwz);
         dq_jxpf=(TextView)view.findViewById(R.id.dq_jxpf);
         dq_pf=(TextView)view.findViewById(R.id.dq_pf);
+        dq_tjbwz=(TextView)view.findViewById(R.id.dq_tjbwz);
         dq_clm=(TextView)view.findViewById(R.id.dq_clm);
         dq_yl=(TextView)view.findViewById(R.id.dq_yl);
         dq_ys=(TextView)view.findViewById(R.id.dq_ys);
@@ -147,6 +148,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         xy_cfwz=(TextView)view.findViewById(R.id.xy_cfwz);
         xy_jxpf=(TextView)view.findViewById(R.id.xy_jxpf);
         xy_pf=(TextView)view.findViewById(R.id.xy_pf);
+        xy_tjbwz=(TextView)view.findViewById(R.id.xy_tjbwz);
         xy_clm=(TextView)view.findViewById(R.id.xy_clm);
         xy_yl=(TextView)view.findViewById(R.id.xy_yl);
         xy_ys=(TextView)view.findViewById(R.id.xy_ys);
@@ -240,66 +242,69 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                     try {
                         JSONArray list= (JSONArray) msg.obj;
                         if(list.length()>0){
-                            dq_sjsx.setText(list.getJSONObject(0).getString("kbm_sxrq"));
-                            dq_zzdh.setText(list.getJSONObject(0).getString("kbm_zzdh"));
+                            JSONObject object = list.getJSONObject(0);
+                            dq_sjsx.setText(object.getString("kbm_sxrq"));
+                            dq_zzdh.setText(object.getString("kbm_zzdh"));
 
                             SharedPreferences.Editor editor=sharedPreferences.edit();
-                            editor.putString("sjsx",list.getJSONObject(0).getString("kbm_sxrq"));
-                            editor.putString("zzdh",list.getJSONObject(0).getString("kbm_zzdh"));
-                            editor.putString("gddh",list.getJSONObject(0).getString("kbm_sodh"));
-                            editor.putString("scph",list.getJSONObject(0).getString("kbm_ph"));
-                            editor.putString("mjbh",list.getJSONObject(0).getString("kbm_mjbh"));
-                            editor.putString("cpbh",list.getJSONObject(0).getString("kbm_wldm"));
-                            editor.putString("pmgg",list.getJSONObject(0).getString("kbm_pmgg"));
-                            editor.putString("ysdm",list.getJSONObject(0).getString("kbm_ysdm"));
+                            editor.putString("sjsx", object.getString("kbm_sxrq"));
+                            editor.putString("zzdh", object.getString("kbm_zzdh"));
+                            editor.putString("gddh", object.getString("kbm_sodh"));
+                            editor.putString("scph", object.getString("kbm_ph"));
+                            editor.putString("mjbh", object.getString("kbm_mjbh"));
+                            editor.putString("cpbh", object.getString("kbm_wldm"));
+                            editor.putString("pmgg", object.getString("kbm_pmgg"));
+                            editor.putString("ysdm", object.getString("kbm_ysdm"));
                             //editor.putString("mjmc",list.getJSONObject(0).getString("kbm_mjmc"));
-                            editor.putString("jhsl",list.getJSONObject(0).getString("kbm_scsl"));
-                            editor.putString("lpsl",list.getJSONObject(0).getString("kbm_lpsl"));
-                            editor.putString("blsl",list.getJSONObject(0).getString("kbm_blsl"));
-                            editor.putString("mjqs",list.getJSONObject(0).getString("kbm_mjxs"));
-                            editor.putString("sjqs",list.getJSONObject(0).getString("kbm_xs"));
-                            editor.putString("jzzl",list.getJSONObject(0).getString("kbm_jzzl"));
+                            editor.putString("jhsl", object.getString("kbm_scsl"));
+                            editor.putString("lpsl", object.getString("kbm_lpsl"));
+                            editor.putString("blsl", object.getString("kbm_blsl"));
+                            editor.putString("mjqs", object.getString("kbm_mjxs"));
+                            editor.putString("sjqs", object.getString("kbm_xs"));
+                            editor.putString("jzzl", object.getString("kbm_jzzl"));
                             editor.commit();
-                            dq_cfwz.setText(list.getJSONObject(0).getString("kbm_cwdm"));
-                            dq_jxpf.setText(list.getJSONObject(0).getString("kbm_mjbh"));
-                            dq_pf.setText(list.getJSONObject(0).getString("kbm_wldm"));
-                            dq_clm.setText(list.getJSONObject(0).getString("kbm_pmgg"));
-                            dq_ys.setText(list.getJSONObject(0).getString("kbm_ysdm"));
-                            dq_yl.setText(list.getJSONObject(0).getString("kbm_czdm"));
-                            xy_yjsx.setText(list.getJSONObject(0).getString("kbm_xxrq"));
-                            xy_zzdh.setText(list.getJSONObject(0).getString("kbm_nextzzdh"));
-                            xy_cfwz.setText(list.getJSONObject(0).getString("kbm_nextcwdm"));
-                            xy_jxpf.setText(list.getJSONObject(0).getString("kbm_nextmjbh"));
-                            xy_pf.setText(list.getJSONObject(0).getString("kbm_nextwldm"));
-                            xy_clm.setText(list.getJSONObject(0).getString("kbm_nextpmgg"));
-                            xy_ys.setText(list.getJSONObject(0).getString("kbm_nextysdm"));
-                            xy_yl.setText(list.getJSONObject(0).getString("kbm_nextczdm"));
+                            dq_cfwz.setText(object.getString("kbm_cwdm"));
+                            dq_jxpf.setText(object.getString("kbm_mjbh"));
+                            dq_pf.setText(object.getString("kbm_wldm"));
+                            dq_tjbwz.setText(object.getString("kbm_tjbwz"));
+                            dq_clm.setText(object.getString("kbm_pmgg"));
+                            dq_ys.setText(object.getString("kbm_ysdm"));
+                            dq_yl.setText(object.getString("kbm_czdm"));
+                            xy_yjsx.setText(object.getString("kbm_xxrq"));
+                            xy_zzdh.setText(object.getString("kbm_nextzzdh"));
+                            xy_cfwz.setText(object.getString("kbm_nextcwdm"));
+                            xy_jxpf.setText(object.getString("kbm_nextmjbh"));
+                            xy_pf.setText(object.getString("kbm_nextwldm"));
+                            xy_tjbwz.setText(object.getString("kbm_nexttjbwz"));
+                            xy_clm.setText(object.getString("kbm_nextpmgg"));
+                            xy_ys.setText(object.getString("kbm_nextysdm"));
+                            xy_yl.setText(object.getString("kbm_nextczdm"));
 
-                            mo_jxpf.setText(list.getJSONObject(0).getString("kbm_mjbh"));
-                            mo_cpqs.setText(list.getJSONObject(0).getString("kbm_cpxs"));
-                            mo_cxzq.setText(list.getJSONObject(0).getString("kbm_cxsj"));
-                            mo_sjzq.setText(list.getJSONObject(0).getString("kbm_sjcxsj"));
-                            mo_jxqs.setText(list.getJSONObject(0).getString("kbm_mjxs"));
-                            mo_sjqs.setText(list.getJSONObject(0).getString("kbm_xs"));
-                            mo_jyzq.setText(list.getJSONObject(0).getString("kbm_gdzq"));
-                            if (list.getJSONObject(0).getString("kbm_xs").equals(list.getJSONObject(0).getString("kbm_cpxs"))){
+                            mo_jxpf.setText(object.getString("kbm_mjbh"));
+                            mo_cpqs.setText(object.getString("kbm_cpxs"));
+                            mo_cxzq.setText(object.getString("kbm_cxsj"));
+                            mo_sjzq.setText(object.getString("kbm_sjcxsj"));
+                            mo_jxqs.setText(object.getString("kbm_mjxs"));
+                            mo_sjqs.setText(object.getString("kbm_xs"));
+                            mo_jyzq.setText(object.getString("kbm_gdzq"));
+                            if (object.getString("kbm_xs").equals(object.getString("kbm_cpxs"))){
                                 mo_sjqs.setBackgroundColor(Color.WHITE);
                             }else {
                                 mo_sjqs.setBackgroundColor(getResources().getColor(R.color.small));
                             }
 
-                            tong_1.setText(list.getJSONObject(0).getString("kbm_scsl"));
-                            tong_2.setText(list.getJSONObject(0).getString("kbm_chsl"));
-                            tong_3.setText(list.getJSONObject(0).getString("kbm_lpsl"));
-                            tong_4.setText(list.getJSONObject(0).getString("kbm_blsl"));
-                            tong_5.setText(list.getJSONObject(0).getString("kbm_blv"));
-                            tong_6.setText(list.getJSONObject(0).getString("kbm_jdcy"));
+                            tong_1.setText(object.getString("kbm_scsl"));
+                            tong_2.setText(object.getString("kbm_chsl"));
+                            tong_3.setText(object.getString("kbm_lpsl"));
+                            tong_4.setText(object.getString("kbm_blsl"));
+                            tong_5.setText(object.getString("kbm_blv"));
+                            tong_6.setText(object.getString("kbm_jdcy"));
 
 
 
 
-                            if (!(list.getJSONObject(0).getString("kbm_mjbh").trim().equals("")|list.getJSONObject(0).getString("kbm_nextmjbh").equals(""))){
-                                if(!list.getJSONObject(0).getString("kbm_mjbh").equals(list.getJSONObject(0).getString("kbm_nextmjbh").trim())){
+                            if (!(object.getString("kbm_mjbh").trim().equals("")| object.getString("kbm_nextmjbh").equals(""))){
+                                if(!object.getString("kbm_mjbh").equals(object.getString("kbm_nextmjbh").trim())){
                                     xy_jxpf.setBackgroundColor(Color.RED);
                                 }else {
                                     xy_jxpf.setBackgroundColor(Color.WHITE);
@@ -307,8 +312,8 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                             }else {
                                 xy_jxpf.setBackgroundColor(Color.WHITE);
                             }
-                            if (!(list.getJSONObject(0).getString("kbm_wldm").trim().equals("")|list.getJSONObject(0).getString("kbm_nextwldm").trim().equals(""))){
-                                if(!list.getJSONObject(0).getString("kbm_wldm").trim().equals(list.getJSONObject(0).getString("kbm_nextwldm").trim() )){
+                            if (!(object.getString("kbm_wldm").trim().equals("")| object.getString("kbm_nextwldm").trim().equals(""))){
+                                if(!object.getString("kbm_wldm").trim().equals(object.getString("kbm_nextwldm").trim() )){
                                     xy_pf.setBackgroundColor(Color.RED);
                                 }else {
                                     xy_pf.setBackgroundColor(Color.WHITE);
@@ -318,7 +323,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                             }
 
 
-                            if(Integer.parseInt(list.getJSONObject(0).getString("kbm_jdcy"))>0){
+                            if(Integer.parseInt(object.getString("kbm_jdcy"))>0){
                                 tong_6.setBackgroundColor(getResources().getColor(R.color.large));
                             }else {
                                 tong_6.setBackgroundColor(getResources().getColor(R.color.small));

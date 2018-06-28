@@ -91,8 +91,8 @@ public class FirstActivity extends BaseActivity{
             appDir.mkdir();
         }
         sharedPreferences=getSharedPreferences("info",MODE_PRIVATE);
-        NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
-        //NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
+        //NetHelper.URL=getString(R.string.service_ip)+":8080/Service.asmx";
+        NetHelper.URL=getString(R.string.service_ip)+"/Service.asmx";
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putBoolean("isSetTime",false);
         editor.commit();
@@ -342,8 +342,12 @@ public class FirstActivity extends BaseActivity{
     };
 
 
-
+    /**
+     * 获取网络数据
+     * @param type
+     */
     private void getNetData(int type){
+        //只有第一次会检查网络
         if (type==0){
             new Thread(new Runnable() {//服务器是否开启
                 @Override
@@ -382,7 +386,7 @@ public class FirstActivity extends BaseActivity{
         }
 
 
-
+        //获取机台号
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -421,7 +425,7 @@ public class FirstActivity extends BaseActivity{
         }).start();
 
 
-
+        //获取时间
         new Thread(new Runnable() {//获取系统时间
             @Override
             public void run() {
@@ -440,7 +444,7 @@ public class FirstActivity extends BaseActivity{
             }
         }).start();
 
-
+        //获取服务器地址，检查版本
         new Thread(new Runnable() {
             @Override
             public void run() {

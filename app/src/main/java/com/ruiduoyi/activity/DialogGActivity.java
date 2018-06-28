@@ -76,6 +76,7 @@ public class DialogGActivity extends BaseDialogActivity implements View.OnClickL
                         }else {//执行文档操作
                             String wkno=readCardResult.substring(2,readCardResult.length());
                             Intent intent;
+                            //wkno,操作人员编号
                             if (zldm.equals(getResources().getString(R.string.gdgl))){
                                 intent=new Intent(DialogGActivity.this,GdglActivity.class);
                                 intent.putExtra("wkno",wkno);

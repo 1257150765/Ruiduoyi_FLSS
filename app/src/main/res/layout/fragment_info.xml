@@ -526,7 +526,33 @@
                                         android:gravity="center_vertical"
                                         android:textSize="@dimen/text_size" />
                                 </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/tjbwz_layout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
 
+                                    <TextView
+                                        android:layout_width="60dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="7dp"
+                                        android:text="条件本位置"
+                                        android:textColor="#000000"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/dq_tjbwz"
+                                        android:layout_width="250dp"
+                                        android:singleLine="true"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="3dp"
+                                        android:background="@drawable/ed_bg"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size" />
+                                </LinearLayout>
                                 <LinearLayout
                                     android:id="@+id/clm_layout"
                                     android:layout_width="wrap_content"
@@ -813,7 +839,33 @@
                                         android:gravity="center_vertical"
                                         android:textSize="@dimen/text_size" />
                                 </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/next_tjbwz_layout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
 
+                                    <TextView
+                                        android:layout_width="60dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="7dp"
+                                        android:text="条件本位置"
+                                        android:textColor="#000000"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/xy_tjbwz"
+                                        android:layout_width="250dp"
+                                        android:singleLine="true"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="3dp"
+                                        android:background="@drawable/ed_bg"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size" />
+                                </LinearLayout>
                                 <LinearLayout
                                     android:id="@+id/next_clm_layout"
                                     android:layout_width="wrap_content"

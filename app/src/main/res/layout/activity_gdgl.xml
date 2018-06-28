@@ -86,6 +86,13 @@
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
+                    android:layout_width="108dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@android:color/black"
+                    android:text="预计工时（H）" />
+                <TextView
+                    android:background="@drawable/text_bg"
+                    android:gravity="center"
                     android:layout_width="118dp"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"

@@ -123,7 +123,6 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                 String zldming;
                 String zlmcing;
                 String waring;
-
                 //请求当前指令及是否超时信息
                 try {
                     JSONArray list2= NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_JtmZtInfo '"+sharedPreferences.getString("jtbh","")+"'");
@@ -201,7 +200,6 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
 
     public void initView(View view){
         cardView_js=(CardView)view.findViewById(R.id.js);
-
         cardView_gdgl=(CardView)view.findViewById(R.id.gdgl);
         cardView_blfx=(CardView)view.findViewById(R.id.blfx);
         cardView_ycfx=(CardView)view.findViewById(R.id.ycfx);
@@ -235,8 +233,6 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         cardView_zyzd.setOnClickListener(this);
         cardView_slcs.setOnClickListener(this);
         cardView_qsfh.setOnClickListener(this);
-
-
         dialog=new PopupDialog(getActivity(),400,360);
         dialog.setTitle("提示");
         dialog.getCancle_btn().setVisibility(View.GONE);

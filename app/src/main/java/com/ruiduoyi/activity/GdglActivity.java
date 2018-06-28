@@ -103,6 +103,7 @@ public class GdglActivity extends BaseActivity implements View.OnClickListener{
                map.put("lpsl",item.getString("v_lpsl"));
                map.put("ztbz",item.getString("v_ztbz"));
                map.put("cfwz",item.getString("v_cwdm"));
+               map.put("yjgs",item.getString("v_yjgs"));
                data.add(map);
            }
            WorkOrderAdapter adapter=new WorkOrderAdapter(GdglActivity.this,R.layout.list_item_b3,data,wkno,handler);
