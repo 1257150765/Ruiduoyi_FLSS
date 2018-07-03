@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="70dp">
 
     <LinearLayout
         android:id="@+id/bg"
-        android:layout_width="1638dp"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -92,7 +91,13 @@
             android:background="@drawable/text_bg"
             android:gravity="center"
             android:textColor="@android:color/black" />
-
+        <TextView
+            android:id="@+id/lab_14"
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/text_bg"
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
         <TextView
             android:id="@+id/lab_7"
             android:layout_width="196dp"

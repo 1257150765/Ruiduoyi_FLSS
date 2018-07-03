@@ -63,6 +63,7 @@ public class WorkOrderAdapter extends ArrayAdapter{
         TextView lab_11=(TextView)view.findViewById(R.id.lab_11);
         TextView lab_12=(TextView)view.findViewById(R.id.lab_12);
         TextView lab_13=(TextView)view.findViewById(R.id.lab_13);
+        TextView lab_14=(TextView)view.findViewById(R.id.lab_14);
         LinearLayout backgroup=(LinearLayout)view.findViewById(R.id.bg);
         final Button on_btn=(Button)view.findViewById(R.id.on_btn);
         final Button off_btn=(Button)view.findViewById(R.id.off_btn);
@@ -132,6 +133,7 @@ public class WorkOrderAdapter extends ArrayAdapter{
         lab_11.setText(map.get("mjbh"));
         lab_12.setText(map.get("cfwz"));
         lab_13.setText(map.get("yjgs"));
+        lab_14.setText(map.get("tjbwz"));
         switch (map.get("ztbz")){
             case "1":
                 backgroup.setBackgroundColor(getContext().getResources().getColor(R.color.gdgl_1));

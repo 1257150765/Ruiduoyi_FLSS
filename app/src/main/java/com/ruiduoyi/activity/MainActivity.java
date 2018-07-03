@@ -161,11 +161,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         try {
                             final JSONArray array= (JSONArray) msg.obj;
                             if (array.getJSONObject(0).getString("v_WebAppVer").equals(array.getJSONObject(0).getString("oldver"))){
-                                dialog.setMessage("当前已是最新版本");
+                                dialog.setMessage("当前版本:"+array.getJSONObject(0).getString("oldver")+"\n最新版本:"+array.getJSONObject(0).getString("v_WebAppVer")+"\n是否立即更新？");
                                 dialog.getOkbtn().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        dialog.dismiss();
+                                        dialog.getOkbtn().setEnabled(false);
+                                        dialog.setMessage("下载更新包当中...");
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    NetHelper.DownLoadFileByUrl(array.getJSONObject(0).getString("v_WebAppPath"),
+                                                            Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
+                                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                                    intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
+                                                            "application/vnd.android.package-archive");
+                                                    startActivity(intent);
+                                                }catch (JSONException e){
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }).start();
                                     }
                                 });
                             }else {

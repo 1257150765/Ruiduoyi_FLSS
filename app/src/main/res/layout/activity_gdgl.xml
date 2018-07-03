@@ -29,25 +29,24 @@
     </FrameLayout>
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
                 android:background="@color/blue_sl_false"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="1638dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:background="@drawable/text_bg"
-                    android:gravity="center"
                     android:layout_width="128dp"
                     android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    />
+                    android:background="@drawable/text_bg"
+                    android:gravity="center"
+                    android:textColor="@android:color/black" />
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
@@ -107,6 +106,13 @@
                 <TextView
                     android:background="@drawable/text_bg"
                     android:gravity="center"
+                    android:layout_width="108dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@android:color/black"
+                    android:text="条件本位置"/>
+                <TextView
+                    android:background="@drawable/text_bg"
+                    android:gravity="center"
                     android:layout_width="196dp"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
@@ -149,7 +155,7 @@
             </LinearLayout>
             <ListView
                 android:layout_gravity="center_horizontal"
-                android:layout_width="1638dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/list_b3"
