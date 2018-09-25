@@ -488,9 +488,10 @@ public class NetHelper {
         if (AppUtils.calculate(result,"\n")>200){
             return null;
         }
+
         String[] str_line=result.split("\n");
         for (int i=0;i<str_line.length;i++){
-            if (i>100){
+            if (i>200){
                 break;
             }
             //Log.e("result",str_line[i]);

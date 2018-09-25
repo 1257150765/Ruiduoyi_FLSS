@@ -27,6 +27,7 @@
             android:background="@drawable/spnner_bg"
             android:gravity="center_vertical|left"
             android:textSize="23dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,6 +36,12 @@
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/holo_red_dark"
             android:text="*"/>
+        <CheckBox
+            android:id="@+id/cb_isCreateList_yyfxFragment"
+            android:textSize="23dp"
+            android:text="是否生成维修单"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout

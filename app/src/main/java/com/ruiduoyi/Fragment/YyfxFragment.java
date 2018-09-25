@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class YyfxFragment extends Fragment implements View.OnClickListener{
+    private int isCreateList;
     private String zldm;
     private Button spinner;
     private ListView listView;
@@ -40,6 +43,7 @@ public class YyfxFragment extends Fragment implements View.OnClickListener{
     private YyfxAdapter adapter;
     private String lbdm,jtbh;
     private PopupDialog isReadyDialog;
+    private CheckBox cbIsCreateList;//是否生成维修单
 
 
     public YyfxFragment() {
@@ -121,6 +125,25 @@ public class YyfxFragment extends Fragment implements View.OnClickListener{
     private void initView(View view){
         spinner=(Button)view.findViewById(R.id.spinner);
         listView=(ListView)view.findViewById(R.id.list_bl);
+        cbIsCreateList = (CheckBox) view.findViewById(R.id.cb_isCreateList_yyfxFragment);
+        cbIsCreateList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    YyfxFragment.this.isCreateList = 1;
+                }else {
+                    YyfxFragment.this.isCreateList = 0;
+                }
+            }
+        });
+
+        if ("55".equals(zldm)){
+            cbIsCreateList.setText("是否自动生成金型维修单");
+        }else if ("56".equals(zldm)){
+            cbIsCreateList.setText("是否自动生成机械维修单");
+        }else {
+            cbIsCreateList.setVisibility(View.GONE);
+        }
         spinner.setOnClickListener(this);
         isReadyDialog=new PopupDialog(getActivity(),400,360);
         isReadyDialog.setTitle("提示");
@@ -169,8 +192,15 @@ public class YyfxFragment extends Fragment implements View.OnClickListener{
                             select_str=select_str+map.get("lab_1")+";";
                             //upLoadOneData(selectData.get(i),wkno);
                         }
-                        JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
-                                "'"+jtbh+"','"+zldm+"','"+lbdm+"'," + "'"+select_str+"',0,'"+wkno+"'");
+                        JSONArray list = null;
+                        //55是金型维修 56是机械维修
+                        if ("55".equals(zldm) || "56".equals(zldm)){
+                            list = NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
+                                    "'"+jtbh+"','"+zldm+"','"+lbdm+"'," + "'"+select_str+"',0,'"+isCreateList+"','"+wkno+"'");
+                        }else {
+                             list = NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
+                                    "'" + jtbh + "','" + zldm + "','" + lbdm + "'," + "'" + select_str + "',0,'" + wkno + "'");
+                        }
                         if (list!=null){
                             if (list.length()>0){
                                 if (list.getJSONObject(0).getString("Column1").equals("OK")){

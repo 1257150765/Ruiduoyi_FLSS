@@ -165,6 +165,8 @@ public class DialogGActivity extends BaseDialogActivity implements View.OnClickL
         cancle_btn=(Button)findViewById(R.id.cancle_btn);
         num_edit=(EditText) findViewById(R.id.num_text);
         title_text=(TextView)findViewById(R.id.title_text);
+        title_text.setOnClickListener(this);
+
         tip_text=(TextView)findViewById(R.id.tip);
         intent_from=getIntent();
         /*yy_bg=(FrameLayout)findViewById(R.id.yy_bg);
@@ -218,9 +220,14 @@ public class DialogGActivity extends BaseDialogActivity implements View.OnClickL
         receiverfilter.addAction("SerialPortNum");
         registerReceiver(receiver,receiverfilter);
         setIsFinishOk();
+
+
     }
 
 
+    /**
+     * 验证卡号正确后调用，暂时未知道作用 2018-9-25
+     */
     private void execOPR(){
         new Thread(new Runnable() {
             @Override
@@ -267,6 +274,12 @@ public class DialogGActivity extends BaseDialogActivity implements View.OnClickL
         }).start();
     }
 
+    /**
+     * 记录操作人员，并且验证卡号是否有权限
+     * 刷卡后调用 100
+     * execOPR 调用之后也会调用  但不知道其作用 101
+     * @param what
+     */
     private void getNetData(final int what){
         new Thread(new Runnable() {
             @Override
@@ -310,6 +323,15 @@ public class DialogGActivity extends BaseDialogActivity implements View.OnClickL
                 setResult(1,intent2);
                 AppUtils.sendCountdownReceiver(DialogGActivity.this);
                 finish();
+                break;
+            case R.id.title_text:
+                //如果是模拟器版本，则模拟一个刷卡广播（模拟器无刷卡功能）
+                if ("true".equals(getResources().getString(R.string.isTest))){
+                    Intent intent3=new Intent();
+                    intent3.putExtra("num","296412351");
+                    intent3.setAction("SerialPortNum");
+                    getApplicationContext().sendBroadcast(intent3);
+                }
                 break;
         }
     }

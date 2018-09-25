@@ -36,8 +36,11 @@ public class SerialPortService extends Service {
         super.onCreate();
         try {
             serialPort=new SerialPort(new File("/dev/ttyUSB10"),9600,0);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(serialPort == null){
+            return;
         }
         in=serialPort.getInputStream();
         out=serialPort.getOutputStream();

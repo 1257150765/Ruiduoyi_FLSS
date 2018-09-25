@@ -22,6 +22,11 @@ import com.ruiduoyi.R;
 import com.ruiduoyi.adapter.ViewPagerAdapter;
 import com.ruiduoyi.utils.AppUtils;
 
+/**
+ * 不良/原因分析 （金型维修，机械维修会使用该界面 2018-9-25 ）
+ * 上面是写死的界面  下面是包含两个Fragment的ViewPager
+ * 第一个Fragment
+ */
 public class BlYyfxActivity extends BaseActivity implements View.OnClickListener {
     private TextView sjsx_text,zzdh_text,gddh_text,mjbh_text,cpbh_text,pmgg_text,mjmc_text,
                 blfx_text,yyfx_text,title_text,jhsl_text,lpsl_text,blpsl_text,jzzl_text;
@@ -179,6 +184,7 @@ public class BlYyfxActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.save_btn:
                 save_btn.startAnimation(animation);
+                //不良分析，原因分析，需要处理数据后才可提交
                 if (yyfxFragment.isReady()&&blfxFragment.isReady()){
                     Intent intent=new Intent(BlYyfxActivity.this,DialogGActivity.class);
                     if (zldming.equals("50")|zldming.equals("51")|zldming.equals("52")|zldming.equals("53")|zldming.equals("54")|

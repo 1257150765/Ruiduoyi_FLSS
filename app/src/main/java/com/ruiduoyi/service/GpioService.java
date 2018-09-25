@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.IntDef;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.glongtech.gpio.GpioEvent;
 import com.ruiduoyi.R;
@@ -79,6 +80,7 @@ public class GpioService extends Service {
     }
 
     private void initData(){
+
         /*file=new File(Environment.getExternalStorageDirectory().getPath()+"/gpio.txt");
         if (!file.exists()){
             try {
@@ -108,6 +110,10 @@ public class GpioService extends Service {
 
 
     public void initGpio(){
+        if ("true".equals(getResources().getString(R.string.isTest))){
+            Toast.makeText(this,"Gpio不可用",Toast.LENGTH_LONG).show();
+            return;
+        }
         int g1= Gpio.SetGpioInput("gpio1");
         int g2=Gpio.SetGpioInput("gpio2");
         int g3=Gpio.SetGpioInput("gpio3");
