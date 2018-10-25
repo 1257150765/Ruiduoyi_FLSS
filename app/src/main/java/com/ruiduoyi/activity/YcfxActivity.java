@@ -320,7 +320,7 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
                             }
                             try {
                                 JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
-                                        "'"+jtbh+"','"+text_2.getText().toString()+"','"+lbdm+"'," + "'"+select_str+"',"+keyid+",'"+wkno+"'");
+                                        "'"+jtbh+"','"+text_2.getText().toString()+"','"+lbdm+"'," + "'"+select_str+"',"+keyid+",0,'"+wkno+"'");
                                 if (list!=null){
                                     if (list.length()>0){
                                         if (list.getJSONObject(0).getString("Column1").equals("OK")){

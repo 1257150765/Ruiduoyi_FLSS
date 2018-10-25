@@ -50,14 +50,16 @@
     <!--<string name="service_ip">http://193.168.0.117</string>-->
     <!--<string name="service_ip">http://172.27.35.58</string>-->
     <!--<string name="service_ip">http://192.168.99.2</string>-->
-    <!--<string name="service_ip">http://flss.ruiduoyi.com</string>-->
+
+    <string name="service_ip">http://flss.ruiduoyi.com</string>
 
     <!--是否模拟器版本，是的话，会没有gpio和刷卡功能（仅做测试用）-->
     <string name="isTest">false</string>
     <!--福莱服务器地址-->
-    <string name="service_ip">http://192.168.99.2:8080</string>
+    <!--<string name="service_ip">http://192.168.99.2:8080</string>-->
     <!--http://192.168.99.2:8080/Service.asmx
     Exec Pln_Auto_ReCalsj 'A02'
     Exec Jobs_Cal_Fhl_Cnl_list
+
 -->
 </resources>

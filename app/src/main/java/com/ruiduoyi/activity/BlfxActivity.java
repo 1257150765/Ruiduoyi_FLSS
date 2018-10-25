@@ -548,7 +548,7 @@ public class BlfxActivity extends BaseActivity implements View.OnClickListener{
         }
         JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Add_BlmInfo " +
                 "'A','"+zzdh_list.get(zzdh_position)+"','','','"+jtbh+"','','"+bldm_text.getText().toString()+"'," +
-                "'"+num+"','"+wkno+"'");
+                "'"+num+"',null,null,'"+wkno+"'");
         if (list!=null){
             if (list.length()>0){
                 if (list.getJSONObject(0).getString("Column1").equals("OK")){

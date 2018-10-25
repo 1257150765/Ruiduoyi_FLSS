@@ -344,7 +344,7 @@ public class BlfxFragment extends Fragment implements View.OnClickListener{
         try {
             JSONArray list=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Add_BlmInfo " +
                     "'A','"+zzdh+"','','','"+jtbh+"','"+zldm+"','"+map.get("lab_1")+"'," +
-                    "'"+map.get("lab_3")+"','"+wkno+"'");
+                    "'"+map.get("lab_3")+"',null,null,'"+wkno+"'");
             if (list!=null){
                 if (list.length()>0){
                     if (list.getJSONObject(0).getString("Column1").equals("OK")){

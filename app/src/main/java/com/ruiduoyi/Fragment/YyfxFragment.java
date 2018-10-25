@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class YyfxFragment extends Fragment implements View.OnClickListener{
-    private int isCreateList;
+    private int isCreateList = 0;
     private String zldm;
     private Button spinner;
     private ListView listView;
@@ -192,15 +192,18 @@ public class YyfxFragment extends Fragment implements View.OnClickListener{
                             select_str=select_str+map.get("lab_1")+";";
                             //upLoadOneData(selectData.get(i),wkno);
                         }
-                        JSONArray list = null;
+                        /*JSONArray list = null;
                         //55是金型维修 56是机械维修
                         if ("55".equals(zldm) || "56".equals(zldm)){
                             list = NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
                                     "'"+jtbh+"','"+zldm+"','"+lbdm+"'," + "'"+select_str+"',0,'"+isCreateList+"','"+wkno+"'");
                         }else {
                              list = NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
-                                    "'" + jtbh + "','" + zldm + "','" + lbdm + "'," + "'" + select_str + "',0,'" + wkno + "'");
-                        }
+                                    "'" + jtbh + "','" + zldm + "','" + lbdm + "'," + "'" + select_str + "',0,0,'" + wkno + "'");
+                        }*/
+
+                        JSONArray list = NetHelper.getQuerysqlResultJsonArray("Exec PAD_Upd_YclInfo " +
+                                "'"+jtbh+"','"+zldm+"','"+lbdm+"'," + "'"+select_str+"',0,'"+isCreateList+"','"+wkno+"'");
                         if (list!=null){
                             if (list.length()>0){
                                 if (list.getJSONObject(0).getString("Column1").equals("OK")){
