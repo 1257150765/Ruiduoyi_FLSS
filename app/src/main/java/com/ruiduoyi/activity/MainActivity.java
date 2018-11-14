@@ -39,6 +39,7 @@ import com.ruiduoyi.service.GpioService;
 import com.ruiduoyi.utils.AppUtils;
 import com.ruiduoyi.utils.OnDoubleClickListener;
 import com.ruiduoyi.service.SerialPortService;
+import com.ruiduoyi.utils.PowerDownLoadUtil;
 import com.ruiduoyi.view.AppDialog;
 import com.ruiduoyi.view.PopupDialog;
 
@@ -47,6 +48,7 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,7 +57,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, PowerDownLoadUtil.DownLoadListener {
     private ViewPager mviewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout mtabLayout;
@@ -101,6 +103,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         intent_service.putExtra("mac",mac);
         intent_service.putExtra("jtbh",jtbh);
         startService(intent_service);
+        updateAppVersion();
         //CountdownToInfo();
     }
 
@@ -161,7 +164,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     case 0x104:
                         try {
                             final JSONArray array= (JSONArray) msg.obj;
-                            if (array.getJSONObject(0).getString("v_WebAppVer").equals(array.getJSONObject(0).getString("oldver"))){
+                            dialog.setMessage("当前版本:"+array.getJSONObject(0).getString("oldver")+"\n最新版本:"+array.getJSONObject(0).getString("v_WebAppVer")+"\n是否立即更新？");
+                            dialog.getOkbtn().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.getOkbtn().setEnabled(false);
+                                    dialog.setMessage("下载更新包中...");
+                                    try {
+                                        PowerDownLoadUtil util =  PowerDownLoadUtil.getInstance(getApplicationContext(),MainActivity.this);
+                                        util.downloadAPK(array.getJSONObject(0).getString("v_WebAppPath"),
+                                                Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            /*if (array.getJSONObject(0).getString("v_WebAppVer").equals(array.getJSONObject(0).getString("oldver"))){
                                 dialog.setMessage("当前版本:"+array.getJSONObject(0).getString("oldver")+"\n最新版本:"+array.getJSONObject(0).getString("v_WebAppVer")+"\n是否立即更新？");
                                 dialog.getOkbtn().setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -172,12 +190,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    NetHelper.DownLoadFileByUrl(array.getJSONObject(0).getString("v_WebAppPath"),
+                                                    *//*NetHelper.DownLoadFileByUrl(array.getJSONObject(0).getString("v_WebAppPath"),
                                                             Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
                                                     Intent intent = new Intent(Intent.ACTION_VIEW);
                                                     intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
                                                             "application/vnd.android.package-archive");
-                                                    startActivity(intent);
+                                                    startActivity(intent);*//*
+                                                    PowerDownLoadUtil util =  PowerDownLoadUtil.getInstance(getApplicationContext(),MainActivity.this);
+                                                    util.downloadAPK(array.getJSONObject(0).getString("v_WebAppPath"),
+                                                            Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
                                                 }catch (JSONException e){
                                                     e.printStackTrace();
                                                 }
@@ -196,12 +217,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    NetHelper.DownLoadFileByUrl(array.getJSONObject(0).getString("v_WebAppPath"),
+                                                    *//*NetHelper.DownLoadFileByUrl(array.getJSONObject(0).getString("v_WebAppPath"),
                                                             Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
                                                     Intent intent = new Intent(Intent.ACTION_VIEW);
                                                     intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
                                                             "application/vnd.android.package-archive");
-                                                    startActivity(intent);
+                                                    startActivity(intent);*//*
+                                                    PowerDownLoadUtil util =  PowerDownLoadUtil.getInstance(getApplicationContext(),MainActivity.this);
+                                                    util.downloadAPK(array.getJSONObject(0).getString("v_WebAppPath"),
+                                                            Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
                                                 }catch (JSONException e){
                                                     e.printStackTrace();
                                                 }
@@ -209,7 +233,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                         }).start();
                                     }
                                 });
-                            }
+                            }*/
                             dialog.show();
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -343,13 +367,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         updata_tip=new PopupDialog(this,450,350);
         updata_tip.setMessageTextColor(Color.BLACK);
-        updata_tip.getCancle_btn().setText("取消");
+        updata_tip.getCancle_btn().setText("确定");
         updata_tip.getOkbtn().setVisibility(View.GONE);
         updata_tip.getCancle_btn().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor=sharedPreferences.edit();
-                editor.putBoolean("cancle_update",true);
+                editor.putBoolean("isKnow",true);
                 editor.commit();
                 updata_tip.dismiss();
             }
@@ -608,13 +632,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             String newVersionName=list.getJSONObject(0).getString("v_WebAppVer");
                             if (!oldVersionName.equals(newVersionName)){
                                 int i=60;
-                                while (!sharedPreferences.getBoolean("cancle_update",false)){
+                                while (true){
+                                    boolean isKnow = sharedPreferences.getBoolean("isKnow", false);
                                     i=i-1;
                                     if (i>0){
+                                        if (isKnow){
+                                            continue;
+                                        }
                                         try {
                                             Message msg=handler.obtainMessage();
                                             msg.what=0x110;
-                                            msg.obj="将在"+i+"秒后自动更新";
+                                            msg.obj="将在"+i+"秒后自动更新，请保存数据";
                                             handler.sendMessage(msg);
                                             Thread.currentThread().sleep(1000);
                                         } catch (InterruptedException e) {
@@ -622,24 +650,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                         }
                                     }else {
                                         handler.sendEmptyMessage(0x111);
-                                        try {
-                                            NetHelper.downLoadFileByUrl(list.getJSONObject(0).getString("v_WebAppPath"),
-                                                    Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
-                                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                                            intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
-                                                    "application/vnd.android.package-archive");
-                                            startActivity(intent);
-                                            handler.sendEmptyMessage(0x112);
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
+                                        /*NetHelper.downLoadFileByUrl(list.getJSONObject(0).getString("v_WebAppPath"),
+                                                Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
+                                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                                        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+"/RdyPmes.apk")),
+                                                "application/vnd.android.package-archive");
+                                        startActivity(intent);*/
+                                        PowerDownLoadUtil util =  PowerDownLoadUtil.getInstance(getApplicationContext(),MainActivity.this);
+                                        util.downloadAPK(list.getJSONObject(0).getString("v_WebAppPath"),
+                                                Environment.getExternalStorageDirectory().getPath(),"RdyPmes.apk");
+                                        handler.sendEmptyMessage(0x112);
+
                                         break;
                                     }
                                 }
 
                             }
                             SharedPreferences.Editor editor=sharedPreferences.edit();
-                            editor.putBoolean("cancle_update",false);
+                            editor.putBoolean("isKnow",false);
                             editor.commit();
 
                         }
@@ -681,6 +709,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+    @Override
+    public void onPrepare() {
 
+    }
+    DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
 
+    @Override
+    public void onDownLoading(int progress, int totalBytes) {
+        if (dialog != null && dialog.isShow()){
+            float f = progress / totalBytes * 100f;
+            String p=decimalFormat.format(f);//format 返回的是字符串
+            dialog.setMessage("下载更新包中...\n"+"已下载："+(progress/1024)+"("+p+"%)\n 文件大小:"+(totalBytes/1024));
+        }
+    }
+
+    @Override
+    public void onSucceed() {
+        if (updata_tip != null && updata_tip.isShow()){
+            updata_tip.dismiss();
+        }
+        if (dialog != null && dialog.isShow()){
+            dialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+        if (dialog != null){
+            dialog.setMessage(errorInfo);
+            dialog.show();
+        }
+    }
 }

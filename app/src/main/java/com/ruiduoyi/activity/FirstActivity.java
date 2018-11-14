@@ -101,7 +101,7 @@ public class FirstActivity extends BaseActivity{
             @Override
             public void run() {
                 int time=0;
-                while (!(isServiceOpen&isJtbh&isNewVersion)){
+                while (!(isServiceOpen&isJtbh)){
                     try {
                         time=time+1;
                         if(time==1){
@@ -109,13 +109,11 @@ public class FirstActivity extends BaseActivity{
                         }else {
                             Thread.currentThread().sleep(4000);
                         }
-                        if (isServiceOpen&isJtbh&isNewVersion){
+                        if (isServiceOpen&isJtbh){
                             break;
                         }else {
                             if(!isServiceOpen){
                                 //handler.sendEmptyMessage(0x101);
-                            }else if(!isNewVersion){
-                                //handler.sendEmptyMessage(0x107);
                             }else if(!isJtbh) {
                                 handler.sendEmptyMessage(0x102);
                             }
@@ -445,7 +443,7 @@ public class FirstActivity extends BaseActivity{
         }).start();
 
         //获取服务器地址，检查版本
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 JSONArray array=NetHelper.getQuerysqlResultJsonArray("Exec PAD_Get_WebAddr");
@@ -473,17 +471,17 @@ public class FirstActivity extends BaseActivity{
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
-                       /*Message msg=handler.obtainMessage();
+                       *//*Message msg=handler.obtainMessage();
                         msg.what=0x107;
                         msg.obj=list;
-                        handler.sendMessage(msg);*/
+                        handler.sendMessage(msg);*//*
                     }
                 }else {
                     AppUtils.uploadNetworkError("PAD_Get_WebAddr NetWordError",
                             jtbh,sharedPreferences.getString("mac",""));
                 }
             }
-        }).start();
+        }).start();*/
 
 
     }
