@@ -295,6 +295,10 @@ public class YcfxActivity extends BaseActivity implements View.OnClickListener{
     }
 
 
+    /**
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         AppUtils.sendCountdownReceiver(YcfxActivity.this);

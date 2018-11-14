@@ -92,4 +92,17 @@ public  class AppDataBase {
         }
     }
 
+    public long getNoUploadGpioCount(){
+        synchronized (this){
+            String sql = "select count(*) from info";
+            Cursor cursor = database.rawQuery(sql, null);
+            cursor.moveToFirst();
+            long count = cursor.getLong(0);
+            cursor.close();
+            return count;
+            /*Cursor cursor = database.("select count(id) from gpio_info order by PadTime limit 0,10", null);
+            int count = cursor.getCount();
+            return count;*/
+        }
+    }
 }

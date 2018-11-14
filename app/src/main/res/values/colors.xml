@@ -38,4 +38,5 @@
     <color name="cardview_bg">#bae3fb</color>
     <color name="zl_btn">#bfd999</color>
     <color name="zl_bbtn">#b8dde8</color>
+    <color name="red">#ff0000</color>
 </resources>

@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private FrameLayout bottom1,bottom2,bottom3;
     private TextView bottom_text1,bottom_text2,bottom_text3,companyName;
     private String mac;
+    private TextView gpioErrorInfo,gpioNoUpload;
     private PopupDialog dialog,updata_tip;
     private BroadcastReceiver gpioSignalReceiver;
     private StatusFragment statusFragment;
@@ -269,6 +270,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         bottom_text3=(TextView)findViewById(R.id.bottom_btn_text3);
         companyName=(TextView)findViewById(R.id.company_name);
         rdy_logo_img=(ImageView)findViewById(R.id.rdy_logo_img);
+        gpioErrorInfo=(TextView)findViewById(R.id.tv_gpio_errorInfo);
+        gpioNoUpload=(TextView)findViewById(R.id.tv_gpio_noupload);
         initLogoClieckEvent();
         //初始化gpio
         initGpio();
@@ -466,6 +469,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         gpioSignalReceiver=new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (GpioService.ACTION_UPLOADERROR_COUNT.equals(action)){
+                    /*if (dialog !=null && dialog.isShow()){
+                        dialog.dismiss();
+                    }
+                    dialog.setMessage("网络异常，请检查网络！");
+                    dialog.show();
+                    return;*/
+                    String count = intent.getStringExtra("count");
+                    if ("".equals(count)){
+                        if (gpioErrorInfo.getVisibility() == View.VISIBLE){
+                            gpioErrorInfo.setVisibility(View.GONE);
+                        }
+                    }else {
+                        gpioErrorInfo.setVisibility(View.VISIBLE);
+                        gpioErrorInfo.setText("信号上传失败("+count+")");
+                    }
+                    return;
+                }else if (GpioService.ACTION_UPLOADERROR_COUNT.equals(action)){
+                    String count = intent.getStringExtra("count");
+                    gpioNoUpload.setText(count);
+                    return;
+                }
                 int index=intent.getIntExtra("index",5);
                 boolean level=intent.getBooleanExtra("level",false);
                 switch (index){
@@ -524,7 +550,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         };
         IntentFilter receiverfilter=new IntentFilter();
-        receiverfilter.addAction("com.ruiduoyi.GpioSinal");
+        receiverfilter.addAction(GpioService.ACTION_GPIOSINAL);
+        receiverfilter.addAction(GpioService.ACTION_NOUPLOAD_COUNT);
+        receiverfilter.addAction(GpioService.ACTION_UPLOADERROR_COUNT);
         registerReceiver(gpioSignalReceiver,receiverfilter);
     }
 

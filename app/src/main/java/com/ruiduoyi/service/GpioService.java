@@ -43,6 +43,8 @@ public class GpioService extends Service {
     private SharedPreferences sharedPreferences;
     private String mac,jtbh;
     private Timer timer_gpio;
+    private int count;
+
     /*private File file;
     private PrintStream out;
     private FileOutputStream fileOutputStream;*/
@@ -131,7 +133,7 @@ public class GpioService extends Service {
                 Intent intent=new Intent();
                 intent.putExtra("index",index);
                 intent.putExtra("level",level);
-                intent.setAction("com.ruiduoyi.GpioSinal");
+                intent.setAction(ACTION_GPIOSINAL);
                 getApplicationContext().sendBroadcast(intent);
 
 
@@ -142,7 +144,7 @@ public class GpioService extends Service {
                             dataBase.insertGpio(mac,jtbh,"A","1",ymd_hms,1,"");
                             //out.println(mac+"\t"+jtbh+"\t"+"A\t1\t"+ymd_hms+"\t"+"1\t");
                             //dataBase.insertGpio2(mac,jtbh,"A","1",ymd_hms,1,"");
-                            dataBase.selectGpio();
+                            //dataBase.selectGpio();
                         }
                         break;
                     case 2:
@@ -152,7 +154,7 @@ public class GpioService extends Service {
                             dataBase.insertGpio(mac,jtbh,"A","2",ymd_hms,1,"");
                             //out.println(mac+"\t"+jtbh+"\t"+"A\t2\t"+ymd_hms+"\t"+"1\t");
                             //dataBase.insertGpio2(mac,jtbh,"A","1",ymd_hms,1,"");
-                            dataBase.selectGpio();
+                            //dataBase.selectGpio();
                         }
 
                         break;
@@ -163,7 +165,7 @@ public class GpioService extends Service {
                             dataBase.insertGpio(mac,jtbh,"A","3",ymd_hms,1,"");
                             //out.println(mac+"\t"+jtbh+"\t"+"A\t2\t"+ymd_hms+"\t"+"1\t");
                             //dataBase.insertGpio2(mac,jtbh,"A","1",ymd_hms,1,"");
-                            dataBase.selectGpio();
+                            //dataBase.selectGpio();
                         }
                         break;
                     case 4:
@@ -173,7 +175,7 @@ public class GpioService extends Service {
                             dataBase.insertGpio(mac,jtbh,"A","4",ymd_hms,1,"");
                             //out.println(mac+"\t"+jtbh+"\t"+"A\t4\t"+ymd_hms+"\t"+"1\t");
                             //dataBase.insertGpio2(mac,jtbh,"A","1",ymd_hms,1,"");
-                            dataBase.selectGpio();
+                            //dataBase.selectGpio();
                         }
                         break;
                     default:
@@ -184,11 +186,18 @@ public class GpioService extends Service {
         event_gpio.MyObserverStart();
     }
 
+    public static final String ACTION_NOUPLOAD_COUNT = "com.ruiduoyi.GpioNoUploadCount";
+    public static final String ACTION_UPLOADERROR_COUNT = "com.ruiduoyi.GpioUploadError";
+    public static final String ACTION_GPIOSINAL = "com.ruiduoyi.GpioSinal";
     private void updateGpio(){
         timer_gpio=new Timer();
         TimerTask timerTask=new TimerTask() {
             @Override
             public void run() {
+                long count = dataBase.getNoUploadGpioCount();
+                Intent intent = new Intent(ACTION_NOUPLOAD_COUNT);
+                intent.putExtra("count",""+count);
+                sendBroadcast(intent);
                 String sql="";
                 List<Map<String,String>> list=dataBase.selectGpio();
                 String isUploadFinish=sharedPreferences.getString("isUploadFinish","NO");
@@ -212,7 +221,15 @@ public class GpioService extends Service {
                                 try {
                                     if (list_result.getJSONObject(0).getString("Column1").equals("OK")){
                                         //handler.sendEmptyMessage(0x106);
+                                        //如果有一次上传成功了，说明网络是通的，先隐藏信息
+                                        Intent intent2 = new Intent(ACTION_UPLOADERROR_COUNT);
+                                        intent2.putExtra("count","");
+                                        sendBroadcast(intent2);
+                                        GpioService.this.count = 0;
                                         dataBase.deleteGpio(time);
+                                        SharedPreferences.Editor editor2=sharedPreferences.edit();
+                                        editor2.putString("isUploadFinish","OK");
+                                        editor2.commit();
                                     }else {
                                         break;
                                     }
@@ -226,6 +243,13 @@ public class GpioService extends Service {
                                 break;
                             }
                         }else {
+                            GpioService.this.count++;
+                            if (GpioService.this.count >= 1000){
+                                return;
+                            }
+                            Intent intent3 = new Intent(ACTION_UPLOADERROR_COUNT);
+                            intent3.putExtra("count",""+ GpioService.this.count);
+                            sendBroadcast(intent3);
                             AppUtils.uploadNetworkError("exec PAD_SrvDataUp NetWorkError",jtbh,mac);
                             break;
                         }

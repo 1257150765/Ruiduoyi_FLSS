@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.ruiduoyi"
         minSdkVersion 19
@@ -41,4 +41,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile(name: 'gpiolibrary', ext: 'aar')
     compile(name: 'serialportlibrary', ext: 'aar')
+    implementation 'com.liulishuo.filedownloader:library:1.7.5'
 }
