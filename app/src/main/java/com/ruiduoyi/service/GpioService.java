@@ -232,8 +232,12 @@ public class GpioService extends Service {
                                             editor2.putString("isUploadFinish","OK");
                                             editor2.commit();
                                         }else {
+                                            SharedPreferences.Editor editor2=sharedPreferences.edit();
+                                            editor2.putString("isUploadFinish","OK");
+                                            editor2.commit();
                                             break;
                                         }
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         SharedPreferences.Editor editor2=sharedPreferences.edit();

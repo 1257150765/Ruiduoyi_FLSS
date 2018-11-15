@@ -511,7 +511,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         gpioErrorInfo.setText("信号上传失败("+count+")");
                     }
                     return;
-                }else if (GpioService.ACTION_UPLOADERROR_COUNT.equals(action)){
+                }else if (GpioService.ACTION_NOUPLOAD_COUNT.equals(action)){
                     String count = intent.getStringExtra("count");
                     gpioNoUpload.setText(count);
                     return;

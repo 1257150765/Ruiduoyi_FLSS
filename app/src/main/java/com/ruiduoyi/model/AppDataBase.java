@@ -94,7 +94,7 @@ public  class AppDataBase {
 
     public long getNoUploadGpioCount(){
         synchronized (this){
-            String sql = "select count(*) from info";
+            String sql = "select count(*) from gpio_info";
             Cursor cursor = database.rawQuery(sql, null);
             cursor.moveToFirst();
             long count = cursor.getLong(0);
